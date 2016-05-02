@@ -12,7 +12,7 @@ namespace CloudBackupL
         [PrimaryKey, AutoIncrement, NotNull]
         public int id { get; set; }
 
-        [MaxLength(50), NotNull]
+        [MaxLength(50), NotNull, Unique]
         public String name { get; set; }
 
         [MaxLength(50), NotNull]

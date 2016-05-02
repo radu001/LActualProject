@@ -52,6 +52,16 @@ namespace CloudBackupL
             return result;
         }
 
+        public List<BackupPlan> GetAllPlans()
+        {
+            List<BackupPlan> result;
+            using (SQLiteConnection conn = new SQLiteConnection(connString, true))
+            {
+                result = conn.Query<BackupPlan>("select * from BackupPlan");
+            }
+            return result;
+        }
+
         public bool CheckPlanName(String name)
         {
             int count = 1;

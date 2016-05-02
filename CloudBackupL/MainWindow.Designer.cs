@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label6 = new System.Windows.Forms.Label();
+            this.flowLayoutPanelClouds = new System.Windows.Forms.FlowLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -61,10 +63,10 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.imageListClouds = new System.Windows.Forms.ImageList(this.components);
-            this.flowLayoutPanelClouds = new System.Windows.Forms.FlowLayoutPanel();
-            this.label6 = new System.Windows.Forms.Label();
+            this.flowLayoutPanelPlans = new System.Windows.Forms.FlowLayoutPanel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -112,6 +114,28 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(535, 3);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(96, 13);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Connected clouds:";
+            // 
+            // flowLayoutPanelClouds
+            // 
+            this.flowLayoutPanelClouds.AllowDrop = true;
+            this.flowLayoutPanelClouds.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.flowLayoutPanelClouds.AutoScroll = true;
+            this.flowLayoutPanelClouds.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanelClouds.Location = new System.Drawing.Point(538, 19);
+            this.flowLayoutPanelClouds.Name = "flowLayoutPanelClouds";
+            this.flowLayoutPanelClouds.Size = new System.Drawing.Size(278, 217);
+            this.flowLayoutPanelClouds.TabIndex = 10;
+            this.flowLayoutPanelClouds.WrapContents = false;
             // 
             // label3
             // 
@@ -190,6 +214,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.flowLayoutPanelPlans);
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -197,6 +222,7 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Backup Plans";
             this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
             // tabPage3
             // 
@@ -386,27 +412,15 @@
             this.imageListClouds.TransparentColor = System.Drawing.Color.Transparent;
             this.imageListClouds.Images.SetKeyName(0, "dropbox.jpg");
             // 
-            // flowLayoutPanelClouds
+            // flowLayoutPanelPlans
             // 
-            this.flowLayoutPanelClouds.AllowDrop = true;
-            this.flowLayoutPanelClouds.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.flowLayoutPanelClouds.AutoScroll = true;
-            this.flowLayoutPanelClouds.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanelClouds.Location = new System.Drawing.Point(538, 19);
-            this.flowLayoutPanelClouds.Name = "flowLayoutPanelClouds";
-            this.flowLayoutPanelClouds.Size = new System.Drawing.Size(278, 217);
-            this.flowLayoutPanelClouds.TabIndex = 10;
-            this.flowLayoutPanelClouds.WrapContents = false;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(535, 3);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(96, 13);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Connected clouds:";
+            this.flowLayoutPanelPlans.AllowDrop = true;
+            this.flowLayoutPanelPlans.AutoScroll = true;
+            this.flowLayoutPanelPlans.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelPlans.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanelPlans.Name = "flowLayoutPanelPlans";
+            this.flowLayoutPanelPlans.Size = new System.Drawing.Size(810, 379);
+            this.flowLayoutPanelPlans.TabIndex = 0;
             // 
             // MainWindow
             // 
@@ -420,6 +434,7 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -471,6 +486,7 @@
         private System.Windows.Forms.ImageList imageListClouds;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelClouds;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelPlans;
     }
 }
 

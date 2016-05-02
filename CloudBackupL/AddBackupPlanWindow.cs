@@ -83,9 +83,10 @@ namespace CloudBackupL
                 plan.name = textBoxPlanName.Text;
                 plan.path = textBoxFolderPath.Text;
                 plan.creationDate = DateTime.Now;
-                plan.scheduleType = comboBoxScheduleType.SelectedText;
+                plan.scheduleType = comboBoxScheduleType.Text;
                 plan.scheduleTime = dateTimePickerScheduleTime.Value;
                 plan.currentStatus = "notRun";
+                plan.cloudName = comboBoxClouds.Text;
                 databaseService.InsertBackupPlan(plan);
                 DialogResult dialog = MessageBox.Show("Plan created succesfully");
                 if (dialog == DialogResult.OK)

@@ -104,6 +104,12 @@
     <Compile Include="CustomControllers\CloudControl.Designer.cs">
       <DependentUpon>CloudControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomControllers\PlanControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomControllers\PlanControl.Designer.cs">
+      <DependentUpon>PlanControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="DatabaseService.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
@@ -128,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomControllers\CloudControl.resx">
       <DependentUpon>CloudControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomControllers\PlanControl.resx">
+      <DependentUpon>PlanControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
