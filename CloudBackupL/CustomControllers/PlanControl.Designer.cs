@@ -29,31 +29,33 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.labelBackupName = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
-            this.labelFolderPath = new System.Windows.Forms.Label();
-            this.labelScheduleType = new System.Windows.Forms.Label();
-            this.labelScheduleTime = new System.Windows.Forms.Label();
-            this.labelCloudName = new System.Windows.Forms.Label();
-            this.labelCreated = new System.Windows.Forms.Label();
-            this.labelLastDuration = new System.Windows.Forms.Label();
-            this.labelCurrentStatus = new System.Windows.Forms.Label();
-            this.labelLastRun = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.labelLastResult = new System.Windows.Forms.Label();
+            this.labelLastRun = new System.Windows.Forms.Label();
+            this.labelCurrentStatus = new System.Windows.Forms.Label();
+            this.labelLastDuration = new System.Windows.Forms.Label();
+            this.labelCreated = new System.Windows.Forms.Label();
+            this.labelCloudName = new System.Windows.Forms.Label();
+            this.labelScheduleTime = new System.Windows.Forms.Label();
+            this.labelScheduleType = new System.Windows.Forms.Label();
+            this.labelFolderPath = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.linkLabelDeletePlan = new System.Windows.Forms.LinkLabel();
+            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.labelBackupName = new System.Windows.Forms.Label();
+            this.buttonRunNow = new System.Windows.Forms.Button();
+            this.labelPlanId = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -62,16 +64,28 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.labelPlanId);
+            this.panel1.Controls.Add(this.buttonRunNow);
             this.panel1.Controls.Add(this.linkLabel4);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.linkLabel3);
-            this.panel1.Controls.Add(this.linkLabel2);
+            this.panel1.Controls.Add(this.linkLabelDeletePlan);
             this.panel1.Controls.Add(this.linkLabel1);
             this.panel1.Controls.Add(this.labelBackupName);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(782, 233);
             this.panel1.TabIndex = 0;
+            // 
+            // linkLabel4
+            // 
+            this.linkLabel4.AutoSize = true;
+            this.linkLabel4.Location = new System.Drawing.Point(376, 207);
+            this.linkLabel4.Name = "linkLabel4";
+            this.linkLabel4.Size = new System.Drawing.Size(65, 13);
+            this.linkLabel4.TabIndex = 4;
+            this.linkLabel4.TabStop = true;
+            this.linkLabel4.Text = "View History";
             // 
             // panel2
             // 
@@ -101,95 +115,76 @@
             this.panel2.Size = new System.Drawing.Size(776, 178);
             this.panel2.TabIndex = 0;
             // 
-            // labelBackupName
+            // labelLastResult
             // 
-            this.labelBackupName.AutoSize = true;
-            this.labelBackupName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBackupName.Location = new System.Drawing.Point(3, 5);
-            this.labelBackupName.Name = "labelBackupName";
-            this.labelBackupName.Size = new System.Drawing.Size(97, 16);
-            this.labelBackupName.TabIndex = 0;
-            this.labelBackupName.Text = "Bakcup Name:";
+            this.labelLastResult.AutoSize = true;
+            this.labelLastResult.Location = new System.Drawing.Point(461, 120);
+            this.labelLastResult.Name = "labelLastResult";
+            this.labelLastResult.Size = new System.Drawing.Size(0, 13);
+            this.labelLastResult.TabIndex = 19;
             // 
-            // label2
+            // labelLastRun
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 50);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Schedule Type:";
+            this.labelLastRun.AutoSize = true;
+            this.labelLastRun.Location = new System.Drawing.Point(461, 85);
+            this.labelLastRun.Name = "labelLastRun";
+            this.labelLastRun.Size = new System.Drawing.Size(0, 13);
+            this.labelLastRun.TabIndex = 18;
             // 
-            // label3
+            // labelCurrentStatus
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 85);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(81, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Schedule Time:";
+            this.labelCurrentStatus.AutoSize = true;
+            this.labelCurrentStatus.Location = new System.Drawing.Point(461, 15);
+            this.labelCurrentStatus.Name = "labelCurrentStatus";
+            this.labelCurrentStatus.Size = new System.Drawing.Size(0, 13);
+            this.labelCurrentStatus.TabIndex = 17;
             // 
-            // label4
+            // labelLastDuration
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(24, 120);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(68, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Cloud Name:";
+            this.labelLastDuration.AutoSize = true;
+            this.labelLastDuration.Location = new System.Drawing.Point(461, 50);
+            this.labelLastDuration.Name = "labelLastDuration";
+            this.labelLastDuration.Size = new System.Drawing.Size(0, 13);
+            this.labelLastDuration.TabIndex = 16;
             // 
-            // label5
+            // labelCreated
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(24, 155);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(47, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Created:";
+            this.labelCreated.AutoSize = true;
+            this.labelCreated.Location = new System.Drawing.Point(114, 155);
+            this.labelCreated.Name = "labelCreated";
+            this.labelCreated.Size = new System.Drawing.Size(0, 13);
+            this.labelCreated.TabIndex = 15;
             // 
-            // label6
+            // labelCloudName
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(24, 15);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(64, 13);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Folder Path:";
+            this.labelCloudName.AutoSize = true;
+            this.labelCloudName.Location = new System.Drawing.Point(114, 120);
+            this.labelCloudName.Name = "labelCloudName";
+            this.labelCloudName.Size = new System.Drawing.Size(0, 13);
+            this.labelCloudName.TabIndex = 14;
             // 
-            // label7
+            // labelScheduleTime
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(373, 50);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(0, 13);
-            this.label7.TabIndex = 6;
+            this.labelScheduleTime.AutoSize = true;
+            this.labelScheduleTime.Location = new System.Drawing.Point(114, 85);
+            this.labelScheduleTime.Name = "labelScheduleTime";
+            this.labelScheduleTime.Size = new System.Drawing.Size(0, 13);
+            this.labelScheduleTime.TabIndex = 13;
             // 
-            // label8
+            // labelScheduleType
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(373, 85);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 13);
-            this.label8.TabIndex = 7;
-            this.label8.Text = "Last Run:";
+            this.labelScheduleType.AutoSize = true;
+            this.labelScheduleType.Location = new System.Drawing.Point(114, 50);
+            this.labelScheduleType.Name = "labelScheduleType";
+            this.labelScheduleType.Size = new System.Drawing.Size(0, 13);
+            this.labelScheduleType.TabIndex = 12;
             // 
-            // label9
+            // labelFolderPath
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(373, 120);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(63, 13);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "Last Result:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(373, 50);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(73, 13);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "Last Duration:";
+            this.labelFolderPath.Location = new System.Drawing.Point(114, 15);
+            this.labelFolderPath.Name = "labelFolderPath";
+            this.labelFolderPath.Size = new System.Drawing.Size(253, 13);
+            this.labelFolderPath.TabIndex = 11;
             // 
             // label11
             // 
@@ -200,25 +195,85 @@
             this.label11.TabIndex = 10;
             this.label11.Text = "Current Status:";
             // 
-            // linkLabel1
+            // label10
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(29, 207);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(89, 13);
-            this.linkLabel1.TabIndex = 1;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Edit Backup Plan";
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(373, 50);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(73, 13);
+            this.label10.TabIndex = 9;
+            this.label10.Text = "Last Duration:";
             // 
-            // linkLabel2
+            // label9
             // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(146, 207);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(102, 13);
-            this.linkLabel2.TabIndex = 2;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Delete Backup Plan";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(373, 120);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(63, 13);
+            this.label9.TabIndex = 8;
+            this.label9.Text = "Last Result:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(373, 85);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(53, 13);
+            this.label8.TabIndex = 7;
+            this.label8.Text = "Last Run:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(373, 50);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(0, 13);
+            this.label7.TabIndex = 6;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(24, 15);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(64, 13);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Folder Path:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(24, 155);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(47, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Created:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(24, 120);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(68, 13);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Cloud Name:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(24, 85);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(81, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Schedule Time:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(24, 50);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(82, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Schedule Type:";
             // 
             // linkLabel3
             // 
@@ -230,86 +285,54 @@
             this.linkLabel3.TabStop = true;
             this.linkLabel3.Text = "Restore Files";
             // 
-            // linkLabel4
+            // linkLabelDeletePlan
             // 
-            this.linkLabel4.AutoSize = true;
-            this.linkLabel4.Location = new System.Drawing.Point(376, 207);
-            this.linkLabel4.Name = "linkLabel4";
-            this.linkLabel4.Size = new System.Drawing.Size(65, 13);
-            this.linkLabel4.TabIndex = 4;
-            this.linkLabel4.TabStop = true;
-            this.linkLabel4.Text = "View History";
+            this.linkLabelDeletePlan.AutoSize = true;
+            this.linkLabelDeletePlan.Location = new System.Drawing.Point(146, 207);
+            this.linkLabelDeletePlan.Name = "linkLabelDeletePlan";
+            this.linkLabelDeletePlan.Size = new System.Drawing.Size(102, 13);
+            this.linkLabelDeletePlan.TabIndex = 2;
+            this.linkLabelDeletePlan.TabStop = true;
+            this.linkLabelDeletePlan.Text = "Delete Backup Plan";
             // 
-            // labelFolderPath
+            // linkLabel1
             // 
-            this.labelFolderPath.Location = new System.Drawing.Point(114, 15);
-            this.labelFolderPath.Name = "labelFolderPath";
-            this.labelFolderPath.Size = new System.Drawing.Size(253, 13);
-            this.labelFolderPath.TabIndex = 11;
+            this.linkLabel1.AutoSize = true;
+            this.linkLabel1.Location = new System.Drawing.Point(29, 207);
+            this.linkLabel1.Name = "linkLabel1";
+            this.linkLabel1.Size = new System.Drawing.Size(89, 13);
+            this.linkLabel1.TabIndex = 1;
+            this.linkLabel1.TabStop = true;
+            this.linkLabel1.Text = "Edit Backup Plan";
             // 
-            // labelScheduleType
+            // labelBackupName
             // 
-            this.labelScheduleType.AutoSize = true;
-            this.labelScheduleType.Location = new System.Drawing.Point(114, 50);
-            this.labelScheduleType.Name = "labelScheduleType";
-            this.labelScheduleType.Size = new System.Drawing.Size(0, 13);
-            this.labelScheduleType.TabIndex = 12;
+            this.labelBackupName.AutoSize = true;
+            this.labelBackupName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBackupName.Location = new System.Drawing.Point(3, 5);
+            this.labelBackupName.Name = "labelBackupName";
+            this.labelBackupName.Size = new System.Drawing.Size(97, 16);
+            this.labelBackupName.TabIndex = 0;
+            this.labelBackupName.Text = "Bakcup Name:";
             // 
-            // labelScheduleTime
+            // buttonRunNow
             // 
-            this.labelScheduleTime.AutoSize = true;
-            this.labelScheduleTime.Location = new System.Drawing.Point(114, 85);
-            this.labelScheduleTime.Name = "labelScheduleTime";
-            this.labelScheduleTime.Size = new System.Drawing.Size(0, 13);
-            this.labelScheduleTime.TabIndex = 13;
+            this.buttonRunNow.Location = new System.Drawing.Point(675, 205);
+            this.buttonRunNow.Name = "buttonRunNow";
+            this.buttonRunNow.Size = new System.Drawing.Size(75, 23);
+            this.buttonRunNow.TabIndex = 5;
+            this.buttonRunNow.Text = "Run Now";
+            this.buttonRunNow.UseVisualStyleBackColor = true;
             // 
-            // labelCloudName
+            // labelPlanId
             // 
-            this.labelCloudName.AutoSize = true;
-            this.labelCloudName.Location = new System.Drawing.Point(114, 120);
-            this.labelCloudName.Name = "labelCloudName";
-            this.labelCloudName.Size = new System.Drawing.Size(0, 13);
-            this.labelCloudName.TabIndex = 14;
-            // 
-            // labelCreated
-            // 
-            this.labelCreated.AutoSize = true;
-            this.labelCreated.Location = new System.Drawing.Point(114, 155);
-            this.labelCreated.Name = "labelCreated";
-            this.labelCreated.Size = new System.Drawing.Size(0, 13);
-            this.labelCreated.TabIndex = 15;
-            // 
-            // labelLastDuration
-            // 
-            this.labelLastDuration.AutoSize = true;
-            this.labelLastDuration.Location = new System.Drawing.Point(461, 50);
-            this.labelLastDuration.Name = "labelLastDuration";
-            this.labelLastDuration.Size = new System.Drawing.Size(0, 13);
-            this.labelLastDuration.TabIndex = 16;
-            // 
-            // labelCurrentStatus
-            // 
-            this.labelCurrentStatus.AutoSize = true;
-            this.labelCurrentStatus.Location = new System.Drawing.Point(461, 15);
-            this.labelCurrentStatus.Name = "labelCurrentStatus";
-            this.labelCurrentStatus.Size = new System.Drawing.Size(0, 13);
-            this.labelCurrentStatus.TabIndex = 17;
-            // 
-            // labelLastRun
-            // 
-            this.labelLastRun.AutoSize = true;
-            this.labelLastRun.Location = new System.Drawing.Point(461, 85);
-            this.labelLastRun.Name = "labelLastRun";
-            this.labelLastRun.Size = new System.Drawing.Size(0, 13);
-            this.labelLastRun.TabIndex = 18;
-            // 
-            // labelLastResult
-            // 
-            this.labelLastResult.AutoSize = true;
-            this.labelLastResult.Location = new System.Drawing.Point(461, 120);
-            this.labelLastResult.Name = "labelLastResult";
-            this.labelLastResult.Size = new System.Drawing.Size(0, 13);
-            this.labelLastResult.TabIndex = 19;
+            this.labelPlanId.AutoSize = true;
+            this.labelPlanId.Enabled = false;
+            this.labelPlanId.Location = new System.Drawing.Point(486, 210);
+            this.labelPlanId.Name = "labelPlanId";
+            this.labelPlanId.Size = new System.Drawing.Size(0, 13);
+            this.labelPlanId.TabIndex = 6;
+            this.labelPlanId.Visible = false;
             // 
             // PlanControl
             // 
@@ -343,7 +366,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.LinkLabel linkLabel4;
         private System.Windows.Forms.LinkLabel linkLabel3;
-        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.LinkLabel linkLabelDeletePlan;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label labelLastResult;
         private System.Windows.Forms.Label labelLastRun;
@@ -354,5 +377,7 @@
         private System.Windows.Forms.Label labelScheduleTime;
         private System.Windows.Forms.Label labelScheduleType;
         private System.Windows.Forms.Label labelFolderPath;
+        private System.Windows.Forms.Button buttonRunNow;
+        private System.Windows.Forms.Label labelPlanId;
     }
 }

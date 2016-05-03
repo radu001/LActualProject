@@ -12,11 +12,25 @@ namespace CloudBackupL.CustomControllers
 {
     public partial class PlanControl : UserControl
     {
+        public event EventHandler OnUserControlDeletePlanButtonClicked;
+        public event EventHandler OnUserControlRunNowButtonClicked;
+
         public PlanControl()
         {
             InitializeComponent();
+            linkLabelDeletePlan.LinkClicked += (s, e) =>
+        {
+            if (OnUserControlDeletePlanButtonClicked != null)
+                OnUserControlDeletePlanButtonClicked(this, e);
+        };
+
+            buttonRunNow.Click += (s, e) =>
+            {
+                if (OnUserControlRunNowButtonClicked != null)
+                    OnUserControlRunNowButtonClicked(this, e);
+            };
         }
-        
+
         public Label LabelBackupName 
         {
             get { return this.labelBackupName; }
@@ -66,6 +80,11 @@ namespace CloudBackupL.CustomControllers
         {
             get { return this.labelLastRun; }
             set { this.labelLastRun = value; }
+        }
+        public Label LabelPlanId
+        {
+            get { return this.labelPlanId; }
+            set { this.labelPlanId = value; }
         }
     }
 }

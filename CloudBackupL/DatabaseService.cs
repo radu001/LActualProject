@@ -71,5 +71,33 @@ namespace CloudBackupL
             }
             return count == 0 ? true : false;
         }
+
+        public void DeletePlan(int id)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connString, true))
+            {
+                conn.Delete<BackupPlan>(id);
+            }
+        }
+
+        public BackupPlan GetBackupPlan(int id)
+        {
+            BackupPlan plan = null;
+            using (SQLiteConnection conn = new SQLiteConnection(connString, true))
+            {
+                plan = conn.Get<BackupPlan>(id);
+            }
+            return plan;
+        }
+
+        public Cloud GetCloudByName(String name)
+        {
+            List<Cloud> cloud;
+            using (SQLiteConnection conn = new SQLiteConnection(connString, true))
+            {
+                cloud = conn.Query<Cloud>("select * from cloud where name = ?", name);
+            }
+            return cloud[0];
+        }
     }
 }
