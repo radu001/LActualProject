@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
 namespace CloudBackupL
@@ -29,7 +30,7 @@ namespace CloudBackupL
             List<Cloud> clouds = databaseService.GetAllClouds();
             foreach(var c in clouds)
             {
-                comboBoxClouds.Items.Add(c.name);
+                comboBoxClouds.Items.Add(new ListItem(c.name, c.id));   
             }
         }
 
@@ -87,6 +88,7 @@ namespace CloudBackupL
                 plan.scheduleTime = dateTimePickerScheduleTime.Value;
                 plan.currentStatus = "notRun";
                 plan.cloudName = comboBoxClouds.Text;
+                plan.cloudId = ((ListItem)comboBoxClouds.SelectedItem).Value;
                 databaseService.InsertBackupPlan(plan);
                 DialogResult dialog = MessageBox.Show("Plan created succesfully");
                 if (dialog == DialogResult.OK)

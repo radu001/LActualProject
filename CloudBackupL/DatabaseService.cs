@@ -13,11 +13,13 @@ namespace CloudBackupL
 
         public DatabaseService()
         {
-            //using (SQLiteConnection conn = new SQLiteConnection(connString, true))
-            //{
-            //    conn.CreateTable<Cloud>();
-            //    conn.CreateTable<BackupPlan>();
-            //}
+            
+            using (SQLiteConnection conn = new SQLiteConnection(connString, true))
+            {
+                conn.CreateTable<Cloud>();
+                conn.CreateTable<BackupPlan>();
+            }
+            
         }
 
         public int InsertBackupPlan(BackupPlan backupPlan)
@@ -98,6 +100,34 @@ namespace CloudBackupL
                 cloud = conn.Query<Cloud>("select * from cloud where name = ?", name);
             }
             return cloud[0];
+        }
+
+        public bool IsCloudAlreadyInsered(String id)
+        {
+            int count = 0;
+            using (SQLiteConnection conn = new SQLiteConnection(connString, true))
+            {
+                count = conn.Query<Cloud>("select * from cloud where id = ?", id).Count;
+            }
+            return count > 0 ? true : false;
+        }
+
+        public bool CanDeleteCloud(string id)
+        {
+            int count = 0;
+            using (SQLiteConnection conn = new SQLiteConnection(connString, true))
+            {
+                count = conn.Query<Cloud>("select * from BackupPlan where cloudId = ?", id).Count;
+            }
+            return count > 0 ? false : true;
+        }
+
+        public void DeleteCloud(string id)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connString, true))
+            {
+                conn.Delete<Cloud>(id);
+            }
         }
     }
 }

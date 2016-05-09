@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -40,18 +41,31 @@ namespace CloudBackupL
             var accessToken = cloudController.ParseUriForToken(e.Url);
             if (accessToken != null)
             {
-                Cloud cloud = new Cloud();
-                cloud.name = textBoxCloudName.Text;
-                cloud.cloudType = "dropbox";
-                cloud.token = accessToken;
-                cloud.date = DateTime.Now;
-                dbService.InsertCloud(cloud);
-                this.Close();
+                dynamic data = JObject.Parse(cloudController.GetAccountInfo(accessToken));
+                String uid = data.uid;
+                if(dbService.IsCloudAlreadyInsered(uid))
+                {
+                    DialogResult dialogResult = MessageBox.Show("This cloud is already inserted.", "Error", MessageBoxButtons.OK);
+                    this.Close();
+                } else
+                {
+                    Cloud cloud = new Cloud();
+                    cloud.id = data.uid;
+                    cloud.name = textBoxCloudName.Text;
+                    cloud.cloudType = "dropbox";
+                    cloud.token = accessToken;
+                    cloud.date = DateTime.Now;
+                    dbService.InsertCloud(cloud);
+                    DialogResult dialogResult = MessageBox.Show("Cloud inserted successfuly.", "Succes", MessageBoxButtons.OK);
+                    this.Close();
+                }
+
             }
         }
 
         private void buttonNext_Click(object sender, EventArgs e)
         {
+            this.Height += 220;
             panelCloudSelect.Visible = false;
             panelCloudLogin.Visible = true;
             var uri = cloudController.PrepareUri();

@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.labelPlanId = new System.Windows.Forms.Label();
+            this.buttonRunNow = new System.Windows.Forms.Button();
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.labelLastResult = new System.Windows.Forms.Label();
@@ -54,8 +56,8 @@
             this.linkLabelDeletePlan = new System.Windows.Forms.LinkLabel();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.labelBackupName = new System.Windows.Forms.Label();
-            this.buttonRunNow = new System.Windows.Forms.Button();
-            this.labelPlanId = new System.Windows.Forms.Label();
+            this.progressBarArchiving = new System.Windows.Forms.ProgressBar();
+            this.labelStatus = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -64,6 +66,8 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.labelStatus);
+            this.panel1.Controls.Add(this.progressBarArchiving);
             this.panel1.Controls.Add(this.labelPlanId);
             this.panel1.Controls.Add(this.buttonRunNow);
             this.panel1.Controls.Add(this.linkLabel4);
@@ -76,6 +80,25 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(782, 233);
             this.panel1.TabIndex = 0;
+            // 
+            // labelPlanId
+            // 
+            this.labelPlanId.AutoSize = true;
+            this.labelPlanId.Enabled = false;
+            this.labelPlanId.Location = new System.Drawing.Point(486, 210);
+            this.labelPlanId.Name = "labelPlanId";
+            this.labelPlanId.Size = new System.Drawing.Size(0, 13);
+            this.labelPlanId.TabIndex = 6;
+            this.labelPlanId.Visible = false;
+            // 
+            // buttonRunNow
+            // 
+            this.buttonRunNow.Location = new System.Drawing.Point(675, 205);
+            this.buttonRunNow.Name = "buttonRunNow";
+            this.buttonRunNow.Size = new System.Drawing.Size(75, 23);
+            this.buttonRunNow.TabIndex = 5;
+            this.buttonRunNow.Text = "Run Now";
+            this.buttonRunNow.UseVisualStyleBackColor = true;
             // 
             // linkLabel4
             // 
@@ -315,24 +338,21 @@
             this.labelBackupName.TabIndex = 0;
             this.labelBackupName.Text = "Bakcup Name:";
             // 
-            // buttonRunNow
+            // progressBarArchiving
             // 
-            this.buttonRunNow.Location = new System.Drawing.Point(675, 205);
-            this.buttonRunNow.Name = "buttonRunNow";
-            this.buttonRunNow.Size = new System.Drawing.Size(75, 23);
-            this.buttonRunNow.TabIndex = 5;
-            this.buttonRunNow.Text = "Run Now";
-            this.buttonRunNow.UseVisualStyleBackColor = true;
+            this.progressBarArchiving.Location = new System.Drawing.Point(620, 5);
+            this.progressBarArchiving.Name = "progressBarArchiving";
+            this.progressBarArchiving.Size = new System.Drawing.Size(157, 16);
+            this.progressBarArchiving.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBarArchiving.TabIndex = 7;
             // 
-            // labelPlanId
+            // labelStatus
             // 
-            this.labelPlanId.AutoSize = true;
-            this.labelPlanId.Enabled = false;
-            this.labelPlanId.Location = new System.Drawing.Point(486, 210);
-            this.labelPlanId.Name = "labelPlanId";
-            this.labelPlanId.Size = new System.Drawing.Size(0, 13);
-            this.labelPlanId.TabIndex = 6;
-            this.labelPlanId.Visible = false;
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Location = new System.Drawing.Point(464, 7);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(0, 13);
+            this.labelStatus.TabIndex = 8;
             // 
             // PlanControl
             // 
@@ -379,5 +399,7 @@
         private System.Windows.Forms.Label labelFolderPath;
         private System.Windows.Forms.Button buttonRunNow;
         private System.Windows.Forms.Label labelPlanId;
+        private System.Windows.Forms.ProgressBar progressBarArchiving;
+        private System.Windows.Forms.Label labelStatus;
     }
 }

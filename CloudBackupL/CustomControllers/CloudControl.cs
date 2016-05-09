@@ -12,9 +12,15 @@ namespace CloudBackupL.CustomControllers
 {
     public partial class CloudControl : UserControl
     {
+        public event EventHandler OnUserControlDeleteCloudButtonClicked;
         public CloudControl()
         {
             InitializeComponent();
+            buttonDelete.Click += (s, e) =>
+            {
+                if (OnUserControlDeleteCloudButtonClicked != null)
+                    OnUserControlDeleteCloudButtonClicked(this, e);
+            };
         }
 
         public Label LabelFreeSpace
@@ -36,6 +42,12 @@ namespace CloudBackupL.CustomControllers
         {
             get { return this.pictureBoxCloudImage; }
             set { this.pictureBoxCloudImage = value; }
+        }
+
+        public Label LabelId
+        {
+            get { return this.labelId; }
+            set { this.labelId = value; }
         }
 
     }

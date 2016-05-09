@@ -43,6 +43,7 @@
             this.buttonAddCloud = new System.Windows.Forms.Button();
             this.textBoxLogs = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanelPlans = new System.Windows.Forms.FlowLayoutPanel();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label4 = new System.Windows.Forms.Label();
@@ -63,7 +64,8 @@
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.imageListClouds = new System.Windows.Forms.ImageList(this.components);
-            this.flowLayoutPanelPlans = new System.Windows.Forms.FlowLayoutPanel();
+            this.backgroundWorkerLoadClouds = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorkerBackup = new System.ComponentModel.BackgroundWorker();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -130,6 +132,7 @@
             this.flowLayoutPanelClouds.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.flowLayoutPanelClouds.AutoScroll = true;
+            this.flowLayoutPanelClouds.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanelClouds.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelClouds.Location = new System.Drawing.Point(538, 19);
             this.flowLayoutPanelClouds.Name = "flowLayoutPanelClouds";
@@ -222,7 +225,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Backup Plans";
             this.tabPage2.UseVisualStyleBackColor = true;
-            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+            // 
+            // flowLayoutPanelPlans
+            // 
+            this.flowLayoutPanelPlans.AllowDrop = true;
+            this.flowLayoutPanelPlans.AutoScroll = true;
+            this.flowLayoutPanelPlans.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelPlans.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanelPlans.Name = "flowLayoutPanelPlans";
+            this.flowLayoutPanelPlans.Size = new System.Drawing.Size(810, 379);
+            this.flowLayoutPanelPlans.TabIndex = 0;
             // 
             // tabPage3
             // 
@@ -412,15 +424,17 @@
             this.imageListClouds.TransparentColor = System.Drawing.Color.Transparent;
             this.imageListClouds.Images.SetKeyName(0, "dropbox.jpg");
             // 
-            // flowLayoutPanelPlans
+            // backgroundWorkerLoadClouds
             // 
-            this.flowLayoutPanelPlans.AllowDrop = true;
-            this.flowLayoutPanelPlans.AutoScroll = true;
-            this.flowLayoutPanelPlans.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelPlans.Location = new System.Drawing.Point(3, 3);
-            this.flowLayoutPanelPlans.Name = "flowLayoutPanelPlans";
-            this.flowLayoutPanelPlans.Size = new System.Drawing.Size(810, 379);
-            this.flowLayoutPanelPlans.TabIndex = 0;
+            this.backgroundWorkerLoadClouds.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerLoadClouds_DoWork);
+            this.backgroundWorkerLoadClouds.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerLoadClouds_ProgressChanged);
+            // 
+            // backgroundWorkerBackup
+            // 
+            this.backgroundWorkerBackup.WorkerReportsProgress = true;
+            this.backgroundWorkerBackup.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerBackup_DoWork);
+            this.backgroundWorkerBackup.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerBackup_ProgressChanged);
+            this.backgroundWorkerBackup.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerBackup_RunWorkerCompleted);
             // 
             // MainWindow
             // 
@@ -487,6 +501,8 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelClouds;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelPlans;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerLoadClouds;
+        private System.ComponentModel.BackgroundWorker backgroundWorkerBackup;
     }
 }
 

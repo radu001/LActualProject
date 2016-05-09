@@ -33,14 +33,14 @@
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("", 0);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panelCloudSelect = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxCloudName = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonNext = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.panelCloudLogin = new System.Windows.Forms.Panel();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBoxCloudName = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.panelCloudSelect.SuspendLayout();
             this.panelCloudLogin.SuspendLayout();
             this.SuspendLayout();
@@ -65,6 +65,32 @@
             this.panelCloudSelect.Size = new System.Drawing.Size(449, 316);
             this.panelCloudSelect.TabIndex = 0;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(35, 21);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(387, 16);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Please enter a name for your cloud and select the cloud service.";
+            // 
+            // textBoxCloudName
+            // 
+            this.textBoxCloudName.Location = new System.Drawing.Point(84, 72);
+            this.textBoxCloudName.Name = "textBoxCloudName";
+            this.textBoxCloudName.Size = new System.Drawing.Size(177, 20);
+            this.textBoxCloudName.TabIndex = 7;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 75);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(66, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Cloud name:";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -87,10 +113,12 @@
             // 
             // listView1
             // 
+            this.listView1.HideSelection = false;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
             this.listView1.LargeImageList = this.imageList1;
             this.listView1.Location = new System.Drawing.Point(12, 139);
+            this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(425, 138);
             this.listView1.SmallImageList = this.imageList1;
@@ -114,35 +142,10 @@
             this.webBrowser1.Location = new System.Drawing.Point(0, 0);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.ScrollBarsEnabled = false;
             this.webBrowser1.Size = new System.Drawing.Size(449, 316);
             this.webBrowser1.TabIndex = 0;
             this.webBrowser1.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.webBrowser1_Navigated);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 75);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(66, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Cloud name:";
-            // 
-            // textBoxCloudName
-            // 
-            this.textBoxCloudName.Location = new System.Drawing.Point(84, 72);
-            this.textBoxCloudName.Name = "textBoxCloudName";
-            this.textBoxCloudName.Size = new System.Drawing.Size(177, 20);
-            this.textBoxCloudName.TabIndex = 7;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(35, 21);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(387, 16);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Please enter a name for your cloud and select the cloud service.";
             // 
             // AddCloudWindow
             // 

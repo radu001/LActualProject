@@ -103,6 +103,7 @@
             // 
             this.textBoxFolderPath.Location = new System.Drawing.Point(351, 75);
             this.textBoxFolderPath.Name = "textBoxFolderPath";
+            this.textBoxFolderPath.ReadOnly = true;
             this.textBoxFolderPath.Size = new System.Drawing.Size(146, 20);
             this.textBoxFolderPath.TabIndex = 10;
             // 
@@ -118,6 +119,7 @@
             // 
             // comboBoxScheduleType
             // 
+            this.comboBoxScheduleType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxScheduleType.FormattingEnabled = true;
             this.comboBoxScheduleType.Items.AddRange(new object[] {
             "Manual",
@@ -132,6 +134,7 @@
             // 
             // comboBoxClouds
             // 
+            this.comboBoxClouds.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxClouds.FormattingEnabled = true;
             this.comboBoxClouds.Location = new System.Drawing.Point(113, 115);
             this.comboBoxClouds.Name = "comboBoxClouds";

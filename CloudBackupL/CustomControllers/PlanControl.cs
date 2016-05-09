@@ -86,5 +86,17 @@ namespace CloudBackupL.CustomControllers
             get { return this.labelPlanId; }
             set { this.labelPlanId = value; }
         }
+
+        public ProgressBar ProgressBarArchiving
+        {
+            get { return this.progressBarArchiving; }
+            set { this.progressBarArchiving = value; }
+        }
+
+        public Label LabelStatus
+        {
+            get { return this.labelStatus ; }
+            set { this.labelStatus = value; }
+        }
     }
 }

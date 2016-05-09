@@ -34,6 +34,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.labelTotalSpace = new System.Windows.Forms.Label();
             this.labelFreeSpace = new System.Windows.Forms.Label();
+            this.buttonDelete = new System.Windows.Forms.Button();
+            this.labelId = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCloudImage)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,10 +90,31 @@
             this.labelFreeSpace.Size = new System.Drawing.Size(0, 13);
             this.labelFreeSpace.TabIndex = 5;
             // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(199, 80);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(48, 23);
+            this.buttonDelete.TabIndex = 6;
+            this.buttonDelete.Text = "Delete";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            // 
+            // labelId
+            // 
+            this.labelId.AutoSize = true;
+            this.labelId.Enabled = false;
+            this.labelId.Location = new System.Drawing.Point(110, 89);
+            this.labelId.Name = "labelId";
+            this.labelId.Size = new System.Drawing.Size(0, 13);
+            this.labelId.TabIndex = 7;
+            this.labelId.Visible = false;
+            // 
             // CloudControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.labelId);
+            this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.labelFreeSpace);
             this.Controls.Add(this.labelTotalSpace);
             this.Controls.Add(this.label2);
@@ -114,5 +137,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label labelTotalSpace;
         private System.Windows.Forms.Label labelFreeSpace;
+        private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Label labelId;
     }
 }
