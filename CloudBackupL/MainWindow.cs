@@ -1,17 +1,9 @@
 ﻿using ByteSizeLib;
 using CloudBackupL.CustomControllers;
 using CloudBackupL.Utils;
-using Dropbox.Api;
-using Dropbox.Api.Files;
-using Ionic.Zip;
-using Newtonsoft.Json.Linq;
-using SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
@@ -66,6 +58,7 @@ namespace CloudBackupL
             flowLayoutPanelPlans.Controls.Clear();
 
             List<BackupPlan> plans = databaseService.GetAllPlans();
+            labelTotalPlans.Text = "Total plans: " + plans.Count;
             foreach (var c in plans)
             {
                 PlanControl control = new PlanControl();
@@ -99,7 +92,7 @@ namespace CloudBackupL
 
         private void listBoxClouds_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(((System.Windows.Forms.ListBox)sender) == null) return;
+            if(((System.Windows.Forms.ListBox)sender).Text.Equals("")) return;
             listViewBackupsInfo.Items.Clear();
             ListItem selectedItem = (ListItem)((System.Windows.Forms.ListBox)sender).SelectedItem;
             List<Backup> backups = databaseService.GetBackCloudBackups(selectedItem.Value);
@@ -244,7 +237,5 @@ namespace CloudBackupL
             get { return this.backgroundWorkerBackup; }
             set { this.backgroundWorkerBackup = value; }
         }
-
-
     }
 }

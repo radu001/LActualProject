@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -78,9 +79,8 @@ namespace CloudBackupL
             return ByteSize.FromBytes(totalSpaceBytes).GigaBytes;
         }
 
-        public async Task<Boolean> Upload(string file, string targetPath, DropboxClient client, MainWindow instance, Backup backup)
+        public async Task<Boolean> Upload(string file, string targetPath, DropboxClient client, MainWindow instance, Backup backup, Stopwatch watch)
         {
-            var watch = System.Diagnostics.Stopwatch.StartNew();
             instance.BeginInvoke(new Action(() => instance.ReportProgress(200)));
             const int chunkSize = 1024 * 10240;
             FileStream CurrentFileStream = File.Open(file, FileMode.Open, FileAccess.Read);

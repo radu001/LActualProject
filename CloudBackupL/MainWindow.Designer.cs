@@ -54,6 +54,7 @@
             this.columnDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnCompressedSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnRunTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.label5 = new System.Windows.Forms.Label();
@@ -67,7 +68,8 @@
             this.imageListClouds = new System.Windows.Forms.ImageList(this.components);
             this.backgroundWorkerLoadClouds = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorkerBackup = new System.ComponentModel.BackgroundWorker();
-            this.columnRunTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.settingsControl = new CloudBackupL.CustomControllers.SettingsControl();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -81,6 +83,8 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -96,7 +100,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(824, 415);
+            this.tabControl1.Size = new System.Drawing.Size(824, 463);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -114,7 +118,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(816, 385);
+            this.tabPage1.Size = new System.Drawing.Size(816, 433);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Home";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -138,7 +142,7 @@
             this.flowLayoutPanelClouds.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelClouds.Location = new System.Drawing.Point(538, 19);
             this.flowLayoutPanelClouds.Name = "flowLayoutPanelClouds";
-            this.flowLayoutPanelClouds.Size = new System.Drawing.Size(278, 217);
+            this.flowLayoutPanelClouds.Size = new System.Drawing.Size(278, 265);
             this.flowLayoutPanelClouds.TabIndex = 10;
             this.flowLayoutPanelClouds.WrapContents = false;
             // 
@@ -172,7 +176,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 223);
+            this.label1.Location = new System.Drawing.Point(3, 271);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 13);
             this.label1.TabIndex = 5;
@@ -211,7 +215,7 @@
             // 
             this.textBoxLogs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxLogs.Location = new System.Drawing.Point(0, 239);
+            this.textBoxLogs.Location = new System.Drawing.Point(0, 287);
             this.textBoxLogs.Multiline = true;
             this.textBoxLogs.Name = "textBoxLogs";
             this.textBoxLogs.Size = new System.Drawing.Size(816, 146);
@@ -224,7 +228,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(816, 385);
+            this.tabPage2.Size = new System.Drawing.Size(816, 433);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Backup Plans";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -232,7 +236,7 @@
             // labelTotalPlans
             // 
             this.labelTotalPlans.AutoSize = true;
-            this.labelTotalPlans.Location = new System.Drawing.Point(9, 366);
+            this.labelTotalPlans.Location = new System.Drawing.Point(3, 420);
             this.labelTotalPlans.Name = "labelTotalPlans";
             this.labelTotalPlans.Size = new System.Drawing.Size(71, 13);
             this.labelTotalPlans.TabIndex = 1;
@@ -244,7 +248,7 @@
             this.flowLayoutPanelPlans.AutoScroll = true;
             this.flowLayoutPanelPlans.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanelPlans.Name = "flowLayoutPanelPlans";
-            this.flowLayoutPanelPlans.Size = new System.Drawing.Size(810, 357);
+            this.flowLayoutPanelPlans.Size = new System.Drawing.Size(810, 414);
             this.flowLayoutPanelPlans.TabIndex = 0;
             // 
             // tabPage3
@@ -253,7 +257,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 26);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(816, 385);
+            this.tabPage3.Size = new System.Drawing.Size(816, 433);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Cloud backups";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -272,7 +276,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.listViewBackupsInfo);
-            this.splitContainer1.Size = new System.Drawing.Size(810, 379);
+            this.splitContainer1.Size = new System.Drawing.Size(810, 427);
             this.splitContainer1.SplitterDistance = 200;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -293,7 +297,7 @@
             this.listBoxClouds.IntegralHeight = false;
             this.listBoxClouds.Location = new System.Drawing.Point(0, 23);
             this.listBoxClouds.Name = "listBoxClouds";
-            this.listBoxClouds.Size = new System.Drawing.Size(200, 356);
+            this.listBoxClouds.Size = new System.Drawing.Size(200, 404);
             this.listBoxClouds.TabIndex = 1;
             this.listBoxClouds.SelectedIndexChanged += new System.EventHandler(this.listBoxClouds_SelectedIndexChanged);
             // 
@@ -309,7 +313,7 @@
             this.listViewBackupsInfo.FullRowSelect = true;
             this.listViewBackupsInfo.Location = new System.Drawing.Point(0, 0);
             this.listViewBackupsInfo.Name = "listViewBackupsInfo";
-            this.listViewBackupsInfo.Size = new System.Drawing.Size(606, 379);
+            this.listViewBackupsInfo.Size = new System.Drawing.Size(606, 427);
             this.listViewBackupsInfo.TabIndex = 0;
             this.listViewBackupsInfo.UseCompatibleStateImageBehavior = false;
             this.listViewBackupsInfo.View = System.Windows.Forms.View.Details;
@@ -334,13 +338,18 @@
             this.columnCompressedSize.Text = "Compressed Size";
             this.columnCompressedSize.Width = 121;
             // 
+            // columnRunTime
+            // 
+            this.columnRunTime.Text = "Run Time";
+            this.columnRunTime.Width = 100;
+            // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.splitContainer2);
             this.tabPage4.Location = new System.Drawing.Point(4, 26);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(816, 385);
+            this.tabPage4.Size = new System.Drawing.Size(816, 433);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Backup files";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -359,7 +368,7 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.listView3);
-            this.splitContainer2.Size = new System.Drawing.Size(810, 379);
+            this.splitContainer2.Size = new System.Drawing.Size(810, 427);
             this.splitContainer2.SplitterDistance = 270;
             this.splitContainer2.TabIndex = 1;
             // 
@@ -380,7 +389,7 @@
             this.listBox2.IntegralHeight = false;
             this.listBox2.Location = new System.Drawing.Point(0, 23);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(270, 356);
+            this.listBox2.Size = new System.Drawing.Size(270, 404);
             this.listBox2.TabIndex = 1;
             // 
             // listView3
@@ -392,7 +401,7 @@
             this.listView3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView3.Location = new System.Drawing.Point(0, 0);
             this.listView3.Name = "listView3";
-            this.listView3.Size = new System.Drawing.Size(536, 379);
+            this.listView3.Size = new System.Drawing.Size(536, 427);
             this.listView3.TabIndex = 0;
             this.listView3.UseCompatibleStateImageBehavior = false;
             this.listView3.View = System.Windows.Forms.View.Details;
@@ -414,10 +423,11 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.panel1);
             this.tabPage5.Location = new System.Drawing.Point(4, 26);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(816, 385);
+            this.tabPage5.Size = new System.Drawing.Size(816, 433);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Settings";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -427,7 +437,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 26);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(816, 385);
+            this.tabPage6.Size = new System.Drawing.Size(816, 433);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "About";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -450,16 +460,28 @@
             this.backgroundWorkerBackup.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerBackup_ProgressChanged);
             this.backgroundWorkerBackup.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerBackup_RunWorkerCompleted);
             // 
-            // columnRunTime
+            // panel1
             // 
-            this.columnRunTime.Text = "Run Time";
-            this.columnRunTime.Width = 100;
+            this.panel1.Controls.Add(this.settingsControl);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(810, 427);
+            this.panel1.TabIndex = 0;
+            // 
+            // settingsControl
+            // 
+            this.settingsControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.settingsControl.Location = new System.Drawing.Point(0, 0);
+            this.settingsControl.Name = "settingsControl";
+            this.settingsControl.Size = new System.Drawing.Size(810, 427);
+            this.settingsControl.TabIndex = 0;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(824, 415);
+            this.ClientSize = new System.Drawing.Size(824, 463);
             this.Controls.Add(this.tabControl1);
             this.Name = "MainWindow";
             this.Text = "CLoud Backup";
@@ -481,6 +503,8 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -525,6 +549,8 @@
         private System.ComponentModel.BackgroundWorker backgroundWorkerBackup;
         private System.Windows.Forms.Label labelTotalPlans;
         private System.Windows.Forms.ColumnHeader columnRunTime;
+        private System.Windows.Forms.Panel panel1;
+        private CustomControllers.SettingsControl settingsControl;
     }
 }
 
