@@ -43,12 +43,13 @@
             this.buttonAddCloud = new System.Windows.Forms.Button();
             this.textBoxLogs = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.labelTotalPlans = new System.Windows.Forms.Label();
             this.flowLayoutPanelPlans = new System.Windows.Forms.FlowLayoutPanel();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label4 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.listView2 = new System.Windows.Forms.ListView();
+            this.listBoxClouds = new System.Windows.Forms.ListBox();
+            this.listViewBackupsInfo = new System.Windows.Forms.ListView();
             this.columnBackupName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnSize = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -66,6 +67,7 @@
             this.imageListClouds = new System.Windows.Forms.ImageList(this.components);
             this.backgroundWorkerLoadClouds = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorkerBackup = new System.ComponentModel.BackgroundWorker();
+            this.columnRunTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -217,6 +219,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.labelTotalPlans);
             this.tabPage2.Controls.Add(this.flowLayoutPanelPlans);
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Name = "tabPage2";
@@ -226,14 +229,22 @@
             this.tabPage2.Text = "Backup Plans";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // labelTotalPlans
+            // 
+            this.labelTotalPlans.AutoSize = true;
+            this.labelTotalPlans.Location = new System.Drawing.Point(9, 366);
+            this.labelTotalPlans.Name = "labelTotalPlans";
+            this.labelTotalPlans.Size = new System.Drawing.Size(71, 13);
+            this.labelTotalPlans.TabIndex = 1;
+            this.labelTotalPlans.Text = "Total plans: 0";
+            // 
             // flowLayoutPanelPlans
             // 
             this.flowLayoutPanelPlans.AllowDrop = true;
             this.flowLayoutPanelPlans.AutoScroll = true;
-            this.flowLayoutPanelPlans.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelPlans.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanelPlans.Name = "flowLayoutPanelPlans";
-            this.flowLayoutPanelPlans.Size = new System.Drawing.Size(810, 379);
+            this.flowLayoutPanelPlans.Size = new System.Drawing.Size(810, 357);
             this.flowLayoutPanelPlans.TabIndex = 0;
             // 
             // tabPage3
@@ -256,49 +267,52 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.label4);
-            this.splitContainer1.Panel1.Controls.Add(this.listBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.listBoxClouds);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.listView2);
+            this.splitContainer1.Panel2.Controls.Add(this.listViewBackupsInfo);
             this.splitContainer1.Size = new System.Drawing.Size(810, 379);
-            this.splitContainer1.SplitterDistance = 270;
+            this.splitContainer1.SplitterDistance = 200;
             this.splitContainer1.TabIndex = 0;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(95, 0);
+            this.label4.Location = new System.Drawing.Point(62, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(82, 20);
             this.label4.TabIndex = 2;
             this.label4.Text = "My Clouds";
             // 
-            // listBox1
+            // listBoxClouds
             // 
-            this.listBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.IntegralHeight = false;
-            this.listBox1.Location = new System.Drawing.Point(0, 23);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(270, 356);
-            this.listBox1.TabIndex = 1;
+            this.listBoxClouds.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.listBoxClouds.FormattingEnabled = true;
+            this.listBoxClouds.IntegralHeight = false;
+            this.listBoxClouds.Location = new System.Drawing.Point(0, 23);
+            this.listBoxClouds.Name = "listBoxClouds";
+            this.listBoxClouds.Size = new System.Drawing.Size(200, 356);
+            this.listBoxClouds.TabIndex = 1;
+            this.listBoxClouds.SelectedIndexChanged += new System.EventHandler(this.listBoxClouds_SelectedIndexChanged);
             // 
-            // listView2
+            // listViewBackupsInfo
             // 
-            this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.listViewBackupsInfo.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnBackupName,
             this.columnDate,
             this.columnSize,
-            this.columnCompressedSize});
-            this.listView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView2.Location = new System.Drawing.Point(0, 0);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(536, 379);
-            this.listView2.TabIndex = 0;
-            this.listView2.UseCompatibleStateImageBehavior = false;
-            this.listView2.View = System.Windows.Forms.View.Details;
+            this.columnCompressedSize,
+            this.columnRunTime});
+            this.listViewBackupsInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewBackupsInfo.FullRowSelect = true;
+            this.listViewBackupsInfo.Location = new System.Drawing.Point(0, 0);
+            this.listViewBackupsInfo.Name = "listViewBackupsInfo";
+            this.listViewBackupsInfo.Size = new System.Drawing.Size(606, 379);
+            this.listViewBackupsInfo.TabIndex = 0;
+            this.listViewBackupsInfo.UseCompatibleStateImageBehavior = false;
+            this.listViewBackupsInfo.View = System.Windows.Forms.View.Details;
             // 
             // columnBackupName
             // 
@@ -308,7 +322,7 @@
             // columnDate
             // 
             this.columnDate.Text = "Date";
-            this.columnDate.Width = 98;
+            this.columnDate.Width = 115;
             // 
             // columnSize
             // 
@@ -436,6 +450,11 @@
             this.backgroundWorkerBackup.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerBackup_ProgressChanged);
             this.backgroundWorkerBackup.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerBackup_RunWorkerCompleted);
             // 
+            // columnRunTime
+            // 
+            this.columnRunTime.Text = "Run Time";
+            this.columnRunTime.Width = 100;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -449,6 +468,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -482,9 +502,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox listBoxClouds;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.ListView listViewBackupsInfo;
         private System.Windows.Forms.ColumnHeader columnBackupName;
         private System.Windows.Forms.ColumnHeader columnDate;
         private System.Windows.Forms.ColumnHeader columnSize;
@@ -503,6 +523,8 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelPlans;
         private System.ComponentModel.BackgroundWorker backgroundWorkerLoadClouds;
         private System.ComponentModel.BackgroundWorker backgroundWorkerBackup;
+        private System.Windows.Forms.Label labelTotalPlans;
+        private System.Windows.Forms.ColumnHeader columnRunTime;
     }
 }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Common;
 using SQLite;
-//using System.Data.SQLite;
+using System.IO;
 
 namespace CloudBackupL
 {
@@ -13,11 +13,14 @@ namespace CloudBackupL
 
         public DatabaseService()
         {
-            
-            using (SQLiteConnection conn = new SQLiteConnection(connString, true))
+            if (!File.Exists(connString))
             {
-                conn.CreateTable<Cloud>();
-                conn.CreateTable<BackupPlan>();
+                using (SQLiteConnection conn = new SQLiteConnection(connString, true))
+                {
+                    conn.CreateTable<Cloud>();
+                    conn.CreateTable<BackupPlan>();
+                    conn.CreateTable<Backup>();
+                }
             }
             
         }
@@ -42,6 +45,26 @@ namespace CloudBackupL
             }
 
             return key;
+        }
+
+        public void InsertBackup(Backup backup)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connString, true))
+            {
+                conn.Insert(backup);
+            }
+
+            BackupPlan backupPlan = GetBackupPlan(backup.backupPlanId);
+            backupPlan.lastRun = backup.date;
+            backupPlan.currentStatus = "Updated";
+            backupPlan.lastResult = true;
+            backupPlan.lastBackupDuration = backup.runTime;
+
+            using (SQLiteConnection conn = new SQLiteConnection(connString, true))
+            {
+                conn.Update(backupPlan);
+            }
+
         }
 
         public List<Cloud> GetAllClouds()
@@ -128,6 +151,16 @@ namespace CloudBackupL
             {
                 conn.Delete<Cloud>(id);
             }
+        }
+
+        public List<Backup> GetBackCloudBackups(string cloudId)
+        {
+            List<Backup> result;
+            using (SQLiteConnection conn = new SQLiteConnection(connString, true))
+            {
+                result = conn.Query<Backup>("select * from Backup where cloudId = ?", cloudId);
+            }
+            return result;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ByteSizeLib;
 using CloudBackupL.CustomControllers;
+using CloudBackupL.Utils;
 using Dropbox.Api;
 using Dropbox.Api.Files;
 using Ionic.Zip;
@@ -11,6 +12,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
 namespace CloudBackupL
@@ -20,7 +22,7 @@ namespace CloudBackupL
         DatabaseService databaseService;
         DropBoxController dropBoxController;
         PlanControl currentRunningPlan = null;
-        MainWindow instance;
+        static MainWindow instance;
 
         //Main Window Constructor
         public MainWindow()
@@ -38,6 +40,7 @@ namespace CloudBackupL
         {
             LoadClouds();
             LoadPlans();
+            LoadCloudList();
         }
 
         //Button Add Cloud Clicked
@@ -46,6 +49,7 @@ namespace CloudBackupL
             AddCloudWindow addCloudWindow = new AddCloudWindow();
             addCloudWindow.ShowDialog(); 
             LoadClouds();
+            LoadCloudList();
         }
 
         //Button Add Cloud Clicked
@@ -80,6 +84,40 @@ namespace CloudBackupL
                 control.OnUserControlRunNowButtonClicked += (s, e) => RunNowButtonClicked(s, e);
                 flowLayoutPanelPlans.Controls.Add(control);
             }
+        }
+
+        //Load Plans in the 2nd tab
+        private void LoadCloudList()
+        {
+            listBoxClouds.Items.Clear();
+            List<Cloud> clouds = databaseService.GetAllClouds();
+            foreach (var c in clouds)
+            {
+                listBoxClouds.Items.Add(new ListItem(c.name, c.id));
+            }
+        }
+
+        private void listBoxClouds_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(((System.Windows.Forms.ListBox)sender) == null) return;
+            listViewBackupsInfo.Items.Clear();
+            ListItem selectedItem = (ListItem)((System.Windows.Forms.ListBox)sender).SelectedItem;
+            List<Backup> backups = databaseService.GetBackCloudBackups(selectedItem.Value);
+            foreach(var b in backups)
+            {
+                Double size = Math.Round(ByteSize.FromBytes(b.size).MegaBytes, 3);
+                Double compressedSize = Math.Round(ByteSize.FromBytes(b.compressedSize).MegaBytes, 3);
+                TimeSpan runTimeTimeSpan = new TimeSpan(0, 0, 0, 0, (int)b.runTime);
+                String runTime = (runTimeTimeSpan.Days > 0 ? runTimeTimeSpan.Days + " d - " : "") +
+                    runTimeTimeSpan.Hours + " h : " + runTimeTimeSpan.Minutes + " m : " + runTimeTimeSpan.Seconds + " s";
+
+                System.Windows.Forms.ListViewItem item = new System.Windows.Forms.ListViewItem(
+                    new string [] {b.backupPlanName, b.date.ToString("yyyy/MM/dd h-m-s"),
+                    size + " MB" , compressedSize + " MB", runTime});
+                item.Tag = b.id;
+                listViewBackupsInfo.Items.Add(item);
+            }
+            
         }
 
         //Button Delecte Plan Clicked
@@ -167,7 +205,6 @@ namespace CloudBackupL
 
         public void ReportProgress(int value)
         {
-            System.Console.WriteLine("progress: " + value);
             if (value == 110)
             {
                 currentRunningPlan.ProgressBarArchiving.Value = 100;
@@ -186,31 +223,8 @@ namespace CloudBackupL
 
         private void backgroundWorkerBackup_DoWork(object sender, DoWorkEventArgs e)
         {
-            string id = currentRunningPlan.LabelPlanId.Text;
-            BackupPlan plan = databaseService.GetBackupPlan(Int32.Parse(id));
-            Cloud cloud = databaseService.GetCloudByName(plan.cloudName);
-            using (ZipFile zip = new ZipFile())
-            {
-                zip.SaveProgress += Zip_SaveProgress;
-                zip.AddDirectory(@plan.path, "Backup1");
-                zip.Comment = "This zip was created at " + System.DateTime.Now.ToString("G");
-                zip.Save(AppDomain.CurrentDomain.BaseDirectory + "\\temp.zip");
-            }
-            Task.Run(async () => dropBoxController.Upload(AppDomain.CurrentDomain.BaseDirectory + "temp.zip", "/temp.zip", new DropboxClient(cloud.token), this)).Wait(); ;
-        }
-
-
-        private void Zip_SaveProgress(object sender, SaveProgressEventArgs e)
-        {
-            if (e.EventType == ZipProgressEventType.Saving_EntryBytesRead)
-            {
-                int progress = (int)((e.BytesTransferred * 100) / e.TotalBytesToTransfer);
-                backgroundWorkerBackup.ReportProgress(progress);
-            }
-            else if (e.EventType == ZipProgressEventType.Saving_Completed)
-            {
-                backgroundWorkerBackup.ReportProgress(200);
-            }
+            ArchiveUtils archiveUtils = new ArchiveUtils();
+            archiveUtils.RunArchiving(backgroundWorkerBackup, currentRunningPlan, instance);
         }
 
         private void backgroundWorkerBackup_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -221,7 +235,8 @@ namespace CloudBackupL
 
         private void backgroundWorkerBackup_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            
+            LoadClouds();
+            LoadPlans();
         }
 
         public BackgroundWorker BackgroundWorkerBackup
@@ -229,5 +244,7 @@ namespace CloudBackupL
             get { return this.backgroundWorkerBackup; }
             set { this.backgroundWorkerBackup = value; }
         }
+
+
     }
 }

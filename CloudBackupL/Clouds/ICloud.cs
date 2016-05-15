@@ -18,6 +18,6 @@ namespace CloudBackupL
         String GetAccountInfo(String accessToken);
 
 
-        void Upload(string file, string targetPath, DropboxClient client, MainWindow instance);
+        Task<Boolean> Upload(string file, string targetPath, DropboxClient client, MainWindow instance, Backup backup);
     }
 }

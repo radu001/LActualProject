@@ -20,9 +20,11 @@ namespace CloudBackupL
         public object MessageBox { get; private set; }
         string redirectUri = ConfigurationManager.AppSettings["dropboxRedirectUri"];
         FileStream CurrentFileStream;
+        DatabaseService databaseService;
 
         public DropBoxController()
         {
+            databaseService = new DatabaseService();
         }
 
         public String PrepareUri()
@@ -76,11 +78,13 @@ namespace CloudBackupL
             return ByteSize.FromBytes(totalSpaceBytes).GigaBytes;
         }
 
-        public async void Upload(string file, string targetPath, DropboxClient client, MainWindow instance)
+        public async Task<Boolean> Upload(string file, string targetPath, DropboxClient client, MainWindow instance, Backup backup)
         {
-            const int chunkSize = 1024 * 100;
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            instance.BeginInvoke(new Action(() => instance.ReportProgress(200)));
+            const int chunkSize = 1024 * 10240;
             FileStream CurrentFileStream = File.Open(file, FileMode.Open, FileAccess.Read);
-
+            
             if (CurrentFileStream.Length <= chunkSize)
             {
                 System.Diagnostics.Trace.WriteLine("Start one-shot upload");
@@ -96,19 +100,16 @@ namespace CloudBackupL
                 for (var idx = 0; idx < numChunks; idx++)
                 {
                     var byteRead = CurrentFileStream.Read(buffer, 0, chunkSize);
-                    System.Diagnostics.Trace.WriteLine(byteRead.ToString());
 
                     using (MemoryStream memStream = new MemoryStream(buffer, 0, byteRead))
                     {
                         if (idx == 0)
                         {
-                            System.Diagnostics.Trace.WriteLine("Session start");
                             var result = await client.Files.UploadSessionStartAsync(false, memStream);
                             sessionId = result.SessionId;
                         }
                         else
                         {
-                            System.Diagnostics.Trace.WriteLine("Upload cusor");
                             UploadSessionCursor cursor = new UploadSessionCursor(sessionId, (ulong)(chunkSize * idx));
 
                             if (idx == numChunks - 1)
@@ -120,7 +121,6 @@ namespace CloudBackupL
 
                             else
                             {
-                                System.Diagnostics.Trace.WriteLine("Session append");
                                 instance.Invoke(new Action(() => instance.ReportProgress((int)(idx*100 / numChunks))));
                                 await client.Files.UploadSessionAppendV2Async(cursor, body: memStream);
                                 
@@ -129,6 +129,10 @@ namespace CloudBackupL
                     }
                 }
             }
+            watch.Stop();
+            backup.runTime = watch.ElapsedMilliseconds;
+            databaseService.InsertBackup(backup);
+            return true;
         }
     }
 }
