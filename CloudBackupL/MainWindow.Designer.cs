@@ -64,10 +64,6 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.imageListClouds = new System.Windows.Forms.ImageList(this.components);
-            this.backgroundWorkerLoadClouds = new System.ComponentModel.BackgroundWorker();
-            this.backgroundWorkerBackup = new System.ComponentModel.BackgroundWorker();
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
@@ -98,6 +94,8 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.label15 = new System.Windows.Forms.Label();
+            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.imageListClouds = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -231,7 +229,6 @@
             this.buttonAddBackupPlan.TabIndex = 3;
             this.buttonAddBackupPlan.Text = "Add Backup Plan";
             this.buttonAddBackupPlan.UseVisualStyleBackColor = true;
-            this.buttonAddBackupPlan.Click += new System.EventHandler(this.buttonAddBackupPlan_Click);
             // 
             // buttonAddCloud
             // 
@@ -241,7 +238,6 @@
             this.buttonAddCloud.TabIndex = 2;
             this.buttonAddCloud.Text = "Add Cloud";
             this.buttonAddCloud.UseVisualStyleBackColor = true;
-            this.buttonAddCloud.Click += new System.EventHandler(this.buttonAddCloud_Click);
             // 
             // textBoxLogs
             // 
@@ -331,7 +327,6 @@
             this.listBoxClouds.Name = "listBoxClouds";
             this.listBoxClouds.Size = new System.Drawing.Size(200, 404);
             this.listBoxClouds.TabIndex = 1;
-            this.listBoxClouds.SelectedIndexChanged += new System.EventHandler(this.listBoxClouds_SelectedIndexChanged);
             // 
             // listViewBackupsInfo
             // 
@@ -463,34 +458,6 @@
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Settings";
             this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // tabPage6
-            // 
-            this.tabPage6.Location = new System.Drawing.Point(4, 26);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(816, 433);
-            this.tabPage6.TabIndex = 5;
-            this.tabPage6.Text = "About";
-            this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // imageListClouds
-            // 
-            this.imageListClouds.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListClouds.ImageStream")));
-            this.imageListClouds.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListClouds.Images.SetKeyName(0, "dropbox.jpg");
-            // 
-            // backgroundWorkerLoadClouds
-            // 
-            this.backgroundWorkerLoadClouds.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerLoadClouds_DoWork);
-            this.backgroundWorkerLoadClouds.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerLoadClouds_ProgressChanged);
-            // 
-            // backgroundWorkerBackup
-            // 
-            this.backgroundWorkerBackup.WorkerReportsProgress = true;
-            this.backgroundWorkerBackup.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorkerBackup_DoWork);
-            this.backgroundWorkerBackup.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorkerBackup_ProgressChanged);
-            this.backgroundWorkerBackup.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorkerBackup_RunWorkerCompleted);
             // 
             // panel1
             // 
@@ -784,6 +751,22 @@
             this.label15.TabIndex = 0;
             this.label15.Text = "Show the program in system tray:";
             // 
+            // tabPage6
+            // 
+            this.tabPage6.Location = new System.Drawing.Point(4, 26);
+            this.tabPage6.Name = "tabPage6";
+            this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage6.Size = new System.Drawing.Size(816, 433);
+            this.tabPage6.TabIndex = 5;
+            this.tabPage6.Text = "About";
+            this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // imageListClouds
+            // 
+            this.imageListClouds.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListClouds.ImageStream")));
+            this.imageListClouds.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListClouds.Images.SetKeyName(0, "dropbox.jpg");
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -860,8 +843,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelClouds;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelPlans;
-        private System.ComponentModel.BackgroundWorker backgroundWorkerLoadClouds;
-        private System.ComponentModel.BackgroundWorker backgroundWorkerBackup;
         private System.Windows.Forms.Label labelTotalPlans;
         private System.Windows.Forms.ColumnHeader columnRunTime;
         private System.Windows.Forms.Panel panel1;

@@ -1,16 +1,13 @@
 ﻿using ByteSizeLib;
+using CloudBackupL.TabsControllers;
 using Dropbox.Api;
 using Dropbox.Api.Files;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -20,7 +17,6 @@ namespace CloudBackupL
     {
         public object MessageBox { get; private set; }
         string redirectUri = ConfigurationManager.AppSettings["dropboxRedirectUri"];
-        FileStream CurrentFileStream;
         DatabaseService databaseService;
 
         public DropBoxController()
@@ -79,9 +75,9 @@ namespace CloudBackupL
             return ByteSize.FromBytes(totalSpaceBytes).GigaBytes;
         }
 
-        public async Task<Boolean> Upload(string file, string targetPath, DropboxClient client, MainWindow instance, Backup backup, Stopwatch watch)
+        public async Task<Boolean> Upload(string file, string targetPath, DropboxClient client, BackupPlansTabController instance, Backup backup, Stopwatch watch)
         {
-            instance.BeginInvoke(new Action(() => instance.ReportProgress(200)));
+            instance.ReportProgress(200);
             const int chunkSize = 1024 * 10240;
             FileStream CurrentFileStream = File.Open(file, FileMode.Open, FileAccess.Read);
             
@@ -89,7 +85,7 @@ namespace CloudBackupL
             {
                 System.Diagnostics.Trace.WriteLine("Start one-shot upload");
                 await client.Files.UploadAsync(targetPath, body: CurrentFileStream, mode: WriteMode.Overwrite.Instance);
-                instance.BeginInvoke(new Action(() => instance.ReportProgress(110)));
+                instance.ReportProgress(110);
             } else {
                 System.Diagnostics.Trace.WriteLine("Start chunk upload");
                 int numChunks = (int)Math.Ceiling((double)CurrentFileStream.Length / chunkSize);
@@ -116,12 +112,12 @@ namespace CloudBackupL
                             {
                                 System.Diagnostics.Trace.WriteLine("Session finish");
                                 await client.Files.UploadSessionFinishAsync(cursor, new CommitInfo(targetPath, mode: WriteMode.Overwrite.Instance), memStream);
-                                instance.BeginInvoke(new Action(() => instance.ReportProgress(110)));
+                                instance.ReportProgress(110);
                             }
 
                             else
                             {
-                                instance.Invoke(new Action(() => instance.ReportProgress((int)(idx*100 / numChunks))));
+                                instance.ReportProgress((int)(idx*100 / numChunks));
                                 await client.Files.UploadSessionAppendV2Async(cursor, body: memStream);
                                 
                             }

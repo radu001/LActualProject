@@ -1,4 +1,5 @@
 ﻿using CloudBackupL.CustomControllers;
+using CloudBackupL.TabsControllers;
 using Dropbox.Api;
 using Ionic.Zip;
 using System;
@@ -18,16 +19,16 @@ namespace CloudBackupL.Utils
         PlanControl currentRunningPlan;
         DatabaseService databaseService;
         DropBoxController dropBoxController;
-        MainWindow mainWindowInstance;
+        BackupPlansTabController backupPlansTabControllerInstance;
         long size;
         long compressedSize;
         Stopwatch watch;
 
-        public void RunArchiving(BackgroundWorker backgroundWorkerBackup, PlanControl currentRunningPlan, MainWindow mainWindowInstance)
+        public void RunArchiving(BackgroundWorker backgroundWorkerBackup, PlanControl currentRunningPlan, BackupPlansTabController instance)
         {
             this.backgroundWorkerBackup = backgroundWorkerBackup;
             this.currentRunningPlan = currentRunningPlan;
-            this.mainWindowInstance = mainWindowInstance;
+            this.backupPlansTabControllerInstance = instance;
             databaseService = new DatabaseService();
             dropBoxController = new DropBoxController();
             //start counting time
@@ -69,7 +70,7 @@ namespace CloudBackupL.Utils
                 backup.size = size;
                 backup.compressedSize = compressedSize;
                 backup.backupPlanName = plan.name;
-                Task<Boolean> task = dropBoxController.Upload(AppDomain.CurrentDomain.BaseDirectory + "temp.zip", targetPath, new DropboxClient(cloud.token), mainWindowInstance, backup, watch);
+                Task<Boolean> task = dropBoxController.Upload(AppDomain.CurrentDomain.BaseDirectory + "temp.zip", targetPath, new DropboxClient(cloud.token), backupPlansTabControllerInstance, backup, watch);
                 Boolean b = task.Result;
             }
         }

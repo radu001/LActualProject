@@ -102,12 +102,15 @@
     </Compile>
     <Compile Include="Clouds\DropBoxController.cs" />
     <Compile Include="Clouds\ICloud.cs" />
+    <Compile Include="TabsControllers\BackupPlansTabController.cs" />
+    <Compile Include="TabsControllers\CloudBackupsTabController.cs" />
     <Compile Include="CustomControllers\CloudControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="CustomControllers\CloudControl.Designer.cs">
       <DependentUpon>CloudControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="TabsControllers\HomeTabController.cs" />
     <Compile Include="CustomControllers\PlanControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
