@@ -30,7 +30,7 @@ namespace CloudBackupL
             List<Cloud> clouds = databaseService.GetAllClouds();
             foreach(var c in clouds)
             {
-                comboBoxClouds.Items.Add(new ListItem(c.name, c.id));   
+                comboBoxClouds.Items.Add(new ListItem(c.name, c.id.ToString()));   
             }
         }
 
@@ -88,7 +88,7 @@ namespace CloudBackupL
                 plan.scheduleTime = dateTimePickerScheduleTime.Value;
                 plan.currentStatus = "notRun";
                 plan.cloudName = comboBoxClouds.Text;
-                plan.cloudId = ((ListItem)comboBoxClouds.SelectedItem).Value;
+                plan.cloudId = Int32.Parse(((ListItem)comboBoxClouds.SelectedItem).Value);
                 databaseService.InsertBackupPlan(plan);
                 DialogResult dialog = MessageBox.Show("Plan created succesfully");
                 if (dialog == DialogResult.OK)

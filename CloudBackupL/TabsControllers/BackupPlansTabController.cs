@@ -80,6 +80,7 @@ namespace CloudBackupL.TabsControllers
 
         public void ReportProgress(int value)
         {
+            
             if (value == 110)
             {
                 currentRunningPlan.BeginInvoke(new Action(() => currentRunningPlan.ProgressBarArchiving.Value = 100));
@@ -94,6 +95,7 @@ namespace CloudBackupL.TabsControllers
             {
                 currentRunningPlan.BeginInvoke(new Action(() => currentRunningPlan.ProgressBarArchiving.Value = value));
             }
+            
         }
 
         private void backgroundWorkerBackup_DoWork(object sender, DoWorkEventArgs e)
@@ -104,8 +106,7 @@ namespace CloudBackupL.TabsControllers
 
         private void backgroundWorkerBackup_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            ReportProgress(e.ProgressPercentage);
-
+            currentRunningPlan.ProgressBarArchiving.Value = e.ProgressPercentage;
         }
 
         private void backgroundWorkerBackup_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

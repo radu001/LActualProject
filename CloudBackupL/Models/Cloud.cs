@@ -9,8 +9,8 @@ namespace CloudBackupL
 {
     class Cloud
     {
-        [MaxLength(50), NotNull, PrimaryKey]
-        public String id { get; set; }
+        [NotNull, PrimaryKey]
+        public int id { get; set; }
 
         [MaxLength(50), NotNull, Unique]
         public String name { get; set; }
@@ -24,7 +24,7 @@ namespace CloudBackupL
         [NotNull]
         public DateTime date { get; set; }
 
-        public Cloud(String id, String name, String cloudType, String token, DateTime date)
+        public Cloud(int id, String name, String cloudType, String token, DateTime date)
         {
             this.id = id;
             this.name = name;

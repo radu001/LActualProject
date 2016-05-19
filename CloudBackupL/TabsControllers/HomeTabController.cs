@@ -67,7 +67,7 @@ namespace CloudBackupL.TabsControllers
 
                         control.LabelCloudName.Text = c.name;
                         control.PictureBoxCloudImage.Image = mainWindowinstance.ImageListClouds.Images[0];
-                        control.LabelId.Text = c.id;
+                        control.LabelId.Text = c.id.ToString();
                         break;
                 }
                 control.OnUserControlDeleteCloudButtonClicked += (s, eve) => DeleteCloudButtonClicked(s, eve);

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
 
 namespace CloudBackupL.TabsControllers
 {
@@ -13,6 +14,8 @@ namespace CloudBackupL.TabsControllers
         ListBox listBoxClouds;
         ListView listViewBackupsInfo;
         DatabaseService databaseService;
+        ContextMenuStrip contextMenuStrip;
+        ListViewItem selectedItem;
 
         public CloudBackupsTabController()
         {
@@ -20,6 +23,56 @@ namespace CloudBackupL.TabsControllers
             listViewBackupsInfo = MainWindow.instance.ListViewBackupsInfo;
             databaseService = new DatabaseService();
             listBoxClouds.SelectedIndexChanged += listBoxClouds_SelectedIndexChanged;
+            listViewBackupsInfo.MouseClick += ListViewBackupsInfo_MouseClick;
+            contextMenuStrip = new ContextMenuStrip();
+            contextMenuStrip.Items.Add("Restore", null, EventRestore);
+            contextMenuStrip.Items.Add("Download", null, EventDownload);
+            contextMenuStrip.Items.Add("Delete", null, EventDelete);
+        }
+
+        public void EventRestore(object sender, EventArgs e)
+        {
+            MessageBox.Show("Are you sure you want to restore this backup? Your current folder will be replaced by this one.","Restore backup", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
+        }
+
+        public void EventDownload(object sender, EventArgs e)
+        {
+            if(selectedItem != null)
+            {
+                Backup backup = databaseService.GetBackup((int)selectedItem.Tag);
+                Cloud cloud = databaseService.GetCloud(backup.cloudId);
+
+
+
+
+
+            FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
+            DialogResult dialogResult = folderBrowser.ShowDialog();
+            if(dialogResult == DialogResult.OK)
+            {
+                    var web = new WebClient();
+                    web.DownloadFile(string.Format("https://content.dropboxapi.com/1/files/auto{0}?access_token={1}", backup.targetPath, cloud.token),folderBrowser.SelectedPath + "/file1.zip");
+
+                    // folderBrowser.SelectedPath;
+                }
+            }
+        }
+
+        public void EventDelete(object sender, EventArgs e)
+        {
+            MessageBox.Show("Are you sure you want to delete this backup ? ", "Delete backup", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
+        }
+
+        private void ListViewBackupsInfo_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (listViewBackupsInfo.FocusedItem.Bounds.Contains(e.Location) == true)
+                {
+                    selectedItem = listViewBackupsInfo.FocusedItem;
+                    contextMenuStrip.Show(Cursor.Position);
+                }
+            }
         }
 
         public void LoadCloudList()
@@ -28,7 +81,7 @@ namespace CloudBackupL.TabsControllers
             List<Cloud> clouds = databaseService.GetAllClouds();
             foreach (var c in clouds)
             {
-                listBoxClouds.Items.Add(new System.Web.UI.WebControls.ListItem(c.name, c.id));
+                listBoxClouds.Items.Add(new System.Web.UI.WebControls.ListItem(c.name, c.id.ToString()));
             }
         }
 

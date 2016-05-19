@@ -41,6 +41,8 @@ namespace CloudBackupL.Utils
             using (ZipFile zip = new ZipFile())
             {
                 zip.SaveProgress += Zip_SaveProgress;
+                zip.Encryption = EncryptionAlgorithm.WinZipAes256;
+                zip.Password = "radu";
                 zip.AddDirectory(@plan.path, "Backup1");
                 zip.Comment = "This zip was created at " + System.DateTime.Now.ToString("G");
                 zip.Save(AppDomain.CurrentDomain.BaseDirectory + "temp.zip");
@@ -65,7 +67,7 @@ namespace CloudBackupL.Utils
                 Backup backup = new Backup();
                 backup.date = DateTime.Now;
                 backup.targetPath = targetPath;
-                backup.cloudId = Int32.Parse(cloud.id);
+                backup.cloudId = cloud.id;
                 backup.backupPlanId = Int32.Parse(id);
                 backup.size = size;
                 backup.compressedSize = compressedSize;

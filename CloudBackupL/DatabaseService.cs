@@ -162,5 +162,25 @@ namespace CloudBackupL
             }
             return result;
         }
+
+        public Backup GetBackup(int backupId)
+        {
+            Backup result;
+            using (SQLiteConnection conn = new SQLiteConnection(connString, true))
+            {
+                result = conn.Get<Backup>(backupId);
+            }
+            return result;
+        }
+
+        public Cloud GetCloud(int cloudId)
+        {
+            Cloud result;
+            using (SQLiteConnection conn = new SQLiteConnection(connString, true))
+            {
+                result = conn.Get<Cloud>(cloudId);
+            }
+            return result;
+        }
     }
 }
