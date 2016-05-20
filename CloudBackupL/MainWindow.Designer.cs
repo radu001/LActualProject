@@ -59,6 +59,7 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.label5 = new System.Windows.Forms.Label();
             this.listBoxCloudsManual = new System.Windows.Forms.ListBox();
+            this.buttonManualUpload = new System.Windows.Forms.Button();
             this.buttonManualDownload = new System.Windows.Forms.Button();
             this.progressBarManualDownload = new System.Windows.Forms.ProgressBar();
             this.listViewCloudFiles = new System.Windows.Forms.ListView();
@@ -79,7 +80,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBoxChunkSize = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
@@ -98,7 +99,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.imageListClouds = new System.Windows.Forms.ImageList(this.components);
-            this.buttonManualUpload = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -425,6 +425,15 @@
             this.listBoxCloudsManual.Size = new System.Drawing.Size(270, 404);
             this.listBoxCloudsManual.TabIndex = 1;
             // 
+            // buttonManualUpload
+            // 
+            this.buttonManualUpload.Location = new System.Drawing.Point(308, 395);
+            this.buttonManualUpload.Name = "buttonManualUpload";
+            this.buttonManualUpload.Size = new System.Drawing.Size(75, 23);
+            this.buttonManualUpload.TabIndex = 3;
+            this.buttonManualUpload.Text = "Upload";
+            this.buttonManualUpload.UseVisualStyleBackColor = true;
+            // 
             // buttonManualDownload
             // 
             this.buttonManualDownload.Location = new System.Drawing.Point(227, 395);
@@ -584,7 +593,7 @@
             // 
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.checkBox2);
-            this.groupBox3.Controls.Add(this.textBox3);
+            this.groupBox3.Controls.Add(this.textBoxChunkSize);
             this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Location = new System.Drawing.Point(15, 197);
             this.groupBox3.Name = "groupBox3";
@@ -612,12 +621,12 @@
             this.checkBox2.Text = "Prevent computer from sleeping while plan is running";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // textBoxChunkSize
             // 
-            this.textBox3.Location = new System.Drawing.Point(77, 17);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(92, 20);
-            this.textBox3.TabIndex = 2;
+            this.textBoxChunkSize.Location = new System.Drawing.Point(77, 17);
+            this.textBoxChunkSize.Name = "textBoxChunkSize";
+            this.textBoxChunkSize.Size = new System.Drawing.Size(92, 20);
+            this.textBoxChunkSize.TabIndex = 2;
             // 
             // label10
             // 
@@ -791,15 +800,6 @@
             this.imageListClouds.TransparentColor = System.Drawing.Color.Transparent;
             this.imageListClouds.Images.SetKeyName(0, "dropbox.jpg");
             // 
-            // buttonManualUpload
-            // 
-            this.buttonManualUpload.Location = new System.Drawing.Point(308, 395);
-            this.buttonManualUpload.Name = "buttonManualUpload";
-            this.buttonManualUpload.Size = new System.Drawing.Size(75, 23);
-            this.buttonManualUpload.TabIndex = 3;
-            this.buttonManualUpload.Text = "Upload";
-            this.buttonManualUpload.UseVisualStyleBackColor = true;
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -891,7 +891,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textBoxChunkSize;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox textBox5;

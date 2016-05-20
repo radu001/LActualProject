@@ -88,7 +88,7 @@ namespace CloudBackupL
             double totalSpaceBytes = data.quota_info.quota;
             return ByteSize.FromBytes(totalSpaceBytes).GigaBytes;
         }
-
+        /*
         public async Task<Boolean> Upload(string file, string targetPath, DropboxClient client, BackupPlansTabController instance, Backup backup, Stopwatch watch)
         {
             instance.ReportProgress(200);
@@ -144,6 +144,7 @@ namespace CloudBackupL
             databaseService.InsertBackup(backup);
             return true;
         }
+        */
 
         public void Download(string path, string token, string targetPath, DownloadProgressChangedEventHandler eh)
         {
@@ -152,19 +153,33 @@ namespace CloudBackupL
             web.DownloadFileAsync(new Uri(string.Format("https://content.dropboxapi.com/1/files/auto{0}?access_token={1}", path, token)), targetPath);
         }
 
-        public void Upload(string cloudPath, string token, string clientPath, UploadProgressChangedEventHandler eh)
+        public void Upload(string cloudPath, string token, string clientPath, UploadProgressChangedEventHandler peh, TaskCompletionSource<bool> tcs)
         {
-            var web = new WebClient();
-         
-            web.Headers["Authorization"] = "Bearer " + token;
-            web.UploadProgressChanged += eh;
-            web.UploadFileAsync(new Uri(string.Format("https://content.dropboxapi.com/1/files_put/auto/{0}", cloudPath + Path.GetFileName(clientPath))), "PUT", clientPath);
-            web.UploadFileCompleted += Web_UploadFileCompleted;
+            using (var web = new WebClient())
+            {
+                web.Headers["Authorization"] = "Bearer " + token;
+                web.UploadProgressChanged += peh;
+                web.UploadFileCompleted += (sender, args) => Web_UploadFileCompleted(sender, tcs, args);
+                web.UploadFileAsync(new Uri(string.Format("https://content.dropboxapi.com/1/files_put/auto/{0}", cloudPath + Path.GetFileName(clientPath))), "PUT", clientPath);
+            }
         }
 
-        private void Web_UploadFileCompleted(object sender, UploadFileCompletedEventArgs e)
+
+        private void Web_UploadFileCompleted(object sender, TaskCompletionSource<bool> tcs, UploadFileCompletedEventArgs e)
         {
-            Console.WriteLine("completed");
+            Console.WriteLine("upload completed !!!");
+            if (e.Cancelled)
+            {
+                tcs.TrySetCanceled();
+            }
+            else if (e.Error != null)
+            {
+                tcs.TrySetException(e.Error);
+            }
+            else
+            {
+                tcs.TrySetResult(true);
+            }
         }
     }
 }

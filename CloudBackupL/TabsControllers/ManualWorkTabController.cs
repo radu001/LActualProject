@@ -8,7 +8,6 @@ using System.Windows.Forms;
 using System.IO;
 using System.Net;
 
-delegate void Web_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e);
 namespace CloudBackupL.TabsControllers
 {
     public class ManualWorkTabController
@@ -42,7 +41,7 @@ namespace CloudBackupL.TabsControllers
             DialogResult dialogResult = ofd.ShowDialog();
             if (dialogResult == DialogResult.OK)
             {
-                dropboxController.Upload("/", currentCLoud.token, ofd.FileName, Web_UploadProgressChanged);
+                dropboxController.Upload("/", currentCLoud.token, ofd.FileName, Web_UploadProgressChanged, null);
             }
         }
 

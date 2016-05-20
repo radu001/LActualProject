@@ -1,10 +1,12 @@
-﻿using CloudBackupL.CustomControllers;
+﻿using ByteSizeLib;
+using CloudBackupL.CustomControllers;
 using CloudBackupL.TabsControllers;
 using Dropbox.Api;
 using Ionic.Zip;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -15,69 +17,25 @@ namespace CloudBackupL.Utils
 {
     class ArchiveUtils
     {
-        BackgroundWorker backgroundWorkerBackup;
-        PlanControl currentRunningPlan;
-        DatabaseService databaseService;
-        DropBoxController dropBoxController;
-        BackupPlansTabController backupPlansTabControllerInstance;
-        long size;
-        long compressedSize;
-        Stopwatch watch;
-
-        public void RunArchiving(BackgroundWorker backgroundWorkerBackup, PlanControl currentRunningPlan, BackupPlansTabController instance)
+        public void RunArchiving(string directoryName, EventHandler<SaveProgressEventArgs> Zip_SaveProgress)
         {
-            this.backgroundWorkerBackup = backgroundWorkerBackup;
-            this.currentRunningPlan = currentRunningPlan;
-            this.backupPlansTabControllerInstance = instance;
-            databaseService = new DatabaseService();
-            dropBoxController = new DropBoxController();
-            //start counting time
-            watch = System.Diagnostics.Stopwatch.StartNew();
+            int size = (int) ByteSize.FromMegaBytes(Double.Parse(ConfigurationManager.AppSettings["chunkSize"])).Bytes;
 
-            string id = currentRunningPlan.LabelPlanId.Text;
-            BackupPlan plan = databaseService.GetBackupPlan(Int32.Parse(id));
-            Cloud cloud = databaseService.GetCloudByName(plan.cloudName);
-            size = GetDirectorySize(@plan.path);
+
             using (ZipFile zip = new ZipFile())
             {
+                zip.MaxOutputSegmentSize = size;
                 zip.SaveProgress += Zip_SaveProgress;
                 zip.Encryption = EncryptionAlgorithm.WinZipAes256;
                 zip.Password = "radu";
-                zip.AddDirectory(@plan.path, "Backup1");
+                zip.AddDirectory(directoryName, "Backup1");
                 zip.Comment = "This zip was created at " + System.DateTime.Now.ToString("G");
-                zip.Save(AppDomain.CurrentDomain.BaseDirectory + "temp.zip");
+                Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "tmpFolder\\");
+                zip.Save(AppDomain.CurrentDomain.BaseDirectory + "tmpFolder\\temp.zip");
             }
         }
 
-        private void Zip_SaveProgress(object sender, SaveProgressEventArgs e)
-        {
-            if (e.EventType == ZipProgressEventType.Saving_EntryBytesRead)
-            {
-                int progress = (int)((e.BytesTransferred * 100) / e.TotalBytesToTransfer);
-                backgroundWorkerBackup.ReportProgress(progress);
-            }
-            else if (e.EventType == ZipProgressEventType.Saving_Completed)
-            {
-                compressedSize = new System.IO.FileInfo(AppDomain.CurrentDomain.BaseDirectory + "temp.zip").Length;
-                string id = currentRunningPlan.LabelPlanId.Text;
-                BackupPlan plan = databaseService.GetBackupPlan(Int32.Parse(id));
-                Cloud cloud = databaseService.GetCloudByName(plan.cloudName);
-                Console.WriteLine("saving complete");
-                String targetPath = "/" + id + "/" + DateTime.Now.ToString("yyyyMMddHms") + ".zip";
-                Backup backup = new Backup();
-                backup.date = DateTime.Now;
-                backup.targetPath = targetPath;
-                backup.cloudId = cloud.id;
-                backup.backupPlanId = Int32.Parse(id);
-                backup.size = size;
-                backup.compressedSize = compressedSize;
-                backup.backupPlanName = plan.name;
-                Task<Boolean> task = dropBoxController.Upload(AppDomain.CurrentDomain.BaseDirectory + "temp.zip", targetPath, new DropboxClient(cloud.token), backupPlansTabControllerInstance, backup, watch);
-                Boolean b = task.Result;
-            }
-        }
-
-        private static long GetDirectorySize(string folderPath)
+        public static long GetDirectorySize(string folderPath)
         {
             DirectoryInfo di = new DirectoryInfo(folderPath);
             return di.EnumerateFiles("*", SearchOption.AllDirectories).Sum(fi => fi.Length);

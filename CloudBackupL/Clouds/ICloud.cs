@@ -14,6 +14,6 @@ namespace CloudBackupL
 
         String GetAccountInfo(String accessToken);
 
-        Task<Boolean> Upload(string file, string targetPath, DropboxClient client, BackupPlansTabController instance, Backup backup, Stopwatch watch);
+        //Task<Boolean> Upload(string file, string targetPath, DropboxClient client, BackupPlansTabController instance, Backup backup, Stopwatch watch);
     }
 }

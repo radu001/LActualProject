@@ -12,6 +12,7 @@ namespace CloudBackupL
         public BackupPlansTabController backupPlansTabController;
         public MyBackupsTabController cloudBackupsTabController;
         public ManualWorkTabController manualWorkTabController;
+        public SettingsTabController settingsTabController;
 
         //Main Window Constructor
         public MainWindow()
@@ -22,6 +23,7 @@ namespace CloudBackupL
             backupPlansTabController = new BackupPlansTabController();
             cloudBackupsTabController = new MyBackupsTabController();
             manualWorkTabController = new ManualWorkTabController();
+            settingsTabController = new SettingsTabController();
         }
 
         //Main Window Load
@@ -109,6 +111,12 @@ namespace CloudBackupL
         {
             get { return this.buttonManualUpload; }
             set { this.buttonManualUpload = value; }
+        }
+
+        public TextBox TextBoxChunkSize
+        {
+            get { return this.textBoxChunkSize; }
+            set { this.textBoxChunkSize = value; }
         }
     }
 }
