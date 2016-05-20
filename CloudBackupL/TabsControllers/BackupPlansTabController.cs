@@ -118,12 +118,18 @@ namespace CloudBackupL.TabsControllers
 
 
             DirectoryInfo di = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "tmpFolder\\");
+            int i = 1;
+            int total = di.GetFiles().Length;
             foreach (FileInfo file in di.GetFiles())
             {
+                currentRunningPlan.ProgressBarArchiving.Invoke(new Action(() => currentRunningPlan.LabelStatus.Text = "Uploading file " + i + " of " + total));
                 var tcs = new TaskCompletionSource<bool>();
                 String targetPath = currentBackup.targetPath + file.Name;
                 dropboxController.Upload(targetPath, currentCloud.token, file.FullName, Web_UploadProgressChanged, tcs);
                 tcs.Task.Wait();
+                i++;
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
             }
 
             DirectoryInfo did = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "tmpFolder\\");
@@ -162,7 +168,7 @@ namespace CloudBackupL.TabsControllers
             }
             if(e.EventType == ZipProgressEventType.Saving_BeforeWriteEntry)
             {
-                Console.WriteLine(e.EntriesTotal + " total, saved: " + e.EntriesSaved);
+                currentRunningPlan.ProgressBarArchiving.Invoke(new Action(() => currentRunningPlan.LabelStatus.Text = "Status: Archiving file " + e.EntriesSaved + " of " + e.EntriesTotal));
             }
         }
 
