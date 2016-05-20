@@ -48,7 +48,7 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label4 = new System.Windows.Forms.Label();
-            this.listBoxClouds = new System.Windows.Forms.ListBox();
+            this.listBoxBackupPlans = new System.Windows.Forms.ListBox();
             this.listViewBackupsInfo = new System.Windows.Forms.ListView();
             this.columnBackupName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -58,8 +58,10 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.label5 = new System.Windows.Forms.Label();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.listView3 = new System.Windows.Forms.ListView();
+            this.listBoxCloudsManual = new System.Windows.Forms.ListBox();
+            this.buttonManualDownload = new System.Windows.Forms.Button();
+            this.progressBarManualDownload = new System.Windows.Forms.ProgressBar();
+            this.listViewCloudFiles = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -96,6 +98,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.imageListClouds = new System.Windows.Forms.ImageList(this.components);
+            this.buttonManualUpload = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -287,7 +290,7 @@
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage3.Size = new System.Drawing.Size(816, 433);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Cloud backups";
+            this.tabPage3.Text = "My backups";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // splitContainer1
@@ -299,7 +302,7 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.label4);
-            this.splitContainer1.Panel1.Controls.Add(this.listBoxClouds);
+            this.splitContainer1.Panel1.Controls.Add(this.listBoxBackupPlans);
             // 
             // splitContainer1.Panel2
             // 
@@ -312,21 +315,21 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(62, 0);
+            this.label4.Location = new System.Drawing.Point(36, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(82, 20);
+            this.label4.Size = new System.Drawing.Size(130, 20);
             this.label4.TabIndex = 2;
-            this.label4.Text = "My Clouds";
+            this.label4.Text = "My Backup Plans";
             // 
-            // listBoxClouds
+            // listBoxBackupPlans
             // 
-            this.listBoxClouds.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.listBoxClouds.FormattingEnabled = true;
-            this.listBoxClouds.IntegralHeight = false;
-            this.listBoxClouds.Location = new System.Drawing.Point(0, 23);
-            this.listBoxClouds.Name = "listBoxClouds";
-            this.listBoxClouds.Size = new System.Drawing.Size(200, 404);
-            this.listBoxClouds.TabIndex = 1;
+            this.listBoxBackupPlans.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.listBoxBackupPlans.FormattingEnabled = true;
+            this.listBoxBackupPlans.IntegralHeight = false;
+            this.listBoxBackupPlans.Location = new System.Drawing.Point(0, 23);
+            this.listBoxBackupPlans.Name = "listBoxBackupPlans";
+            this.listBoxBackupPlans.Size = new System.Drawing.Size(200, 404);
+            this.listBoxBackupPlans.TabIndex = 1;
             // 
             // listViewBackupsInfo
             // 
@@ -378,7 +381,7 @@
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage4.Size = new System.Drawing.Size(816, 433);
             this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Backup files";
+            this.tabPage4.Text = "Manual Work";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // splitContainer2
@@ -390,11 +393,14 @@
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.Controls.Add(this.label5);
-            this.splitContainer2.Panel1.Controls.Add(this.listBox2);
+            this.splitContainer2.Panel1.Controls.Add(this.listBoxCloudsManual);
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.listView3);
+            this.splitContainer2.Panel2.Controls.Add(this.buttonManualUpload);
+            this.splitContainer2.Panel2.Controls.Add(this.buttonManualDownload);
+            this.splitContainer2.Panel2.Controls.Add(this.progressBarManualDownload);
+            this.splitContainer2.Panel2.Controls.Add(this.listViewCloudFiles);
             this.splitContainer2.Size = new System.Drawing.Size(810, 427);
             this.splitContainer2.SplitterDistance = 270;
             this.splitContainer2.TabIndex = 1;
@@ -405,33 +411,51 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(90, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(95, 20);
+            this.label5.Size = new System.Drawing.Size(82, 20);
             this.label5.TabIndex = 2;
-            this.label5.Text = "My Backups";
+            this.label5.Text = "My Clouds";
             // 
-            // listBox2
+            // listBoxCloudsManual
             // 
-            this.listBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.IntegralHeight = false;
-            this.listBox2.Location = new System.Drawing.Point(0, 23);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(270, 404);
-            this.listBox2.TabIndex = 1;
+            this.listBoxCloudsManual.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.listBoxCloudsManual.FormattingEnabled = true;
+            this.listBoxCloudsManual.IntegralHeight = false;
+            this.listBoxCloudsManual.Location = new System.Drawing.Point(0, 23);
+            this.listBoxCloudsManual.Name = "listBoxCloudsManual";
+            this.listBoxCloudsManual.Size = new System.Drawing.Size(270, 404);
+            this.listBoxCloudsManual.TabIndex = 1;
             // 
-            // listView3
+            // buttonManualDownload
             // 
-            this.listView3.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.buttonManualDownload.Location = new System.Drawing.Point(227, 395);
+            this.buttonManualDownload.Name = "buttonManualDownload";
+            this.buttonManualDownload.Size = new System.Drawing.Size(75, 23);
+            this.buttonManualDownload.TabIndex = 2;
+            this.buttonManualDownload.Text = "Download";
+            this.buttonManualDownload.UseVisualStyleBackColor = true;
+            // 
+            // progressBarManualDownload
+            // 
+            this.progressBarManualDownload.Location = new System.Drawing.Point(4, 396);
+            this.progressBarManualDownload.Name = "progressBarManualDownload";
+            this.progressBarManualDownload.Size = new System.Drawing.Size(217, 23);
+            this.progressBarManualDownload.TabIndex = 1;
+            // 
+            // listViewCloudFiles
+            // 
+            this.listViewCloudFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3});
-            this.listView3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView3.Location = new System.Drawing.Point(0, 0);
-            this.listView3.Name = "listView3";
-            this.listView3.Size = new System.Drawing.Size(536, 427);
-            this.listView3.TabIndex = 0;
-            this.listView3.UseCompatibleStateImageBehavior = false;
-            this.listView3.View = System.Windows.Forms.View.Details;
+            this.listViewCloudFiles.FullRowSelect = true;
+            this.listViewCloudFiles.HideSelection = false;
+            this.listViewCloudFiles.Location = new System.Drawing.Point(0, 0);
+            this.listViewCloudFiles.MultiSelect = false;
+            this.listViewCloudFiles.Name = "listViewCloudFiles";
+            this.listViewCloudFiles.Size = new System.Drawing.Size(536, 389);
+            this.listViewCloudFiles.TabIndex = 0;
+            this.listViewCloudFiles.UseCompatibleStateImageBehavior = false;
+            this.listViewCloudFiles.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
@@ -767,6 +791,15 @@
             this.imageListClouds.TransparentColor = System.Drawing.Color.Transparent;
             this.imageListClouds.Images.SetKeyName(0, "dropbox.jpg");
             // 
+            // buttonManualUpload
+            // 
+            this.buttonManualUpload.Location = new System.Drawing.Point(308, 395);
+            this.buttonManualUpload.Name = "buttonManualUpload";
+            this.buttonManualUpload.Size = new System.Drawing.Size(75, 23);
+            this.buttonManualUpload.TabIndex = 3;
+            this.buttonManualUpload.Text = "Upload";
+            this.buttonManualUpload.UseVisualStyleBackColor = true;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -824,7 +857,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.ListBox listBoxClouds;
+        private System.Windows.Forms.ListBox listBoxBackupPlans;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ListView listViewBackupsInfo;
         private System.Windows.Forms.ColumnHeader columnBackupName;
@@ -832,8 +865,8 @@
         private System.Windows.Forms.ColumnHeader columnSize;
         private System.Windows.Forms.ColumnHeader columnCompressedSize;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.ListBox listBox2;
-        private System.Windows.Forms.ListView listView3;
+        private System.Windows.Forms.ListBox listBoxCloudsManual;
+        private System.Windows.Forms.ListView listViewCloudFiles;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
@@ -875,6 +908,9 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button buttonManualDownload;
+        private System.Windows.Forms.ProgressBar progressBarManualDownload;
+        private System.Windows.Forms.Button buttonManualUpload;
     }
 }
 

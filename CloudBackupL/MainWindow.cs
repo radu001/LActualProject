@@ -10,7 +10,8 @@ namespace CloudBackupL
         public static MainWindow instance;
         public HomeTabController homeTabController;
         public BackupPlansTabController backupPlansTabController;
-        public CloudBackupsTabController cloudBackupsTabController;
+        public MyBackupsTabController cloudBackupsTabController;
+        public ManualWorkTabController manualWorkTabController;
 
         //Main Window Constructor
         public MainWindow()
@@ -19,7 +20,8 @@ namespace CloudBackupL
             InitializeComponent();
             homeTabController = new HomeTabController();
             backupPlansTabController = new BackupPlansTabController();
-            cloudBackupsTabController = new CloudBackupsTabController();
+            cloudBackupsTabController = new MyBackupsTabController();
+            manualWorkTabController = new ManualWorkTabController();
         }
 
         //Main Window Load
@@ -27,7 +29,8 @@ namespace CloudBackupL
         {
             homeTabController.LoadClouds();
             backupPlansTabController.LoadPlans();
-            cloudBackupsTabController.LoadCloudList();
+            cloudBackupsTabController.LoadBackupPlansList();
+            manualWorkTabController.LoadCloudList();
         }
 
         public Button ButtonAddCloud
@@ -66,16 +69,46 @@ namespace CloudBackupL
             set { this.buttonAddBackupPlan = value; }
         }
 
-        public ListBox ListBoxClouds
+        public ListBox ListBoxBackupPlans
         {
-            get { return this.listBoxClouds; }
-            set { this.listBoxClouds = value; }
+            get { return this.listBoxBackupPlans; }
+            set { this.listBoxBackupPlans = value; }
         }
 
         public ListView ListViewBackupsInfo
         {
             get { return this.listViewBackupsInfo; }
             set { this.listViewBackupsInfo = value; }
+        }
+
+        public ListBox ListBoxCloudsManual
+        {
+            get { return this.listBoxCloudsManual; }
+            set { this.listBoxCloudsManual = value; }
+        }
+
+        public ListView ListViewCloudFiles
+        {
+            get { return this.listViewCloudFiles; }
+            set { this.listViewCloudFiles = value; }
+        }
+
+        public Button ButtonManualDownload
+        {
+            get { return this.buttonManualDownload; }
+            set { this.buttonManualDownload = value; }
+        }
+
+        public ProgressBar ProgressBarManualDownload
+        {
+            get { return this.progressBarManualDownload; }
+            set { this.progressBarManualDownload = value; }
+        }
+
+        public Button ButtonManualUpload
+        {
+            get { return this.buttonManualUpload; }
+            set { this.buttonManualUpload = value; }
         }
     }
 }

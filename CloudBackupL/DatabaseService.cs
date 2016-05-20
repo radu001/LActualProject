@@ -182,5 +182,15 @@ namespace CloudBackupL
             }
             return result;
         }
+
+        public List<Backup> GetBackByPlanId(int planId)
+        {
+            List<Backup> result;
+            using (SQLiteConnection conn = new SQLiteConnection(connString, true))
+            {
+                result = conn.Query<Backup>("select * from Backup where backupPlanId = ?", planId);
+            }
+            return result;
+        }
     }
 }

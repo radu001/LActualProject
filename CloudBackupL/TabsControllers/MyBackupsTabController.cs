@@ -6,23 +6,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net;
+using Nemiro.OAuth;
+using System.IO;
 
+delegate List<string> GetFilesList(RequestResult result);
 namespace CloudBackupL.TabsControllers
 {
-    public class CloudBackupsTabController
+    public class MyBackupsTabController
     {
-        ListBox listBoxClouds;
+        ListBox listBoxBackupPlans;
         ListView listViewBackupsInfo;
         DatabaseService databaseService;
         ContextMenuStrip contextMenuStrip;
         ListViewItem selectedItem;
+        DropBoxController dropboxController = new DropBoxController();
 
-        public CloudBackupsTabController()
+        public MyBackupsTabController()
         {
-            listBoxClouds = MainWindow.instance.ListBoxClouds;
+            listBoxBackupPlans = MainWindow.instance.ListBoxBackupPlans;
             listViewBackupsInfo = MainWindow.instance.ListViewBackupsInfo;
             databaseService = new DatabaseService();
-            listBoxClouds.SelectedIndexChanged += listBoxClouds_SelectedIndexChanged;
+            listBoxBackupPlans.SelectedIndexChanged += listBoxClouds_SelectedIndexChanged;
             listViewBackupsInfo.MouseClick += ListViewBackupsInfo_MouseClick;
             contextMenuStrip = new ContextMenuStrip();
             contextMenuStrip.Items.Add("Restore", null, EventRestore);
@@ -41,19 +45,11 @@ namespace CloudBackupL.TabsControllers
             {
                 Backup backup = databaseService.GetBackup((int)selectedItem.Tag);
                 Cloud cloud = databaseService.GetCloud(backup.cloudId);
-
-
-
-
-
             FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
             DialogResult dialogResult = folderBrowser.ShowDialog();
             if(dialogResult == DialogResult.OK)
             {
-                    var web = new WebClient();
-                    web.DownloadFile(string.Format("https://content.dropboxapi.com/1/files/auto{0}?access_token={1}", backup.targetPath, cloud.token),folderBrowser.SelectedPath + "/file1.zip");
-
-                    // folderBrowser.SelectedPath;
+                    dropboxController.Download(backup.targetPath, cloud.token, folderBrowser.SelectedPath + "//" + Path.GetFileName(backup.targetPath), null);
                 }
             }
         }
@@ -75,13 +71,13 @@ namespace CloudBackupL.TabsControllers
             }
         }
 
-        public void LoadCloudList()
+        public void LoadBackupPlansList()
         {
-            listBoxClouds.Items.Clear();
-            List<Cloud> clouds = databaseService.GetAllClouds();
-            foreach (var c in clouds)
+            listBoxBackupPlans.Items.Clear();
+            List<BackupPlan> plans = databaseService.GetAllPlans();
+            foreach (var p in plans)
             {
-                listBoxClouds.Items.Add(new System.Web.UI.WebControls.ListItem(c.name, c.id.ToString()));
+                listBoxBackupPlans.Items.Add(new System.Web.UI.WebControls.ListItem(p.name, p.id.ToString()));
             }
         }
 
@@ -90,7 +86,7 @@ namespace CloudBackupL.TabsControllers
             if (((System.Windows.Forms.ListBox)sender).Text.Equals("")) return;
             listViewBackupsInfo.Items.Clear();
             System.Web.UI.WebControls.ListItem selectedItem = (System.Web.UI.WebControls.ListItem)((System.Windows.Forms.ListBox)sender).SelectedItem;
-            List<Backup> backups = databaseService.GetBackCloudBackups(selectedItem.Value);
+            List<Backup> backups = databaseService.GetBackByPlanId(Int32.Parse(selectedItem.Value));
             foreach (var b in backups)
             {
                 Double size = Math.Round(ByteSize.FromBytes(b.size).MegaBytes, 3);
@@ -100,7 +96,7 @@ namespace CloudBackupL.TabsControllers
                     runTimeTimeSpan.Hours + " h : " + runTimeTimeSpan.Minutes + " m : " + runTimeTimeSpan.Seconds + " s";
 
                 System.Windows.Forms.ListViewItem item = new System.Windows.Forms.ListViewItem(
-                    new string[] {b.backupPlanName, b.date.ToString("yyyy/MM/dd h-m-s"),
+                    new string[] {b.targetPath, b.date.ToString("yyyy/MM/dd h-m-s"),
                     size + " MB" , compressedSize + " MB", runTime});
                 item.Tag = b.id;
                 listViewBackupsInfo.Items.Add(item);

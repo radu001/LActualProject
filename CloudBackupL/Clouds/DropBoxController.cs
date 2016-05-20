@@ -2,8 +2,10 @@
 using CloudBackupL.TabsControllers;
 using Dropbox.Api;
 using Dropbox.Api.Files;
+using Nemiro.OAuth;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
@@ -48,6 +50,18 @@ namespace CloudBackupL
             var client = new WebClient();
             client.Headers["Authorization"] = "Bearer " + accessToken;
             return client.DownloadString("https://www.dropbox.com/1/account/info");
+        }
+
+        public void GetFilesList(String accessToken, ExecuteRequestAsyncCallback callback, string currentPath)
+        {
+            OAuthUtility.GetAsync("https://api.dropboxapi.com/1/metadata/auto/",
+                new HttpParameterCollection()
+                {
+                    {"path", currentPath},
+                    {"access_token", accessToken}
+                },
+                callback: callback
+            );
         }
 
         public double GetFreeSpaceInGB(String accessToken)
@@ -131,12 +145,26 @@ namespace CloudBackupL
             return true;
         }
 
-        async Task Download(DropboxClient dbx, string folder, string file)
+        public void Download(string path, string token, string targetPath, DownloadProgressChangedEventHandler eh)
         {
-            using (var response = await dbx.Files.DownloadAsync(folder + "/" + file))
-            {
-                Console.WriteLine(await response.GetContentAsStringAsync());
-            }
+            var web = new WebClient();
+            web.DownloadProgressChanged += eh;
+            web.DownloadFileAsync(new Uri(string.Format("https://content.dropboxapi.com/1/files/auto{0}?access_token={1}", path, token)), targetPath);
+        }
+
+        public void Upload(string cloudPath, string token, string clientPath, UploadProgressChangedEventHandler eh)
+        {
+            var web = new WebClient();
+         
+            web.Headers["Authorization"] = "Bearer " + token;
+            web.UploadProgressChanged += eh;
+            web.UploadFileAsync(new Uri(string.Format("https://content.dropboxapi.com/1/files_put/auto/{0}", cloudPath + Path.GetFileName(clientPath))), "PUT", clientPath);
+            web.UploadFileCompleted += Web_UploadFileCompleted;
+        }
+
+        private void Web_UploadFileCompleted(object sender, UploadFileCompletedEventArgs e)
+        {
+            Console.WriteLine("completed");
         }
     }
 }
