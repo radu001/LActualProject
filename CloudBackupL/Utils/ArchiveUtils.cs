@@ -27,7 +27,7 @@ namespace CloudBackupL.Utils
                 zip.SaveProgress += Zip_SaveProgress;
                 zip.Encryption = EncryptionAlgorithm.WinZipAes256;
                 zip.Password = "radu";
-                zip.AddDirectory(filesSource);
+                zip.AddDirectory(filesSource, new DirectoryInfo(filesSource).Name);
                 zip.Comment = "This zip was created at " + System.DateTime.Now.ToString("G");
                 Directory.CreateDirectory(saveDirectory);
                 zip.Save(saveDirectory + "temp.zip");
