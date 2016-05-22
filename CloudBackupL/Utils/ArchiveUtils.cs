@@ -17,10 +17,9 @@ namespace CloudBackupL.Utils
 {
     class ArchiveUtils
     {
-        public void RunArchiving(string directoryName, EventHandler<SaveProgressEventArgs> Zip_SaveProgress)
+        public static void ZipFiles(string filesSource, string saveDirectory, EventHandler<SaveProgressEventArgs> Zip_SaveProgress)
         {
             int size = (int) ByteSize.FromMegaBytes(Double.Parse(ConfigurationManager.AppSettings["chunkSize"])).Bytes;
-
 
             using (ZipFile zip = new ZipFile())
             {
@@ -28,12 +27,38 @@ namespace CloudBackupL.Utils
                 zip.SaveProgress += Zip_SaveProgress;
                 zip.Encryption = EncryptionAlgorithm.WinZipAes256;
                 zip.Password = "radu";
-                zip.AddDirectory(directoryName, "Backup1");
+                zip.AddDirectory(filesSource);
                 zip.Comment = "This zip was created at " + System.DateTime.Now.ToString("G");
-                Directory.CreateDirectory(AppDomain.CurrentDomain.BaseDirectory + "tmpFolder\\");
-                zip.Save(AppDomain.CurrentDomain.BaseDirectory + "tmpFolder\\temp.zip");
+                Directory.CreateDirectory(saveDirectory);
+                zip.Save(saveDirectory + "temp.zip");
             }
         }
+
+        public static void ExtractZip(string directoryName, string extractPath, EventHandler<ExtractProgressEventArgs> Zip_ExtractProgress)
+        {
+            using (ZipFile zip = ZipFile.Read(directoryName + "temp.ziptemp.zip"))
+            {
+                zip.ExtractProgress += Zip_ExtractProgress;
+                zip.Encryption = EncryptionAlgorithm.WinZipAes256;
+                zip.Password = "radu";
+                zip.ExtractAll(extractPath);
+            }
+        }
+
+        static public void DeleteDirectory(string path)
+        {
+            if(Directory.Exists(path))
+            {
+                DirectoryInfo did = new DirectoryInfo(path);
+                foreach (FileInfo file in did.GetFiles())
+                {
+                    file.Delete();
+                }
+
+                Directory.Delete(path);
+            }
+        }
+
 
         public static long GetDirectorySize(string folderPath)
         {

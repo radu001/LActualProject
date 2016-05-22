@@ -70,7 +70,7 @@ namespace CloudBackupL.TabsControllers
             DialogResult dialogResult = folderBrowser.ShowDialog();
             if(dialogResult == DialogResult.OK)
             {
-                dropboxController.Download(selectedPath, currentCLoud.token, folderBrowser.SelectedPath + "//" + Path.GetFileName(selectedPath), Web_DownloadProgressChanged);
+                dropboxController.Download(selectedPath, currentCLoud.token, folderBrowser.SelectedPath + "//" + Path.GetFileName(selectedPath), Web_DownloadProgressChanged, null);
             }
         }
 

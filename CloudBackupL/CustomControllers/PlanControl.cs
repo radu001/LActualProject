@@ -14,20 +14,27 @@ namespace CloudBackupL.CustomControllers
     {
         public event EventHandler OnUserControlDeletePlanButtonClicked;
         public event EventHandler OnUserControlRunNowButtonClicked;
+        public event EventHandler OnUserControlDownloadButtonClicked;
 
         public PlanControl()
         {
             InitializeComponent();
             linkLabelDeletePlan.LinkClicked += (s, e) =>
-        {
-            if (OnUserControlDeletePlanButtonClicked != null)
-                OnUserControlDeletePlanButtonClicked(this, e);
-        };
+            {
+                if (OnUserControlDeletePlanButtonClicked != null)
+                    OnUserControlDeletePlanButtonClicked(this, e);
+            };
 
             buttonRunNow.Click += (s, e) =>
             {
                 if (OnUserControlRunNowButtonClicked != null)
                     OnUserControlRunNowButtonClicked(this, e);
+            };
+
+            linkLabelDownload.LinkClicked += (s, e) =>
+            {
+                if (OnUserControlDownloadButtonClicked != null)
+                    OnUserControlDownloadButtonClicked(this, e);
             };
         }
 

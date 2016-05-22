@@ -49,7 +49,7 @@ namespace CloudBackupL.TabsControllers
             DialogResult dialogResult = folderBrowser.ShowDialog();
             if(dialogResult == DialogResult.OK)
             {
-                    dropboxController.Download(backup.targetPath, cloud.token, folderBrowser.SelectedPath + "//" + Path.GetFileName(backup.targetPath), null);
+                    dropboxController.Download(backup.targetPath, cloud.token, folderBrowser.SelectedPath + "//" + Path.GetFileName(backup.targetPath), null, null);
                 }
             }
         }
@@ -86,7 +86,7 @@ namespace CloudBackupL.TabsControllers
             if (((System.Windows.Forms.ListBox)sender).Text.Equals("")) return;
             listViewBackupsInfo.Items.Clear();
             System.Web.UI.WebControls.ListItem selectedItem = (System.Web.UI.WebControls.ListItem)((System.Windows.Forms.ListBox)sender).SelectedItem;
-            List<Backup> backups = databaseService.GetBackByPlanId(Int32.Parse(selectedItem.Value));
+            List<Backup> backups = databaseService.GetBackupsByPlanId(Int32.Parse(selectedItem.Value));
             foreach (var b in backups)
             {
                 Double size = Math.Round(ByteSize.FromBytes(b.size).MegaBytes, 3);

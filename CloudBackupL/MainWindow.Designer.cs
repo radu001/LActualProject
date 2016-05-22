@@ -350,7 +350,7 @@
             // 
             // columnBackupName
             // 
-            this.columnBackupName.Text = "Backup Name";
+            this.columnBackupName.Text = "Backup Path";
             this.columnBackupName.Width = 150;
             // 
             // columnDate

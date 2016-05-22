@@ -1,7 +1,9 @@
 ﻿using CloudBackupL.TabsControllers;
 using Dropbox.Api;
+using Nemiro.OAuth;
 using System;
 using System.Diagnostics;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace CloudBackupL
@@ -14,6 +16,10 @@ namespace CloudBackupL
 
         String GetAccountInfo(String accessToken);
 
-        //Task<Boolean> Upload(string file, string targetPath, DropboxClient client, BackupPlansTabController instance, Backup backup, Stopwatch watch);
+        void Upload(string cloudPath, string token, string clientPath, UploadProgressChangedEventHandler peh, TaskCompletionSource<bool> tcs);
+
+        void GetFilesList(string token, ExecuteRequestAsyncCallback callback, string targetPath);
+
+        void Download(string cloudPath, string token, string localPath, DownloadProgressChangedEventHandler eh, TaskCompletionSource<bool> tcs);
     }
 }

@@ -13,6 +13,8 @@ namespace CloudBackupL
         public MyBackupsTabController cloudBackupsTabController;
         public ManualWorkTabController manualWorkTabController;
         public SettingsTabController settingsTabController;
+        public static bool isActiveDownloadOperation = false;
+        public static bool isActiveUploadOperation = false;
 
         //Main Window Constructor
         public MainWindow()

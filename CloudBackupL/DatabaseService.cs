@@ -173,6 +173,16 @@ namespace CloudBackupL
             return result;
         }
 
+        public Backup GetLastBackup(int planId)
+        {
+            List<Backup> result;
+            using (SQLiteConnection conn = new SQLiteConnection(connString, true))
+            {
+                result = conn.Query<Backup>("select * from Backup where backupPlanId = ? order by id desc limit 1", planId);
+            }
+            return result[0];
+        }
+
         public Cloud GetCloud(int cloudId)
         {
             Cloud result;
@@ -183,7 +193,7 @@ namespace CloudBackupL
             return result;
         }
 
-        public List<Backup> GetBackByPlanId(int planId)
+        public List<Backup> GetBackupsByPlanId(int planId)
         {
             List<Backup> result;
             using (SQLiteConnection conn = new SQLiteConnection(connString, true))
@@ -192,5 +202,6 @@ namespace CloudBackupL
             }
             return result;
         }
+
     }
 }

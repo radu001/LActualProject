@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.labelStatus = new System.Windows.Forms.Label();
+            this.progressBarArchiving = new System.Windows.Forms.ProgressBar();
             this.labelPlanId = new System.Windows.Forms.Label();
             this.buttonRunNow = new System.Windows.Forms.Button();
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
@@ -56,8 +58,7 @@
             this.linkLabelDeletePlan = new System.Windows.Forms.LinkLabel();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.labelBackupName = new System.Windows.Forms.Label();
-            this.progressBarArchiving = new System.Windows.Forms.ProgressBar();
-            this.labelStatus = new System.Windows.Forms.Label();
+            this.linkLabelDownload = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -66,6 +67,7 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.linkLabelDownload);
             this.panel1.Controls.Add(this.labelStatus);
             this.panel1.Controls.Add(this.progressBarArchiving);
             this.panel1.Controls.Add(this.labelPlanId);
@@ -80,6 +82,22 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(782, 233);
             this.panel1.TabIndex = 0;
+            // 
+            // labelStatus
+            // 
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Location = new System.Drawing.Point(464, 7);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(0, 13);
+            this.labelStatus.TabIndex = 8;
+            // 
+            // progressBarArchiving
+            // 
+            this.progressBarArchiving.Location = new System.Drawing.Point(620, 5);
+            this.progressBarArchiving.Name = "progressBarArchiving";
+            this.progressBarArchiving.Size = new System.Drawing.Size(157, 16);
+            this.progressBarArchiving.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBarArchiving.TabIndex = 7;
             // 
             // labelPlanId
             // 
@@ -103,7 +121,7 @@
             // linkLabel4
             // 
             this.linkLabel4.AutoSize = true;
-            this.linkLabel4.Location = new System.Drawing.Point(376, 207);
+            this.linkLabel4.Location = new System.Drawing.Point(444, 207);
             this.linkLabel4.Name = "linkLabel4";
             this.linkLabel4.Size = new System.Drawing.Size(65, 13);
             this.linkLabel4.TabIndex = 4;
@@ -338,21 +356,15 @@
             this.labelBackupName.TabIndex = 0;
             this.labelBackupName.Text = "Bakcup Name:";
             // 
-            // progressBarArchiving
+            // linkLabelDownload
             // 
-            this.progressBarArchiving.Location = new System.Drawing.Point(620, 5);
-            this.progressBarArchiving.Name = "progressBarArchiving";
-            this.progressBarArchiving.Size = new System.Drawing.Size(157, 16);
-            this.progressBarArchiving.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBarArchiving.TabIndex = 7;
-            // 
-            // labelStatus
-            // 
-            this.labelStatus.AutoSize = true;
-            this.labelStatus.Location = new System.Drawing.Point(464, 7);
-            this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(0, 13);
-            this.labelStatus.TabIndex = 8;
+            this.linkLabelDownload.AutoSize = true;
+            this.linkLabelDownload.Location = new System.Drawing.Point(361, 207);
+            this.linkLabelDownload.Name = "linkLabelDownload";
+            this.linkLabelDownload.Size = new System.Drawing.Size(79, 13);
+            this.linkLabelDownload.TabIndex = 9;
+            this.linkLabelDownload.TabStop = true;
+            this.linkLabelDownload.Text = "Download Files";
             // 
             // PlanControl
             // 
@@ -401,5 +413,6 @@
         private System.Windows.Forms.Label labelPlanId;
         private System.Windows.Forms.ProgressBar progressBarArchiving;
         private System.Windows.Forms.Label labelStatus;
+        private System.Windows.Forms.LinkLabel linkLabelDownload;
     }
 }

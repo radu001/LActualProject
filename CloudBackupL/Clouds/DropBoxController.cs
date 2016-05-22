@@ -1,13 +1,9 @@
 ﻿using ByteSizeLib;
-using CloudBackupL.TabsControllers;
-using Dropbox.Api;
-using Dropbox.Api.Files;
 using Nemiro.OAuth;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
-using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
@@ -88,69 +84,30 @@ namespace CloudBackupL
             double totalSpaceBytes = data.quota_info.quota;
             return ByteSize.FromBytes(totalSpaceBytes).GigaBytes;
         }
-        /*
-        public async Task<Boolean> Upload(string file, string targetPath, DropboxClient client, BackupPlansTabController instance, Backup backup, Stopwatch watch)
-        {
-            instance.ReportProgress(200);
-            const int chunkSize = 1024 * 10240;
-            FileStream CurrentFileStream = File.Open(file, FileMode.Open, FileAccess.Read);
-            
-            if (CurrentFileStream.Length <= chunkSize)
-            {
-                System.Diagnostics.Trace.WriteLine("Start one-shot upload");
-                await client.Files.UploadAsync(targetPath, body: CurrentFileStream, mode: WriteMode.Overwrite.Instance);
-                instance.ReportProgress(110);
-            } else {
-                System.Diagnostics.Trace.WriteLine("Start chunk upload");
-                int numChunks = (int)Math.Ceiling((double)CurrentFileStream.Length / chunkSize);
 
-                byte[] buffer = new byte[chunkSize];
-                string sessionId = null;
 
-                for (var idx = 0; idx < numChunks; idx++)
-                {
-                    var byteRead = CurrentFileStream.Read(buffer, 0, chunkSize);
-
-                    using (MemoryStream memStream = new MemoryStream(buffer, 0, byteRead))
-                    {
-                        if (idx == 0)
-                        {
-                            var result = await client.Files.UploadSessionStartAsync(false, memStream);
-                            sessionId = result.SessionId;
-                        }
-                        else
-                        {
-                            UploadSessionCursor cursor = new UploadSessionCursor(sessionId, (ulong)(chunkSize * idx));
-
-                            if (idx == numChunks - 1)
-                            {
-                                System.Diagnostics.Trace.WriteLine("Session finish");
-                                await client.Files.UploadSessionFinishAsync(cursor, new CommitInfo(targetPath, mode: WriteMode.Overwrite.Instance), memStream);
-                                instance.ReportProgress(110);
-                            }
-
-                            else
-                            {
-                                instance.ReportProgress((int)(idx*100 / numChunks));
-                                await client.Files.UploadSessionAppendV2Async(cursor, body: memStream);
-                                
-                            }
-                        }
-                    }
-                }
-            }
-            watch.Stop();
-            backup.runTime = watch.ElapsedMilliseconds;
-            databaseService.InsertBackup(backup);
-            return true;
-        }
-        */
-
-        public void Download(string path, string token, string targetPath, DownloadProgressChangedEventHandler eh)
+        public void Download(string cloudPath, string token, string localPath, DownloadProgressChangedEventHandler eh, TaskCompletionSource<bool> tcs)
         {
             var web = new WebClient();
             web.DownloadProgressChanged += eh;
-            web.DownloadFileAsync(new Uri(string.Format("https://content.dropboxapi.com/1/files/auto{0}?access_token={1}", path, token)), targetPath);
+            web.DownloadFileCompleted += (sender, args) => Web_DownloadFileCompleted(sender, tcs, args);
+            web.DownloadFileAsync(new Uri(string.Format("https://content.dropboxapi.com/1/files/auto{0}?access_token={1}", cloudPath, token)), localPath);
+        }
+
+        private void Web_DownloadFileCompleted(object sender, TaskCompletionSource<bool> tcs, AsyncCompletedEventArgs e)
+        {
+            if (e.Cancelled)
+            {
+                tcs.TrySetCanceled();
+            }
+            else if (e.Error != null)
+            {
+                tcs.TrySetException(e.Error);
+            }
+            else
+            {
+                tcs.TrySetResult(true);
+            }
         }
 
         public void Upload(string cloudPath, string token, string clientPath, UploadProgressChangedEventHandler peh, TaskCompletionSource<bool> tcs)
@@ -167,7 +124,6 @@ namespace CloudBackupL
 
         private void Web_UploadFileCompleted(object sender, TaskCompletionSource<bool> tcs, UploadFileCompletedEventArgs e)
         {
-            Console.WriteLine("upload completed !!!");
             if (e.Cancelled)
             {
                 tcs.TrySetCanceled();

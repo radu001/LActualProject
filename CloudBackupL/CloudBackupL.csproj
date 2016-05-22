@@ -119,6 +119,8 @@
     <Compile Include="AddCloudWindow.Designer.cs">
       <DependentUpon>AddCloudWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="BackupActions\DownloadBackupAction.cs" />
+    <Compile Include="BackupActions\UploadBackupAction.cs" />
     <Compile Include="Clouds\DropBoxController.cs" />
     <Compile Include="Clouds\ICloud.cs" />
     <Compile Include="TabsControllers\BackupPlansTabController.cs" />
