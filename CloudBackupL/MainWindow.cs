@@ -10,7 +10,7 @@ namespace CloudBackupL
         public static MainWindow instance;
         public HomeTabController homeTabController;
         public BackupPlansTabController backupPlansTabController;
-        public MyBackupsTabController cloudBackupsTabController;
+        public MyBackupsTabController myBackupsTabController;
         public ManualWorkTabController manualWorkTabController;
         public SettingsTabController settingsTabController;
         public static bool isActiveDownloadOperation = false;
@@ -23,7 +23,7 @@ namespace CloudBackupL
             InitializeComponent();
             homeTabController = new HomeTabController();
             backupPlansTabController = new BackupPlansTabController();
-            cloudBackupsTabController = new MyBackupsTabController();
+            myBackupsTabController = new MyBackupsTabController();
             manualWorkTabController = new ManualWorkTabController();
             settingsTabController = new SettingsTabController();
         }
@@ -33,7 +33,7 @@ namespace CloudBackupL
         {
             homeTabController.LoadClouds();
             backupPlansTabController.LoadPlans();
-            cloudBackupsTabController.LoadBackupPlansList();
+            myBackupsTabController.LoadBackupPlansList();
             manualWorkTabController.LoadCloudList();
         }
 

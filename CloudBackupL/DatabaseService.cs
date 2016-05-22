@@ -179,7 +179,7 @@ namespace CloudBackupL
             {
                 result = conn.Query<Backup>("select * from Backup where backupPlanId = ? order by id desc limit 1", planId);
             }
-            return result[0];
+            return result.Count > 0 ? result[0] : null;
         }
 
         public Cloud GetCloud(int cloudId)

@@ -1,9 +1,5 @@
-﻿using Nemiro.OAuth;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Net;
@@ -82,12 +78,12 @@ namespace CloudBackupL.TabsControllers
                 if(this.currentPath != "/")
                 {
                     currentPath = Path.GetDirectoryName(this.currentPath).Replace("\\", "/");
-                    dropboxController.GetFilesList(currentCLoud.token, LoadFilesCallback, currentPath);
+                   // dropboxController.GetFilesList(currentCLoud.token, LoadFilesCallback, currentPath);
                 }
             } else
             {
                 currentPath += listViewCloudFiles.FocusedItem.Text.Remove(0,1);
-                dropboxController.GetFilesList(currentCLoud.token, LoadFilesCallback, currentPath);
+                //dropboxController.GetFilesList(currentCLoud.token, LoadFilesCallback, currentPath);
             }
             listViewCloudFiles.FocusedItem.Focused = false;
         }
@@ -100,9 +96,9 @@ namespace CloudBackupL.TabsControllers
             Cloud cloud = databaseService.GetCloud(Int32.Parse(selectedItem.Value));
             currentCLoud = cloud;
             listViewCloudFiles.Items.Add("..");
-            dropboxController.GetFilesList(cloud.token, LoadFilesCallback, currentPath);
+            //dropboxController.GetFilesList(cloud.token, LoadFilesCallback, currentPath);
         }
-
+        /*
         private void LoadFilesCallback(RequestResult result)
         {
             if(result.StatusCode == 200)
@@ -115,7 +111,7 @@ namespace CloudBackupL.TabsControllers
                 }
             }
         }
-
+        */
         public void LoadCloudList()
         {
             listBoxClouds.Items.Clear();

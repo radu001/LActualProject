@@ -1,10 +1,8 @@
 ﻿using ByteSizeLib;
-using Nemiro.OAuth;
 using Newtonsoft.Json.Linq;
 using System;
 using System.ComponentModel;
 using System.Configuration;
-using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
@@ -48,16 +46,12 @@ namespace CloudBackupL
             return client.DownloadString("https://www.dropbox.com/1/account/info");
         }
 
-        public void GetFilesList(String accessToken, ExecuteRequestAsyncCallback callback, string currentPath)
+        public void GetFilesList(String accessToken, DownloadStringCompletedEventHandler eventHandler, string currentPath)
         {
-            OAuthUtility.GetAsync("https://api.dropboxapi.com/1/metadata/auto/",
-                new HttpParameterCollection()
-                {
-                    {"path", currentPath},
-                    {"access_token", accessToken}
-                },
-                callback: callback
-            );
+            var client = new WebClient();
+            client.DownloadStringCompleted += eventHandler;
+            client.Headers["Authorization"] = "Bearer " + accessToken;
+            client.DownloadStringAsync(new Uri("https://api.dropboxapi.com/1/metadata/auto/" + currentPath));
         }
 
         public double GetFreeSpaceInGB(String accessToken)
@@ -117,7 +111,7 @@ namespace CloudBackupL
                 web.Headers["Authorization"] = "Bearer " + token;
                 web.UploadProgressChanged += peh;
                 web.UploadFileCompleted += (sender, args) => Web_UploadFileCompleted(sender, tcs, args);
-                web.UploadFileAsync(new Uri(string.Format("https://content.dropboxapi.com/1/files_put/auto/{0}", cloudPath + Path.GetFileName(clientPath))), "PUT", clientPath);
+                web.UploadFileAsync(new Uri(string.Format("https://content.dropboxapi.com/1/files_put/auto/{0}", cloudPath)), "PUT", clientPath);
             }
         }
 

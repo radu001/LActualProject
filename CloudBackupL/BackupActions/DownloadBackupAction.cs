@@ -2,11 +2,12 @@
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Nemiro.OAuth;
 using System.IO;
 using System.Net;
 using CloudBackupL.Utils;
 using Ionic.Zip;
+using Newtonsoft.Json.Linq;
+using System.Collections;
 
 namespace CloudBackupL.BackupActions
 {
@@ -24,16 +25,18 @@ namespace CloudBackupL.BackupActions
         Cloud cloud;
         EventHandler<Boolean> downloadCompleteEvent;
         string downloadPath;
-        RequestResult requestFilesListResult;
+        string requestFilesListResult;
         TaskCompletionSource<bool> tastWaitDownload;
+        string password;
 
-        public DownloadBackupAction(Backup backup, Label labelStatus, ProgressBar progressBar, string downloadPath, EventHandler<Boolean> downloadCompleteEvent)
+        public DownloadBackupAction(Backup backup, Label labelStatus, ProgressBar progressBar, string downloadPath, EventHandler<Boolean> downloadCompleteEvent, string password)
         {
             this.backup = backup;
             this.labelStatus = labelStatus;
             this.progressBar = progressBar;
             this.downloadPath = downloadPath;
             this.downloadCompleteEvent = downloadCompleteEvent;
+            this.password = password;
             backupPlan = databaseService.GetBackupPlan(backup.backupPlanId);
             cloud = databaseService.GetCloud(backupPlan.cloudId);
             backgroundWorker.DoWork += BackgroundWorker_DoWork;
@@ -60,14 +63,16 @@ namespace CloudBackupL.BackupActions
 
             Directory.CreateDirectory(tempDownloadZipFolder);
             int i = 1;
-            int totalFiles = requestFilesListResult["contents"].Count;
-            foreach (UniValue file in requestFilesListResult["contents"])
+            dynamic files = JObject.Parse(requestFilesListResult);
+            int totalFiles = ((ICollection)files.contents).Count;
+            foreach (var file in files.contents)
             {
                 var tcs = new TaskCompletionSource<bool>();
                 labelStatus.Invoke(new Action(() => labelStatus.Text = "Downloading file " + i + " of " + totalFiles));
-                string fileName = Path.GetFileName(file["path"].ToString());
+                progressBar.Invoke(new Action(() => progressBar.Value = 0));
+                string fileName = Path.GetFileName((string)file.path);
 
-                cloudController.Download(file["path"].ToString(), cloud.token, tempDownloadZipFolder + fileName, Web_DownloadProgressChanged, tcs);
+                cloudController.Download((string)file.path, cloud.token, tempDownloadZipFolder + fileName, Web_DownloadProgressChanged, tcs);
                 tcs.Task.Wait();
                 i++;
             }
@@ -75,10 +80,11 @@ namespace CloudBackupL.BackupActions
             progressBar.Invoke(new Action(() => progressBar.Value = 0));
 
             //now save file to directory
-            ArchiveUtils.ExtractZip(tempDownloadZipFolder, downloadPath, Zip_ExtractProgress);
+            ArchiveUtils.ExtractZip(tempDownloadZipFolder, downloadPath, Zip_ExtractProgress, password);
 
             labelStatus.Invoke(new Action(() => labelStatus.Text = ""));
             progressBar.Invoke(new Action(() => progressBar.Value = 0));
+            ArchiveUtils.DeleteDirectory(tempDownloadZipFolder);
         }
 
         private void Web_DownloadProgressChanged(object sender, object e)
@@ -87,18 +93,20 @@ namespace CloudBackupL.BackupActions
             progressBar.Invoke(new Action(() => progressBar.Value = args.ProgressPercentage));
         }
 
-        private void LoadFilesCallback(Object result)
+
+        private void LoadFilesCallback(object sender, DownloadStringCompletedEventArgs e)
         {
-            RequestResult requestResult = (RequestResult)result;
-            if (requestResult.StatusCode == 200)
+            if(e.Error == null)
             {
-                requestFilesListResult = requestResult;
+                requestFilesListResult = e.Result;
                 tastWaitDownload.TrySetResult(true);
             } else
             {
                 tastWaitDownload.TrySetException(new Exception("Error getting file list"));
             }
         }
+
+
         static int currentEntryNr = 1;
         private void Zip_ExtractProgress(object sender, object e)
         {

@@ -1,15 +1,9 @@
 ﻿using ByteSizeLib;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Net;
-using Nemiro.OAuth;
 using System.IO;
 
-delegate List<string> GetFilesList(RequestResult result);
 namespace CloudBackupL.TabsControllers
 {
     public class MyBackupsTabController

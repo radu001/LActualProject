@@ -17,21 +17,21 @@ namespace CloudBackupL.BackupActions
         string tempUploadZipFolder = AppDomain.CurrentDomain.BaseDirectory + "tmpZipUploadFolder\\";
         DatabaseService databaseService = new DatabaseService();
         BackupPlan backupPlan;
-        Backup backup;
         Label labelStatus;
         ProgressBar progressBar;
         ICloud cloudController;
         Cloud cloud;
         EventHandler<Boolean> backupCompleteEvent;
+        string password;
 
 
-        public UploadBackupAction(BackupPlan backupPlan, Label labelStatus, ProgressBar progressBar, EventHandler<Boolean> backupCompleteEvent)
+        public UploadBackupAction(BackupPlan backupPlan, Label labelStatus, ProgressBar progressBar, EventHandler<Boolean> backupCompleteEvent, string password)
         {
             this.backupPlan = backupPlan;
             this.labelStatus = labelStatus;
             this.progressBar = progressBar;
             this.backupCompleteEvent = backupCompleteEvent;
-            this.backup = databaseService.GetLastBackup(backupPlan.id);
+            this.password = password;
             this.cloud = databaseService.GetCloud(backupPlan.cloudId);
 
             backgroundWorker.DoWork += BackgroundWorker_DoWork;
@@ -59,13 +59,13 @@ namespace CloudBackupL.BackupActions
             //clear temp directory
             ArchiveUtils.DeleteDirectory(tempUploadZipFolder);
             long size = ArchiveUtils.GetDirectorySize(backupPlan.path);
-            ArchiveUtils.ZipFiles(backupPlan.path, tempUploadZipFolder, Zip_SaveProgress);
+            ArchiveUtils.ZipFiles(backupPlan.path, tempUploadZipFolder, Zip_SaveProgress, password);
             var compressedSize = ArchiveUtils.GetDirectorySize(tempUploadZipFolder);
             string date = DateTime.Now.ToString("yyyyMMddHHmmss");
 
             Backup currentBackup = new Backup();
             currentBackup.date = DateTime.Now;
-            currentBackup.targetPath = "/" + backupPlan.name + "/" + date + "/";
+            currentBackup.targetPath = "/" + backupPlan.name + "/" + new DirectoryInfo(backupPlan.path).Name + "-" + date + "/";
             currentBackup.cloudId = cloud.id;
             currentBackup.backupPlanId = backupPlan.id;
             currentBackup.size = size;
@@ -77,6 +77,7 @@ namespace CloudBackupL.BackupActions
             int total = di.GetFiles().Length;
             foreach (FileInfo file in di.GetFiles())
             {
+                progressBar.Invoke(new Action(() => progressBar.Value = 0));
                 labelStatus.Invoke(new Action(() => labelStatus.Text = "Uploading file " + i + " of " + total));
                 var tcs = new TaskCompletionSource<bool>();
                 String targetPath = currentBackup.targetPath + file.Name;
@@ -101,8 +102,7 @@ namespace CloudBackupL.BackupActions
             {
                 int progress = (int)((e.BytesTransferred * 100) / e.TotalBytesToTransfer);
                 progressBar.Invoke(new Action(() => progressBar.Value = progress));
-            }
-            if (e.EventType == ZipProgressEventType.Saving_BeforeWriteEntry)
+            }else if (e.EventType == ZipProgressEventType.Saving_BeforeWriteEntry)
             {
                 labelStatus.Invoke(new Action(() => labelStatus.Text = "Status: Archiving file " + e.EntriesSaved + " of " + e.EntriesTotal));
             }
@@ -110,10 +110,9 @@ namespace CloudBackupL.BackupActions
 
         private void Web_UploadProgressChanged(object sender, UploadProgressChangedEventArgs e)
         {
-            int progress = (int)(e.BytesSent * 100 / e.TotalBytesToSend);
-            if (progress >= 0 && progress <= 100)
+            if(e.ProgressPercentage >= 0 && e.ProgressPercentage <= 100)
             {
-                progressBar.Invoke(new Action(() => progressBar.Value = progress));
+                progressBar.Invoke(new Action(() => progressBar.Value = e.ProgressPercentage));
             }
         }
 
