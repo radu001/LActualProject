@@ -32,7 +32,6 @@ namespace CloudBackupL
             {
                 key = conn.Insert(backupPlan);
             }
-
             return key;
         }
 
