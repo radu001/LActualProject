@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.linkLabelDownload = new System.Windows.Forms.LinkLabel();
             this.labelStatus = new System.Windows.Forms.Label();
             this.progressBarArchiving = new System.Windows.Forms.ProgressBar();
             this.labelPlanId = new System.Windows.Forms.Label();
             this.buttonRunNow = new System.Windows.Forms.Button();
-            this.linkLabel4 = new System.Windows.Forms.LinkLabel();
+            this.linkLabelViewHistory = new System.Windows.Forms.LinkLabel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.labelLastResult = new System.Windows.Forms.Label();
             this.labelLastRun = new System.Windows.Forms.Label();
@@ -54,11 +55,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.linkLabelRestoreFiles = new System.Windows.Forms.LinkLabel();
             this.linkLabelDeletePlan = new System.Windows.Forms.LinkLabel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.linkLabelEdit = new System.Windows.Forms.LinkLabel();
             this.labelBackupName = new System.Windows.Forms.Label();
-            this.linkLabelDownload = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -72,16 +72,26 @@
             this.panel1.Controls.Add(this.progressBarArchiving);
             this.panel1.Controls.Add(this.labelPlanId);
             this.panel1.Controls.Add(this.buttonRunNow);
-            this.panel1.Controls.Add(this.linkLabel4);
+            this.panel1.Controls.Add(this.linkLabelViewHistory);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Controls.Add(this.linkLabel3);
+            this.panel1.Controls.Add(this.linkLabelRestoreFiles);
             this.panel1.Controls.Add(this.linkLabelDeletePlan);
-            this.panel1.Controls.Add(this.linkLabel1);
+            this.panel1.Controls.Add(this.linkLabelEdit);
             this.panel1.Controls.Add(this.labelBackupName);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(782, 233);
             this.panel1.TabIndex = 0;
+            // 
+            // linkLabelDownload
+            // 
+            this.linkLabelDownload.AutoSize = true;
+            this.linkLabelDownload.Location = new System.Drawing.Point(361, 207);
+            this.linkLabelDownload.Name = "linkLabelDownload";
+            this.linkLabelDownload.Size = new System.Drawing.Size(79, 13);
+            this.linkLabelDownload.TabIndex = 9;
+            this.linkLabelDownload.TabStop = true;
+            this.linkLabelDownload.Text = "Download Files";
             // 
             // labelStatus
             // 
@@ -118,15 +128,15 @@
             this.buttonRunNow.Text = "Run Now";
             this.buttonRunNow.UseVisualStyleBackColor = true;
             // 
-            // linkLabel4
+            // linkLabelViewHistory
             // 
-            this.linkLabel4.AutoSize = true;
-            this.linkLabel4.Location = new System.Drawing.Point(444, 207);
-            this.linkLabel4.Name = "linkLabel4";
-            this.linkLabel4.Size = new System.Drawing.Size(65, 13);
-            this.linkLabel4.TabIndex = 4;
-            this.linkLabel4.TabStop = true;
-            this.linkLabel4.Text = "View History";
+            this.linkLabelViewHistory.AutoSize = true;
+            this.linkLabelViewHistory.Location = new System.Drawing.Point(444, 207);
+            this.linkLabelViewHistory.Name = "linkLabelViewHistory";
+            this.linkLabelViewHistory.Size = new System.Drawing.Size(65, 13);
+            this.linkLabelViewHistory.TabIndex = 4;
+            this.linkLabelViewHistory.TabStop = true;
+            this.linkLabelViewHistory.Text = "View History";
             // 
             // panel2
             // 
@@ -316,15 +326,15 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Schedule Type:";
             // 
-            // linkLabel3
+            // linkLabelRestoreFiles
             // 
-            this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(275, 207);
-            this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(68, 13);
-            this.linkLabel3.TabIndex = 3;
-            this.linkLabel3.TabStop = true;
-            this.linkLabel3.Text = "Restore Files";
+            this.linkLabelRestoreFiles.AutoSize = true;
+            this.linkLabelRestoreFiles.Location = new System.Drawing.Point(275, 207);
+            this.linkLabelRestoreFiles.Name = "linkLabelRestoreFiles";
+            this.linkLabelRestoreFiles.Size = new System.Drawing.Size(68, 13);
+            this.linkLabelRestoreFiles.TabIndex = 3;
+            this.linkLabelRestoreFiles.TabStop = true;
+            this.linkLabelRestoreFiles.Text = "Restore Files";
             // 
             // linkLabelDeletePlan
             // 
@@ -336,15 +346,15 @@
             this.linkLabelDeletePlan.TabStop = true;
             this.linkLabelDeletePlan.Text = "Delete Backup Plan";
             // 
-            // linkLabel1
+            // linkLabelEdit
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(29, 207);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(89, 13);
-            this.linkLabel1.TabIndex = 1;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Edit Backup Plan";
+            this.linkLabelEdit.AutoSize = true;
+            this.linkLabelEdit.Location = new System.Drawing.Point(29, 207);
+            this.linkLabelEdit.Name = "linkLabelEdit";
+            this.linkLabelEdit.Size = new System.Drawing.Size(89, 13);
+            this.linkLabelEdit.TabIndex = 1;
+            this.linkLabelEdit.TabStop = true;
+            this.linkLabelEdit.Text = "Edit Backup Plan";
             // 
             // labelBackupName
             // 
@@ -355,16 +365,6 @@
             this.labelBackupName.Size = new System.Drawing.Size(97, 16);
             this.labelBackupName.TabIndex = 0;
             this.labelBackupName.Text = "Bakcup Name:";
-            // 
-            // linkLabelDownload
-            // 
-            this.linkLabelDownload.AutoSize = true;
-            this.linkLabelDownload.Location = new System.Drawing.Point(361, 207);
-            this.linkLabelDownload.Name = "linkLabelDownload";
-            this.linkLabelDownload.Size = new System.Drawing.Size(79, 13);
-            this.linkLabelDownload.TabIndex = 9;
-            this.linkLabelDownload.TabStop = true;
-            this.linkLabelDownload.Text = "Download Files";
             // 
             // PlanControl
             // 
@@ -396,10 +396,10 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.LinkLabel linkLabel4;
-        private System.Windows.Forms.LinkLabel linkLabel3;
+        private System.Windows.Forms.LinkLabel linkLabelViewHistory;
+        private System.Windows.Forms.LinkLabel linkLabelRestoreFiles;
         private System.Windows.Forms.LinkLabel linkLabelDeletePlan;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel linkLabelEdit;
         private System.Windows.Forms.Label labelLastResult;
         private System.Windows.Forms.Label labelLastRun;
         private System.Windows.Forms.Label labelCurrentStatus;

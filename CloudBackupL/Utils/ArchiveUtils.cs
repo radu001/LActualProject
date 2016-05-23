@@ -28,28 +28,40 @@ namespace CloudBackupL.Utils
             }
         }
 
-        public static void ExtractZip(string directoryName, string extractPath, EventHandler<ExtractProgressEventArgs> Zip_ExtractProgress, string password)
+        public static void ExtractZip(string directoryName, string extractPath, EventHandler<ExtractProgressEventArgs> Zip_ExtractProgress, string password, bool isRestoreAction)
         {
+            string tempPath = null;
+            if (isRestoreAction)
+            {
+                tempPath = extractPath + "-tmp\\";
+                DeleteDirectory(tempPath);
+                Directory.CreateDirectory(tempPath);
+                DirectoryInfo di = Directory.CreateDirectory(tempPath);
+                di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
+            }
             using (ZipFile zip = ZipFile.Read(directoryName + "temp.zip"))
             {
                 zip.ExtractProgress += Zip_ExtractProgress;
                 zip.Encryption = EncryptionAlgorithm.WinZipAes256;
                 zip.Password = password;
-                zip.ExtractAll(extractPath);
+                zip.ExtractAll(isRestoreAction ? tempPath : extractPath);
             }
+            if (isRestoreAction)
+            {
+                DeleteDirectory(extractPath);
+                Directory.Move(tempPath + new DirectoryInfo(extractPath).Name, extractPath);
+                DeleteDirectory(tempPath);
+            }
+                
+
+
         }
 
         static public void DeleteDirectory(string path)
         {
-            if(Directory.Exists(path))
+            if (Directory.Exists(path))
             {
-                DirectoryInfo did = new DirectoryInfo(path);
-                foreach (FileInfo file in did.GetFiles())
-                {
-                    file.Delete();
-                }
-
-                Directory.Delete(path);
+                Directory.Delete(path, true);
             }
         }
 
@@ -62,15 +74,19 @@ namespace CloudBackupL.Utils
 
         public static string Encript(string password)
         {
+            if(String.IsNullOrEmpty(password))
+            {
+                return null;
+            }
+
             byte[] hash;
             using (SHA512 shaM = new SHA512Managed())
             {
-                var data = Encoding.UTF8.GetBytes("text");
+                var data = Encoding.UTF8.GetBytes(password);
                 hash = shaM.ComputeHash(data);
             }
 
             string encodedPassword = Encoding.UTF8.GetString(hash);
-
             return encodedPassword + encodedPassword;
         }
     }

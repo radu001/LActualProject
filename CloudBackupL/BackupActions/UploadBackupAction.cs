@@ -110,10 +110,7 @@ namespace CloudBackupL.BackupActions
 
         private void Web_UploadProgressChanged(object sender, UploadProgressChangedEventArgs e)
         {
-            if(e.ProgressPercentage >= 0 && e.ProgressPercentage <= 100)
-            {
-                progressBar.Invoke(new Action(() => progressBar.Value = e.ProgressPercentage));
-            }
+                progressBar.Invoke(new Action(() => progressBar.Value = (int)(e.BytesSent * 100 / e.TotalBytesToSend)));
         }
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

@@ -120,5 +120,11 @@ namespace CloudBackupL
             get { return this.textBoxChunkSize; }
             set { this.textBoxChunkSize = value; }
         }
+
+        public TabControl TabControl
+        {
+            get { return this.tabControl1; }
+            set { this.tabControl1 = value; }
+        }
     }
 }

@@ -17,5 +17,7 @@ namespace CloudBackupL
         void Download(string cloudPath, string token, string localPath, DownloadProgressChangedEventHandler eh, TaskCompletionSource<bool> tcs);
 
         void GetFilesList(String accessToken, DownloadStringCompletedEventHandler eventHandler, string currentPath);
+
+        void DeleteFolder(String accessToken, DownloadStringCompletedEventHandler eventHandler, string currentPath);
     }
 }

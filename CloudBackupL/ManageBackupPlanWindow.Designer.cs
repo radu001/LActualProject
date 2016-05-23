@@ -1,6 +1,6 @@
 ﻿namespace CloudBackupL
 {
-    partial class AddBackupPlanWindow
+    partial class ManageBackupPlanWindow
     {
         /// <summary>
         /// Required designer variable.

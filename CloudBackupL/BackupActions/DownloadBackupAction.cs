@@ -28,8 +28,9 @@ namespace CloudBackupL.BackupActions
         string requestFilesListResult;
         TaskCompletionSource<bool> tastWaitDownload;
         string password;
+        bool isRestoreAction;
 
-        public DownloadBackupAction(Backup backup, Label labelStatus, ProgressBar progressBar, string downloadPath, EventHandler<Boolean> downloadCompleteEvent, string password)
+        public DownloadBackupAction(Backup backup, Label labelStatus, ProgressBar progressBar, string downloadPath, EventHandler<Boolean> downloadCompleteEvent, string password, bool isRestoreAction)
         {
             this.backup = backup;
             this.labelStatus = labelStatus;
@@ -37,6 +38,7 @@ namespace CloudBackupL.BackupActions
             this.downloadPath = downloadPath;
             this.downloadCompleteEvent = downloadCompleteEvent;
             this.password = password;
+            this.isRestoreAction = isRestoreAction;
             backupPlan = databaseService.GetBackupPlan(backup.backupPlanId);
             cloud = databaseService.GetCloud(backupPlan.cloudId);
             backgroundWorker.DoWork += BackgroundWorker_DoWork;
@@ -80,7 +82,7 @@ namespace CloudBackupL.BackupActions
             progressBar.Invoke(new Action(() => progressBar.Value = 0));
 
             //now save file to directory
-            ArchiveUtils.ExtractZip(tempDownloadZipFolder, downloadPath, Zip_ExtractProgress, password);
+            ArchiveUtils.ExtractZip(tempDownloadZipFolder, downloadPath, Zip_ExtractProgress, password, isRestoreAction);
 
             labelStatus.Invoke(new Action(() => labelStatus.Text = ""));
             progressBar.Invoke(new Action(() => progressBar.Value = 0));

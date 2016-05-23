@@ -35,6 +35,16 @@ namespace CloudBackupL
             return key;
         }
 
+        public int UpdateBackupPlan(BackupPlan backupPlan)
+        {
+            int key;
+            using (SQLiteConnection conn = new SQLiteConnection(connString, true))
+            {
+                key = conn.Update(backupPlan);
+            }
+            return key;
+        }
+
         public int InsertCloud(Cloud cloud)
         {
             int key;
@@ -101,6 +111,7 @@ namespace CloudBackupL
             using (SQLiteConnection conn = new SQLiteConnection(connString, true))
             {
                 conn.Delete<BackupPlan>(id);
+                conn.Query<Backup>("delete from Backup where backupPlanId = ?", id);
             }
         }
 

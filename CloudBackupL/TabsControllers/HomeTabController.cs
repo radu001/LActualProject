@@ -35,7 +35,6 @@ namespace CloudBackupL.TabsControllers
             AddCloudWindow addCloudWindow = new AddCloudWindow();
             addCloudWindow.ShowDialog();
             LoadClouds();
-            //LoadCloudList();
         }
 
         //Load Clouds, need internet
@@ -104,9 +103,10 @@ namespace CloudBackupL.TabsControllers
         //Button Add Plan Clicked
         private void buttonAddBackupPlan_Click(object sender, EventArgs e)
         {
-            AddBackupPlanWindow addBackupPlanWindow = new AddBackupPlanWindow();
+            ManageBackupPlanWindow addBackupPlanWindow = new ManageBackupPlanWindow();
             addBackupPlanWindow.ShowDialog();
             mainWindowinstance.backupPlansTabController.LoadPlans();
+            mainWindowinstance.myBackupsTabController.LoadBackupPlansList();
         }
     }
 }

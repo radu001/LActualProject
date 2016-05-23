@@ -131,5 +131,12 @@ namespace CloudBackupL
                 tcs.TrySetResult(true);
             }
         }
+
+        public void DeleteFolder(String accessToken, DownloadStringCompletedEventHandler eventHandler, string currentPath)
+        {
+            var client = new WebClient();
+            client.DownloadStringCompleted += eventHandler;
+            client.DownloadStringAsync(new Uri(string.Format("https://api.dropboxapi.com/1/fileops/delete/?path={0}&root=sandbox&access_token={1}", currentPath, accessToken)));
+        }
     }
 }
