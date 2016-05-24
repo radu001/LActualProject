@@ -16,9 +16,6 @@ namespace CloudBackupL.BackupActions
     {
         BackgroundWorker backgroundWorker = new BackgroundWorker();
         string tempDownloadZipFolder = AppDomain.CurrentDomain.BaseDirectory + "tmpZipDownloadFolder\\";
-        DatabaseService databaseService = new DatabaseService();
-        BackupPlan backupPlan;
-        Backup backup;
         Label labelStatus;
         ProgressBar progressBar;
         ICloud cloudController;
@@ -29,18 +26,20 @@ namespace CloudBackupL.BackupActions
         TaskCompletionSource<bool> tastWaitDownload;
         string password;
         bool isRestoreAction;
+        string cloudPath;
+        static int currentEntryNr = 1;
 
-        public DownloadBackupAction(Backup backup, Label labelStatus, ProgressBar progressBar, string downloadPath, EventHandler<Boolean> downloadCompleteEvent, string password, bool isRestoreAction)
+        public DownloadBackupAction(Cloud cloud, string cloudPath, Label labelStatus, ProgressBar progressBar, string downloadPath, EventHandler<Boolean> downloadCompleteEvent, string password, bool isRestoreAction)
         {
-            this.backup = backup;
+            currentEntryNr = 1;
             this.labelStatus = labelStatus;
             this.progressBar = progressBar;
             this.downloadPath = downloadPath;
             this.downloadCompleteEvent = downloadCompleteEvent;
             this.password = password;
             this.isRestoreAction = isRestoreAction;
-            backupPlan = databaseService.GetBackupPlan(backup.backupPlanId);
-            cloud = databaseService.GetCloud(backupPlan.cloudId);
+            this.cloud = cloud;
+            this.cloudPath = cloudPath;
             backgroundWorker.DoWork += BackgroundWorker_DoWork;
             backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
             if(cloud.cloudType.Equals("dropbox"))
@@ -59,7 +58,7 @@ namespace CloudBackupL.BackupActions
         
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            cloudController.GetFilesList(cloud.token, LoadFilesCallback, backup.targetPath);
+            cloudController.GetFilesList(cloud.token, LoadFilesCallback, cloudPath);
             tastWaitDownload = new TaskCompletionSource<bool>();
             tastWaitDownload.Task.Wait();
 
@@ -70,7 +69,7 @@ namespace CloudBackupL.BackupActions
             foreach (var file in files.contents)
             {
                 var tcs = new TaskCompletionSource<bool>();
-                labelStatus.Invoke(new Action(() => labelStatus.Text = "Downloading file " + i + " of " + totalFiles));
+                labelStatus.Invoke(new Action(() => labelStatus.Text = "Status: Downloading file " + i + " of " + totalFiles));
                 progressBar.Invoke(new Action(() => progressBar.Value = 0));
                 string fileName = Path.GetFileName((string)file.path);
 
@@ -109,7 +108,7 @@ namespace CloudBackupL.BackupActions
         }
 
 
-        static int currentEntryNr = 1;
+
         private void Zip_ExtractProgress(object sender, object e)
         {
             ZipProgressEventArgs args = (ZipProgressEventArgs)e;

@@ -59,13 +59,11 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.label5 = new System.Windows.Forms.Label();
             this.listBoxCloudsManual = new System.Windows.Forms.ListBox();
-            this.buttonManualUpload = new System.Windows.Forms.Button();
             this.buttonManualDownload = new System.Windows.Forms.Button();
-            this.progressBarManualDownload = new System.Windows.Forms.ProgressBar();
+            this.progressBarManual = new System.Windows.Forms.ProgressBar();
             this.listViewCloudFiles = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonSave = new System.Windows.Forms.Button();
@@ -99,6 +97,9 @@
             this.label15 = new System.Windows.Forms.Label();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.imageListClouds = new System.Windows.Forms.ImageList(this.components);
+            this.labelManualStatus = new System.Windows.Forms.Label();
+            this.textBoxManualPassword = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -397,19 +398,21 @@
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.buttonManualUpload);
+            this.splitContainer2.Panel2.Controls.Add(this.label16);
+            this.splitContainer2.Panel2.Controls.Add(this.textBoxManualPassword);
+            this.splitContainer2.Panel2.Controls.Add(this.labelManualStatus);
             this.splitContainer2.Panel2.Controls.Add(this.buttonManualDownload);
-            this.splitContainer2.Panel2.Controls.Add(this.progressBarManualDownload);
+            this.splitContainer2.Panel2.Controls.Add(this.progressBarManual);
             this.splitContainer2.Panel2.Controls.Add(this.listViewCloudFiles);
             this.splitContainer2.Size = new System.Drawing.Size(810, 427);
-            this.splitContainer2.SplitterDistance = 270;
+            this.splitContainer2.SplitterDistance = 168;
             this.splitContainer2.TabIndex = 1;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(90, 0);
+            this.label5.Location = new System.Drawing.Point(40, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(82, 20);
             this.label5.TabIndex = 2;
@@ -422,46 +425,37 @@
             this.listBoxCloudsManual.IntegralHeight = false;
             this.listBoxCloudsManual.Location = new System.Drawing.Point(0, 23);
             this.listBoxCloudsManual.Name = "listBoxCloudsManual";
-            this.listBoxCloudsManual.Size = new System.Drawing.Size(270, 404);
+            this.listBoxCloudsManual.Size = new System.Drawing.Size(168, 404);
             this.listBoxCloudsManual.TabIndex = 1;
-            // 
-            // buttonManualUpload
-            // 
-            this.buttonManualUpload.Location = new System.Drawing.Point(308, 395);
-            this.buttonManualUpload.Name = "buttonManualUpload";
-            this.buttonManualUpload.Size = new System.Drawing.Size(75, 23);
-            this.buttonManualUpload.TabIndex = 3;
-            this.buttonManualUpload.Text = "Upload";
-            this.buttonManualUpload.UseVisualStyleBackColor = true;
             // 
             // buttonManualDownload
             // 
-            this.buttonManualDownload.Location = new System.Drawing.Point(227, 395);
+            this.buttonManualDownload.Location = new System.Drawing.Point(450, 131);
             this.buttonManualDownload.Name = "buttonManualDownload";
-            this.buttonManualDownload.Size = new System.Drawing.Size(75, 23);
+            this.buttonManualDownload.Size = new System.Drawing.Size(182, 23);
             this.buttonManualDownload.TabIndex = 2;
             this.buttonManualDownload.Text = "Download";
             this.buttonManualDownload.UseVisualStyleBackColor = true;
             // 
-            // progressBarManualDownload
+            // progressBarManual
             // 
-            this.progressBarManualDownload.Location = new System.Drawing.Point(4, 396);
-            this.progressBarManualDownload.Name = "progressBarManualDownload";
-            this.progressBarManualDownload.Size = new System.Drawing.Size(217, 23);
-            this.progressBarManualDownload.TabIndex = 1;
+            this.progressBarManual.Location = new System.Drawing.Point(450, 34);
+            this.progressBarManual.Name = "progressBarManual";
+            this.progressBarManual.Size = new System.Drawing.Size(182, 23);
+            this.progressBarManual.TabIndex = 1;
             // 
             // listViewCloudFiles
             // 
             this.listViewCloudFiles.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3});
+            this.columnHeader2});
+            this.listViewCloudFiles.Dock = System.Windows.Forms.DockStyle.Left;
             this.listViewCloudFiles.FullRowSelect = true;
             this.listViewCloudFiles.HideSelection = false;
             this.listViewCloudFiles.Location = new System.Drawing.Point(0, 0);
             this.listViewCloudFiles.MultiSelect = false;
             this.listViewCloudFiles.Name = "listViewCloudFiles";
-            this.listViewCloudFiles.Size = new System.Drawing.Size(536, 389);
+            this.listViewCloudFiles.Size = new System.Drawing.Size(444, 427);
             this.listViewCloudFiles.TabIndex = 0;
             this.listViewCloudFiles.UseCompatibleStateImageBehavior = false;
             this.listViewCloudFiles.View = System.Windows.Forms.View.Details;
@@ -469,17 +463,12 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "File name";
-            this.columnHeader1.Width = 128;
+            this.columnHeader1.Width = 200;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Date";
-            this.columnHeader2.Width = 98;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Size";
-            this.columnHeader3.Width = 103;
+            this.columnHeader2.Width = 200;
             // 
             // tabPage5
             // 
@@ -800,6 +789,32 @@
             this.imageListClouds.TransparentColor = System.Drawing.Color.Transparent;
             this.imageListClouds.Images.SetKeyName(0, "dropbox.jpg");
             // 
+            // labelManualStatus
+            // 
+            this.labelManualStatus.AutoSize = true;
+            this.labelManualStatus.Location = new System.Drawing.Point(450, 7);
+            this.labelManualStatus.Name = "labelManualStatus";
+            this.labelManualStatus.Size = new System.Drawing.Size(40, 13);
+            this.labelManualStatus.TabIndex = 3;
+            this.labelManualStatus.Text = "Status:";
+            // 
+            // textBoxManualPassword
+            // 
+            this.textBoxManualPassword.Location = new System.Drawing.Point(450, 86);
+            this.textBoxManualPassword.Name = "textBoxManualPassword";
+            this.textBoxManualPassword.Size = new System.Drawing.Size(182, 20);
+            this.textBoxManualPassword.TabIndex = 4;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(513, 70);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(56, 13);
+            this.label16.TabIndex = 5;
+            this.label16.Text = "Password:";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -824,6 +839,7 @@
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel1.PerformLayout();
             this.splitContainer2.Panel2.ResumeLayout(false);
+            this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
@@ -869,7 +885,6 @@
         private System.Windows.Forms.ListView listViewCloudFiles;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ImageList imageListClouds;
@@ -909,8 +924,10 @@
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button buttonManualDownload;
-        private System.Windows.Forms.ProgressBar progressBarManualDownload;
-        private System.Windows.Forms.Button buttonManualUpload;
+        private System.Windows.Forms.ProgressBar progressBarManual;
+        private System.Windows.Forms.Label labelManualStatus;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox textBoxManualPassword;
     }
 }
 

@@ -85,9 +85,10 @@ namespace CloudBackupL.TabsControllers
                     //to do
                     string password = ArchiveUtils.Encript("mypassword");
                     PlanControl planControl = (PlanControl)sender;
+                    Cloud cloud = databaseService.GetCloudByName(planControl.LabelCloudName.Text);    
                     Backup lastBackup = databaseService.GetLastBackup(Int32.Parse(planControl.LabelPlanId.Text));
 
-                    DownloadBackupAction downloadBackupAction = new DownloadBackupAction(lastBackup, planControl.LabelStatus, planControl.ProgressBarArchiving, planControl.LabelFolderPath.Text, DownloadCompleteEvent, password, true);
+                    DownloadBackupAction downloadBackupAction = new DownloadBackupAction(cloud, lastBackup.targetPath, planControl.LabelStatus, planControl.ProgressBarArchiving, planControl.LabelFolderPath.Text, DownloadCompleteEvent, password, true);
                     downloadBackupAction.StartDownloadBackupAction();
                 }
             }
@@ -117,11 +118,12 @@ namespace CloudBackupL.TabsControllers
                 string password = ArchiveUtils.Encript("mypassword");
                 PlanControl planControl = (PlanControl)sender;
                 Backup lastBackup = databaseService.GetLastBackup(Int32.Parse(planControl.LabelPlanId.Text));
+                Cloud cloud = databaseService.GetCloudByName(planControl.LabelCloudName.Text);
                 FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
                 DialogResult dialogResult = folderBrowser.ShowDialog();
                 if (dialogResult == DialogResult.OK)
                 {
-                    DownloadBackupAction downloadBackupAction = new DownloadBackupAction(lastBackup, planControl.LabelStatus, planControl.ProgressBarArchiving, folderBrowser.SelectedPath, DownloadCompleteEvent, password, false);
+                    DownloadBackupAction downloadBackupAction = new DownloadBackupAction(cloud ,lastBackup.targetPath, planControl.LabelStatus, planControl.ProgressBarArchiving, folderBrowser.SelectedPath, DownloadCompleteEvent, password, false);
                     downloadBackupAction.StartDownloadBackupAction();
                 } else
                 {

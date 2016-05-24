@@ -90,7 +90,7 @@ namespace CloudBackupL.TabsControllers
                     runTimeTimeSpan.Hours + " h : " + runTimeTimeSpan.Minutes + " m : " + runTimeTimeSpan.Seconds + " s";
 
                 System.Windows.Forms.ListViewItem item = new System.Windows.Forms.ListViewItem(
-                    new string[] {b.targetPath, b.date.ToString("yyyy/MM/dd h-m-s"),
+                    new string[] {b.targetPath, b.date.ToString(),
                     size + " MB" , compressedSize + " MB", runTime});
                 item.Tag = b.id;
                 listViewBackupsInfo.Items.Add(item);

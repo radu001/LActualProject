@@ -37,6 +37,20 @@ namespace CloudBackupL
             manualWorkTabController.LoadCloudList();
         }
 
+        public void RestrictDownloadAction()
+        {
+            isActiveDownloadOperation = true;
+            backupPlansTabController.DisableActions();
+            buttonManualDownload.Enabled = false;
+        }
+
+        public void ResetDownloadAction()
+        {
+            isActiveDownloadOperation = false;
+            backupPlansTabController.LoadPlans();
+            buttonManualDownload.Enabled = true;
+        }
+
         public Button ButtonAddCloud
         {
             get { return this.buttonAddCloud; }
@@ -103,17 +117,24 @@ namespace CloudBackupL
             set { this.buttonManualDownload = value; }
         }
 
-        public ProgressBar ProgressBarManualDownload
+        public ProgressBar ProgressBarManual
         {
-            get { return this.progressBarManualDownload; }
-            set { this.progressBarManualDownload = value; }
+            get { return this.progressBarManual; }
+            set { this.progressBarManual = value; }
         }
 
-        public Button ButtonManualUpload
+        public Label LabelManualStatus
         {
-            get { return this.buttonManualUpload; }
-            set { this.buttonManualUpload = value; }
+            get { return this.labelManualStatus; }
+            set { this.labelManualStatus = value; }
         }
+
+        public TextBox TextBoxManualPassword
+        {
+            get { return this.textBoxManualPassword; }
+            set { this.textBoxManualPassword = value; }
+        }
+
 
         public TextBox TextBoxChunkSize
         {

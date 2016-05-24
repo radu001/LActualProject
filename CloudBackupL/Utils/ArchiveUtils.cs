@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows.Forms;
 
 namespace CloudBackupL.Utils
 {
@@ -31,30 +32,34 @@ namespace CloudBackupL.Utils
         public static void ExtractZip(string directoryName, string extractPath, EventHandler<ExtractProgressEventArgs> Zip_ExtractProgress, string password, bool isRestoreAction)
         {
             string tempPath = null;
-            if (isRestoreAction)
-            {
-                tempPath = extractPath + "-tmp\\";
-                DeleteDirectory(tempPath);
-                Directory.CreateDirectory(tempPath);
-                DirectoryInfo di = Directory.CreateDirectory(tempPath);
-                di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
-            }
-            using (ZipFile zip = ZipFile.Read(directoryName + "temp.zip"))
-            {
-                zip.ExtractProgress += Zip_ExtractProgress;
-                zip.Encryption = EncryptionAlgorithm.WinZipAes256;
-                zip.Password = password;
-                zip.ExtractAll(isRestoreAction ? tempPath : extractPath);
-            }
-            if (isRestoreAction)
-            {
-                DeleteDirectory(extractPath);
-                Directory.Move(tempPath + new DirectoryInfo(extractPath).Name, extractPath);
-                DeleteDirectory(tempPath);
-            }
-                
 
-
+            try
+            {
+                if (isRestoreAction)
+                {
+                    tempPath = extractPath + "-tmp\\";
+                    DeleteDirectory(tempPath);
+                    Directory.CreateDirectory(tempPath);
+                    DirectoryInfo di = Directory.CreateDirectory(tempPath);
+                    di.Attributes = FileAttributes.Directory | FileAttributes.Hidden;
+                }
+                using (ZipFile zip = ZipFile.Read(directoryName + "temp.zip"))
+                {
+                    zip.ExtractProgress += Zip_ExtractProgress;
+                    zip.Encryption = EncryptionAlgorithm.WinZipAes256;
+                    zip.Password = password;
+                    zip.ExtractAll(isRestoreAction ? tempPath : extractPath,ExtractExistingFileAction.OverwriteSilently);
+                }
+                if (isRestoreAction)
+                {
+                    DeleteDirectory(extractPath);
+                    Directory.Move(tempPath + new DirectoryInfo(extractPath).Name, extractPath);
+                    DeleteDirectory(tempPath);
+                }
+            } catch(Ionic.Zip.BadPasswordException e)
+            {
+                MessageBox.Show("Wrong password, please try with another password!");
+            }
         }
 
         static public void DeleteDirectory(string path)
