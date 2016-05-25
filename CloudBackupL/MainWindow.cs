@@ -182,6 +182,18 @@ namespace CloudBackupL
             set { this.tabControl1 = value; }
         }
 
+        public Label LabelMainStatus
+        {
+            get { return this.labelMainStatus; }
+            set { this.labelMainStatus = value; }
+        }
+
+        public ProgressBar ProgressBarMain
+        {
+            get { return this.progressBarMain; }
+            set { this.progressBarMain = value; }
+        }
+
         private bool dragging = false;
         private Point dragCursorPoint;
         private Point dragFormPoint;

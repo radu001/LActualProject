@@ -137,7 +137,7 @@ namespace CloudBackupL.Clouds
         string currentPath;
         public void GetFilesList(string accessToken, EventHandler<List<CloudEntry>> eventHandler, string currentPath)
         {
-            accessToken = RefreshToken(accessToken);
+            //accessToken = RefreshToken(accessToken);
             this.currentPath = currentPath;
             this.eventHandler = eventHandler;
             var client = new WebClient();
@@ -173,10 +173,15 @@ namespace CloudBackupL.Clouds
         public void DeleteFolder(string accessToken, DownloadStringCompletedEventHandler eventHandler, string currentPath)
         {
             accessToken = RefreshToken(accessToken);
+            if (currentPath.StartsWith("/"))
+                currentPath = currentPath.Remove(0, 1);
+            if (currentPath.EndsWith("/"))
+                currentPath = currentPath.Remove(currentPath.Length - 1);
             var request = WebRequest.Create(new Uri(string.Format("https://api.onedrive.com/v1.0/drive/special/approot:/{0}", currentPath)));
             request.Method = "DELETE";
             request.Headers["Authorization"] = "Bearer " + accessToken;
             request.GetResponseAsync();
+            eventHandler(this, null);
         }
     }
 }

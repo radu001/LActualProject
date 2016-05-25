@@ -88,7 +88,7 @@ namespace CloudBackupL.BackupActions
             //now save file to directory
             ArchiveUtils.ExtractZip(tempDownloadZipFolder, downloadPath, Zip_ExtractProgress, password, isRestoreAction);
 
-            labelStatus.Invoke(new Action(() => labelStatus.Text = ""));
+            labelStatus.Invoke(new Action(() => labelStatus.Text = "Status:"));
             progressBar.Invoke(new Action(() => progressBar.Value = 0));
             ArchiveUtils.DeleteDirectory(tempDownloadZipFolder);
         }

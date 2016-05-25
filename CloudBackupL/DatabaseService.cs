@@ -173,6 +173,14 @@ namespace CloudBackupL
             }
         }
 
+        public void DeleteBackup(int id)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connString, true))
+            {
+                conn.Delete<Backup>(id);
+            }
+        }
+
         public List<Backup> GetBackCloudBackups(string cloudId)
         {
             List<Backup> result;

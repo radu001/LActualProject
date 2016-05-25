@@ -34,9 +34,8 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
             this.flowLayoutPanelClouds = new System.Windows.Forms.FlowLayoutPanel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.labelMainStatus = new System.Windows.Forms.Label();
+            this.progressBarMain = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonRunAllplans = new System.Windows.Forms.Button();
             this.buttonAddBackupPlan = new System.Windows.Forms.Button();
@@ -101,19 +100,19 @@
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.imageListClouds = new System.Windows.Forms.ImageList(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.buttonTabHome = new System.Windows.Forms.Button();
-            this.buttonTabBackupPlans = new System.Windows.Forms.Button();
-            this.buttonTabMyBackups = new System.Windows.Forms.Button();
-            this.buttonTabManualWork = new System.Windows.Forms.Button();
-            this.buttonTabSettings = new System.Windows.Forms.Button();
             this.buttonTabAbout = new System.Windows.Forms.Button();
+            this.buttonTabSettings = new System.Windows.Forms.Button();
+            this.buttonTabManualWork = new System.Windows.Forms.Button();
+            this.buttonTabMyBackups = new System.Windows.Forms.Button();
+            this.buttonTabBackupPlans = new System.Windows.Forms.Button();
+            this.buttonTabHome = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panelTopBar = new System.Windows.Forms.Panel();
-            this.label17 = new System.Windows.Forms.Label();
-            this.buttonExit = new System.Windows.Forms.Button();
             this.buttonMinimize = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.buttonExit = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -135,9 +134,9 @@
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel4.SuspendLayout();
             this.panelTopBar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -161,9 +160,8 @@
             this.tabPage1.BackColor = System.Drawing.Color.White;
             this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.flowLayoutPanelClouds);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.progressBar1);
+            this.tabPage1.Controls.Add(this.labelMainStatus);
+            this.tabPage1.Controls.Add(this.progressBarMain);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.buttonRunAllplans);
             this.tabPage1.Controls.Add(this.buttonAddBackupPlan);
@@ -199,31 +197,22 @@
             this.flowLayoutPanelClouds.TabIndex = 10;
             this.flowLayoutPanelClouds.WrapContents = false;
             // 
-            // label3
+            // labelMainStatus
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(263, 57);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 13);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Running...";
+            this.labelMainStatus.AutoSize = true;
+            this.labelMainStatus.Location = new System.Drawing.Point(127, 17);
+            this.labelMainStatus.Name = "labelMainStatus";
+            this.labelMainStatus.Size = new System.Drawing.Size(40, 13);
+            this.labelMainStatus.TabIndex = 9;
+            this.labelMainStatus.Text = "Status:";
             // 
-            // label2
+            // progressBarMain
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(272, 19);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 13);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Status";
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(190, 85);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(197, 23);
-            this.progressBar1.TabIndex = 7;
-            this.progressBar1.Value = 90;
+            this.progressBarMain.Location = new System.Drawing.Point(130, 35);
+            this.progressBarMain.Name = "progressBarMain";
+            this.progressBarMain.Size = new System.Drawing.Size(154, 23);
+            this.progressBarMain.TabIndex = 7;
+            this.progressBarMain.Value = 100;
             // 
             // label1
             // 
@@ -852,52 +841,56 @@
             this.panel2.Size = new System.Drawing.Size(156, 445);
             this.panel2.TabIndex = 1;
             // 
-            // panel3
+            // buttonTabAbout
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(115)))), ((int)(((byte)(0)))));
-            this.panel3.Controls.Add(this.pictureBox1);
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(156, 56);
-            this.panel3.TabIndex = 0;
-            this.panel3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseDown);
-            this.panel3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseMove);
-            this.panel3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseUp);
+            this.buttonTabAbout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(77)))), ((int)(((byte)(101)))));
+            this.buttonTabAbout.FlatAppearance.BorderSize = 0;
+            this.buttonTabAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTabAbout.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.buttonTabAbout.ForeColor = System.Drawing.Color.White;
+            this.buttonTabAbout.Location = new System.Drawing.Point(-7, 250);
+            this.buttonTabAbout.Name = "buttonTabAbout";
+            this.buttonTabAbout.Size = new System.Drawing.Size(172, 51);
+            this.buttonTabAbout.TabIndex = 5;
+            this.buttonTabAbout.Tag = "5";
+            this.buttonTabAbout.Text = "        About";
+            this.buttonTabAbout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonTabAbout.UseVisualStyleBackColor = false;
+            this.buttonTabAbout.Click += new System.EventHandler(this.buttonTab_Click);
             // 
-            // buttonTabHome
+            // buttonTabSettings
             // 
-            this.buttonTabHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(126)))), ((int)(((byte)(149)))), ((int)(((byte)(172)))));
-            this.buttonTabHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.buttonTabHome.FlatAppearance.BorderSize = 0;
-            this.buttonTabHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonTabHome.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonTabHome.ForeColor = System.Drawing.Color.White;
-            this.buttonTabHome.Location = new System.Drawing.Point(-7, 0);
-            this.buttonTabHome.Name = "buttonTabHome";
-            this.buttonTabHome.Size = new System.Drawing.Size(172, 50);
-            this.buttonTabHome.TabIndex = 0;
-            this.buttonTabHome.Tag = "0";
-            this.buttonTabHome.Text = "        Home";
-            this.buttonTabHome.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonTabHome.UseVisualStyleBackColor = false;
-            this.buttonTabHome.Click += new System.EventHandler(this.buttonTab_Click);
+            this.buttonTabSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(77)))), ((int)(((byte)(101)))));
+            this.buttonTabSettings.FlatAppearance.BorderSize = 0;
+            this.buttonTabSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTabSettings.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.buttonTabSettings.ForeColor = System.Drawing.Color.White;
+            this.buttonTabSettings.Location = new System.Drawing.Point(-7, 200);
+            this.buttonTabSettings.Name = "buttonTabSettings";
+            this.buttonTabSettings.Size = new System.Drawing.Size(172, 51);
+            this.buttonTabSettings.TabIndex = 4;
+            this.buttonTabSettings.Tag = "4";
+            this.buttonTabSettings.Text = "        Settings";
+            this.buttonTabSettings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonTabSettings.UseVisualStyleBackColor = false;
+            this.buttonTabSettings.Click += new System.EventHandler(this.buttonTab_Click);
             // 
-            // buttonTabBackupPlans
+            // buttonTabManualWork
             // 
-            this.buttonTabBackupPlans.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(77)))), ((int)(((byte)(101)))));
-            this.buttonTabBackupPlans.FlatAppearance.BorderSize = 0;
-            this.buttonTabBackupPlans.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonTabBackupPlans.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonTabBackupPlans.ForeColor = System.Drawing.Color.White;
-            this.buttonTabBackupPlans.Location = new System.Drawing.Point(-8, 50);
-            this.buttonTabBackupPlans.Name = "buttonTabBackupPlans";
-            this.buttonTabBackupPlans.Size = new System.Drawing.Size(172, 51);
-            this.buttonTabBackupPlans.TabIndex = 1;
-            this.buttonTabBackupPlans.Tag = "1";
-            this.buttonTabBackupPlans.Text = "        Backup Plans";
-            this.buttonTabBackupPlans.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonTabBackupPlans.UseVisualStyleBackColor = false;
-            this.buttonTabBackupPlans.Click += new System.EventHandler(this.buttonTab_Click);
+            this.buttonTabManualWork.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(77)))), ((int)(((byte)(101)))));
+            this.buttonTabManualWork.FlatAppearance.BorderSize = 0;
+            this.buttonTabManualWork.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTabManualWork.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.buttonTabManualWork.ForeColor = System.Drawing.Color.White;
+            this.buttonTabManualWork.Location = new System.Drawing.Point(-7, 150);
+            this.buttonTabManualWork.Name = "buttonTabManualWork";
+            this.buttonTabManualWork.Size = new System.Drawing.Size(172, 51);
+            this.buttonTabManualWork.TabIndex = 3;
+            this.buttonTabManualWork.Tag = "3";
+            this.buttonTabManualWork.Text = "        Manual Work";
+            this.buttonTabManualWork.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonTabManualWork.UseVisualStyleBackColor = false;
+            this.buttonTabManualWork.Click += new System.EventHandler(this.buttonTab_Click);
             // 
             // buttonTabMyBackups
             // 
@@ -917,56 +910,65 @@
             this.buttonTabMyBackups.UseVisualStyleBackColor = false;
             this.buttonTabMyBackups.Click += new System.EventHandler(this.buttonTab_Click);
             // 
-            // buttonTabManualWork
+            // buttonTabBackupPlans
             // 
-            this.buttonTabManualWork.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(77)))), ((int)(((byte)(101)))));
-            this.buttonTabManualWork.FlatAppearance.BorderSize = 0;
-            this.buttonTabManualWork.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonTabManualWork.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.buttonTabManualWork.ForeColor = System.Drawing.Color.White;
-            this.buttonTabManualWork.Location = new System.Drawing.Point(-7, 150);
-            this.buttonTabManualWork.Name = "buttonTabManualWork";
-            this.buttonTabManualWork.Size = new System.Drawing.Size(172, 51);
-            this.buttonTabManualWork.TabIndex = 3;
-            this.buttonTabManualWork.Tag = "3";
-            this.buttonTabManualWork.Text = "        Manual Work";
-            this.buttonTabManualWork.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonTabManualWork.UseVisualStyleBackColor = false;
-            this.buttonTabManualWork.Click += new System.EventHandler(this.buttonTab_Click);
+            this.buttonTabBackupPlans.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(77)))), ((int)(((byte)(101)))));
+            this.buttonTabBackupPlans.FlatAppearance.BorderSize = 0;
+            this.buttonTabBackupPlans.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTabBackupPlans.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonTabBackupPlans.ForeColor = System.Drawing.Color.White;
+            this.buttonTabBackupPlans.Location = new System.Drawing.Point(-8, 50);
+            this.buttonTabBackupPlans.Name = "buttonTabBackupPlans";
+            this.buttonTabBackupPlans.Size = new System.Drawing.Size(172, 51);
+            this.buttonTabBackupPlans.TabIndex = 1;
+            this.buttonTabBackupPlans.Tag = "1";
+            this.buttonTabBackupPlans.Text = "        Backup Plans";
+            this.buttonTabBackupPlans.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonTabBackupPlans.UseVisualStyleBackColor = false;
+            this.buttonTabBackupPlans.Click += new System.EventHandler(this.buttonTab_Click);
             // 
-            // buttonTabSettings
+            // buttonTabHome
             // 
-            this.buttonTabSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(77)))), ((int)(((byte)(101)))));
-            this.buttonTabSettings.FlatAppearance.BorderSize = 0;
-            this.buttonTabSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonTabSettings.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.buttonTabSettings.ForeColor = System.Drawing.Color.White;
-            this.buttonTabSettings.Location = new System.Drawing.Point(-7, 200);
-            this.buttonTabSettings.Name = "buttonTabSettings";
-            this.buttonTabSettings.Size = new System.Drawing.Size(172, 51);
-            this.buttonTabSettings.TabIndex = 4;
-            this.buttonTabSettings.Tag = "4";
-            this.buttonTabSettings.Text = "        Settings";
-            this.buttonTabSettings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonTabSettings.UseVisualStyleBackColor = false;
-            this.buttonTabSettings.Click += new System.EventHandler(this.buttonTab_Click);
+            this.buttonTabHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(126)))), ((int)(((byte)(149)))), ((int)(((byte)(172)))));
+            this.buttonTabHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.buttonTabHome.FlatAppearance.BorderSize = 0;
+            this.buttonTabHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTabHome.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonTabHome.ForeColor = System.Drawing.Color.White;
+            this.buttonTabHome.Location = new System.Drawing.Point(-7, 0);
+            this.buttonTabHome.Name = "buttonTabHome";
+            this.buttonTabHome.Size = new System.Drawing.Size(172, 50);
+            this.buttonTabHome.TabIndex = 0;
+            this.buttonTabHome.Tag = "0";
+            this.buttonTabHome.Text = "        Home";
+            this.buttonTabHome.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonTabHome.UseVisualStyleBackColor = false;
+            this.buttonTabHome.Click += new System.EventHandler(this.buttonTab_Click);
             // 
-            // buttonTabAbout
+            // panel3
             // 
-            this.buttonTabAbout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(77)))), ((int)(((byte)(101)))));
-            this.buttonTabAbout.FlatAppearance.BorderSize = 0;
-            this.buttonTabAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonTabAbout.Font = new System.Drawing.Font("Century Gothic", 12F);
-            this.buttonTabAbout.ForeColor = System.Drawing.Color.White;
-            this.buttonTabAbout.Location = new System.Drawing.Point(-7, 250);
-            this.buttonTabAbout.Name = "buttonTabAbout";
-            this.buttonTabAbout.Size = new System.Drawing.Size(172, 51);
-            this.buttonTabAbout.TabIndex = 5;
-            this.buttonTabAbout.Tag = "5";
-            this.buttonTabAbout.Text = "        About";
-            this.buttonTabAbout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonTabAbout.UseVisualStyleBackColor = false;
-            this.buttonTabAbout.Click += new System.EventHandler(this.buttonTab_Click);
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(115)))), ((int)(((byte)(0)))));
+            this.panel3.Controls.Add(this.pictureBox1);
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(156, 56);
+            this.panel3.TabIndex = 0;
+            this.panel3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseDown);
+            this.panel3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseMove);
+            this.panel3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseUp);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::CloudBackupL.Properties.Resources.upload_512;
+            this.pictureBox1.Location = new System.Drawing.Point(28, -9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(70, 70);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseDown);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseMove);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseUp);
             // 
             // panel4
             // 
@@ -990,19 +992,26 @@
             this.panelTopBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseMove);
             this.panelTopBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseUp);
             // 
-            // label17
+            // buttonMinimize
             // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Century Schoolbook", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.ForeColor = System.Drawing.Color.White;
-            this.label17.Location = new System.Drawing.Point(7, 15);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(173, 25);
-            this.label17.TabIndex = 0;
-            this.label17.Text = "Secure Backup";
-            this.label17.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseDown);
-            this.label17.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseMove);
-            this.label17.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseUp);
+            this.buttonMinimize.BackColor = System.Drawing.Color.Transparent;
+            this.buttonMinimize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.buttonMinimize.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.buttonMinimize.FlatAppearance.BorderSize = 0;
+            this.buttonMinimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.buttonMinimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.buttonMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMinimize.Font = new System.Drawing.Font("Lucida Fax", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonMinimize.ForeColor = System.Drawing.Color.White;
+            this.buttonMinimize.Location = new System.Drawing.Point(646, 12);
+            this.buttonMinimize.Name = "buttonMinimize";
+            this.buttonMinimize.Size = new System.Drawing.Size(39, 37);
+            this.buttonMinimize.TabIndex = 2;
+            this.buttonMinimize.Text = "-";
+            this.buttonMinimize.UseVisualStyleBackColor = false;
+            this.buttonMinimize.Click += new System.EventHandler(this.buttonMinimize_Click);
+            this.buttonMinimize.MouseLeave += new System.EventHandler(this.buttonExit_MouseLeave);
+            this.buttonMinimize.MouseMove += new System.Windows.Forms.MouseEventHandler(this.buttonExit_MouseMove);
             // 
             // buttonExit
             // 
@@ -1025,39 +1034,19 @@
             this.buttonExit.MouseLeave += new System.EventHandler(this.buttonExit_MouseLeave);
             this.buttonExit.MouseMove += new System.Windows.Forms.MouseEventHandler(this.buttonExit_MouseMove);
             // 
-            // buttonMinimize
+            // label17
             // 
-            this.buttonMinimize.BackColor = System.Drawing.Color.Transparent;
-            this.buttonMinimize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.buttonMinimize.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.buttonMinimize.FlatAppearance.BorderSize = 0;
-            this.buttonMinimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.buttonMinimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.buttonMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonMinimize.Font = new System.Drawing.Font("Lucida Fax", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonMinimize.ForeColor = System.Drawing.Color.White;
-            this.buttonMinimize.Location = new System.Drawing.Point(646, 12);
-            this.buttonMinimize.Name = "buttonMinimize";
-            this.buttonMinimize.Size = new System.Drawing.Size(39, 37);
-            this.buttonMinimize.TabIndex = 2;
-            this.buttonMinimize.Text = "-";
-            this.buttonMinimize.UseVisualStyleBackColor = false;
-            this.buttonMinimize.Click += new System.EventHandler(this.buttonMinimize_Click);
-            this.buttonMinimize.MouseLeave += new System.EventHandler(this.buttonExit_MouseLeave);
-            this.buttonMinimize.MouseMove += new System.Windows.Forms.MouseEventHandler(this.buttonExit_MouseMove);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::CloudBackupL.Properties.Resources.upload_512;
-            this.pictureBox1.Location = new System.Drawing.Point(28, -9);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(70, 70);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseDown);
-            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseMove);
-            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseUp);
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Century Schoolbook", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.White;
+            this.label17.Location = new System.Drawing.Point(7, 15);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(173, 25);
+            this.label17.TabIndex = 0;
+            this.label17.Text = "Secure Backup";
+            this.label17.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseDown);
+            this.label17.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseMove);
+            this.label17.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseUp);
             // 
             // MainWindow
             // 
@@ -1075,7 +1064,6 @@
             this.MinimizeBox = false;
             this.Name = "MainWindow";
             this.Padding = new System.Windows.Forms.Padding(1);
-            this.ShowInTaskbar = false;
             this.Text = "CLoud Backup";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.tabControl1.ResumeLayout(false);
@@ -1108,10 +1096,10 @@
             this.groupBox1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panelTopBar.ResumeLayout(false);
             this.panelTopBar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1130,9 +1118,8 @@
         private System.Windows.Forms.Button buttonRunAllplans;
         private System.Windows.Forms.Button buttonAddBackupPlan;
         private System.Windows.Forms.Button buttonAddCloud;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Label labelMainStatus;
+        private System.Windows.Forms.ProgressBar progressBarMain;
         private System.Windows.Forms.ListBox listBoxBackupPlans;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ListView listViewBackupsInfo;
