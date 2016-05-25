@@ -45,6 +45,16 @@ namespace CloudBackupL
             return key;
         }
 
+        public int UpdateCloud(Cloud cloud)
+        {
+            int key;
+            using (SQLiteConnection conn = new SQLiteConnection(connString, true))
+            {
+                key = conn.Update(cloud);
+            }
+            return key;
+        }
+
         public int InsertCloud(Cloud cloud)
         {
             int key;
@@ -135,7 +145,7 @@ namespace CloudBackupL
             return cloud[0];
         }
 
-        public bool IsCloudAlreadyInsered(String id)
+        public bool IsCloudAlreadyInsered(string id)
         {
             int count = 0;
             using (SQLiteConnection conn = new SQLiteConnection(connString, true))
@@ -193,7 +203,7 @@ namespace CloudBackupL
             return result.Count > 0 ? result[0] : null;
         }
 
-        public Cloud GetCloud(int cloudId)
+        public Cloud GetCloud(string cloudId)
         {
             Cloud result;
             using (SQLiteConnection conn = new SQLiteConnection(connString, true))
@@ -211,6 +221,16 @@ namespace CloudBackupL
                 result = conn.Query<Backup>("select * from Backup where backupPlanId = ?", planId);
             }
             return result;
+        }
+
+        public Cloud GetCloudByToken(string accessToken)
+        {
+            List<Cloud> clouds;
+            using (SQLiteConnection conn = new SQLiteConnection(connString, true))
+            {
+                clouds = conn.Query<Cloud>("select * from Cloud where token = ?", accessToken);
+            }
+            return clouds.Count == 1 ? clouds[0] : null;
         }
 
     }

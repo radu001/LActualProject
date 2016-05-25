@@ -6,6 +6,8 @@ using System.Net;
 using Newtonsoft.Json.Linq;
 using CloudBackupL.BackupActions;
 using CloudBackupL.Utils;
+using CloudBackupL.Clouds;
+using CloudBackupL.Models;
 
 namespace CloudBackupL.TabsControllers
 {
@@ -71,27 +73,26 @@ namespace CloudBackupL.TabsControllers
             if (((System.Windows.Forms.ListBox)sender).Text.Equals("")) return;
             listViewCloudFiles.Items.Clear();
             System.Web.UI.WebControls.ListItem selectedItem = (System.Web.UI.WebControls.ListItem)((System.Windows.Forms.ListBox)sender).SelectedItem;
-            Cloud cloud = databaseService.GetCloud(Int32.Parse(selectedItem.Value));
+            Cloud cloud = databaseService.GetCloud(selectedItem.Value);
             currentCLoud = cloud;
             if(currentCLoud.cloudType.Equals("dropbox"))
             {
                 cloudController = new DropBoxController();
             }
+            else
+            {
+                cloudController = new OneDriveController();
+            }
             cloudController.GetFilesList(cloud.token, LoadFilesCallback, "/");
         }
-        
-        private void LoadFilesCallback(object s, DownloadStringCompletedEventArgs args)
+
+        private void LoadFilesCallback(object sender, List<CloudEntry> e)
         {
-            if(args.Error == null)
+            foreach (var file in e)
             {
-                dynamic result = JObject.Parse(args.Result);
-                foreach (var file in result.contents)
-                {
-                    DateTime date = DateTime.Parse((string)file.modified);
-                    ListViewItem item = new ListViewItem(new string[] {file.path.ToString(), date.ToString()});
-                    item.Tag = file.path.ToString();
-                    listViewCloudFiles.Invoke(new Action(() => listViewCloudFiles.Items.Add(item)));
-                }
+                ListViewItem item = new ListViewItem(new string[] { file.path, file.date.ToString() });
+                item.Tag = file.path;
+                listViewCloudFiles.Invoke(new Action(() => listViewCloudFiles.Items.Add(item)));
             }
         }
         
@@ -113,7 +114,7 @@ namespace CloudBackupL.TabsControllers
                 DialogResult dialogResult = folderBrowser.ShowDialog();
                 if (dialogResult == DialogResult.OK)
                 {
-                    mainWindowInstance.ResetDownloadAction();
+                    mainWindowInstance.RestrictDownloadAction();
                     DownloadBackupAction downloadBackupAction = new DownloadBackupAction(currentCLoud, listViewCloudFiles.SelectedItems[0].Tag.ToString(), labelStatus, progressBar, folderBrowser.SelectedPath, DownloadCompleteEvent, ArchiveUtils.Encript(textBoxPassword.Text), false);
                     downloadBackupAction.StartDownloadBackupAction();
                 }

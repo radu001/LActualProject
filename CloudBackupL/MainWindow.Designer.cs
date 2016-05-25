@@ -59,6 +59,9 @@
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.label5 = new System.Windows.Forms.Label();
             this.listBoxCloudsManual = new System.Windows.Forms.ListBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.textBoxManualPassword = new System.Windows.Forms.TextBox();
+            this.labelManualStatus = new System.Windows.Forms.Label();
             this.buttonManualDownload = new System.Windows.Forms.Button();
             this.progressBarManual = new System.Windows.Forms.ProgressBar();
             this.listViewCloudFiles = new System.Windows.Forms.ListView();
@@ -97,9 +100,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.imageListClouds = new System.Windows.Forms.ImageList(this.components);
-            this.labelManualStatus = new System.Windows.Forms.Label();
-            this.textBoxManualPassword = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -427,6 +427,32 @@
             this.listBoxCloudsManual.Name = "listBoxCloudsManual";
             this.listBoxCloudsManual.Size = new System.Drawing.Size(168, 404);
             this.listBoxCloudsManual.TabIndex = 1;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(513, 70);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(56, 13);
+            this.label16.TabIndex = 5;
+            this.label16.Text = "Password:";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // textBoxManualPassword
+            // 
+            this.textBoxManualPassword.Location = new System.Drawing.Point(450, 86);
+            this.textBoxManualPassword.Name = "textBoxManualPassword";
+            this.textBoxManualPassword.Size = new System.Drawing.Size(182, 20);
+            this.textBoxManualPassword.TabIndex = 4;
+            // 
+            // labelManualStatus
+            // 
+            this.labelManualStatus.AutoSize = true;
+            this.labelManualStatus.Location = new System.Drawing.Point(450, 7);
+            this.labelManualStatus.Name = "labelManualStatus";
+            this.labelManualStatus.Size = new System.Drawing.Size(40, 13);
+            this.labelManualStatus.TabIndex = 3;
+            this.labelManualStatus.Text = "Status:";
             // 
             // buttonManualDownload
             // 
@@ -787,33 +813,10 @@
             // 
             this.imageListClouds.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListClouds.ImageStream")));
             this.imageListClouds.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListClouds.Images.SetKeyName(0, "dropbox.jpg");
-            // 
-            // labelManualStatus
-            // 
-            this.labelManualStatus.AutoSize = true;
-            this.labelManualStatus.Location = new System.Drawing.Point(450, 7);
-            this.labelManualStatus.Name = "labelManualStatus";
-            this.labelManualStatus.Size = new System.Drawing.Size(40, 13);
-            this.labelManualStatus.TabIndex = 3;
-            this.labelManualStatus.Text = "Status:";
-            // 
-            // textBoxManualPassword
-            // 
-            this.textBoxManualPassword.Location = new System.Drawing.Point(450, 86);
-            this.textBoxManualPassword.Name = "textBoxManualPassword";
-            this.textBoxManualPassword.Size = new System.Drawing.Size(182, 20);
-            this.textBoxManualPassword.TabIndex = 4;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(513, 70);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(56, 13);
-            this.label16.TabIndex = 5;
-            this.label16.Text = "Password:";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.imageListClouds.Images.SetKeyName(0, "dr1.PNG");
+            this.imageListClouds.Images.SetKeyName(1, "or1.PNG");
+            this.imageListClouds.Images.SetKeyName(2, "dropbox.png");
+            this.imageListClouds.Images.SetKeyName(3, "drive.png");
             // 
             // MainWindow
             // 

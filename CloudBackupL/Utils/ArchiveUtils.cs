@@ -94,5 +94,11 @@ namespace CloudBackupL.Utils
             string encodedPassword = Encoding.UTF8.GetString(hash);
             return encodedPassword + encodedPassword;
         }
+
+
+        public static double GetFormatedSpaceInGB(long space)
+        {
+            return Math.Round(ByteSize.FromBytes(space).GigaBytes, 3);
+        }
     }
 }

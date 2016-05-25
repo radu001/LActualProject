@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddCloudWindow));
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("", 0);
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("", 1);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panelCloudSelect = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
@@ -38,7 +39,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonNext = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.listViewCloudsType = new System.Windows.Forms.ListView();
             this.panelCloudLogin = new System.Windows.Forms.Panel();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.panelCloudSelect.SuspendLayout();
@@ -49,7 +50,8 @@
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "dropbox.jpg");
+            this.imageList1.Images.SetKeyName(0, "dr1.PNG");
+            this.imageList1.Images.SetKeyName(1, "or1.PNG");
             // 
             // panelCloudSelect
             // 
@@ -58,7 +60,7 @@
             this.panelCloudSelect.Controls.Add(this.label2);
             this.panelCloudSelect.Controls.Add(this.label1);
             this.panelCloudSelect.Controls.Add(this.buttonNext);
-            this.panelCloudSelect.Controls.Add(this.listView1);
+            this.panelCloudSelect.Controls.Add(this.listViewCloudsType);
             this.panelCloudSelect.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelCloudSelect.Location = new System.Drawing.Point(0, 0);
             this.panelCloudSelect.Name = "panelCloudSelect";
@@ -111,21 +113,21 @@
             this.buttonNext.UseVisualStyleBackColor = true;
             this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
             // 
-            // listView1
+            // listViewCloudsType
             // 
-            this.listView1.HideSelection = false;
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
-            this.listView1.LargeImageList = this.imageList1;
-            this.listView1.Location = new System.Drawing.Point(12, 139);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(425, 138);
-            this.listView1.SmallImageList = this.imageList1;
-            this.listView1.TabIndex = 3;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.SmallIcon;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.listViewCloudsType.HideSelection = false;
+            this.listViewCloudsType.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1,
+            listViewItem2});
+            this.listViewCloudsType.LargeImageList = this.imageList1;
+            this.listViewCloudsType.Location = new System.Drawing.Point(12, 139);
+            this.listViewCloudsType.MultiSelect = false;
+            this.listViewCloudsType.Name = "listViewCloudsType";
+            this.listViewCloudsType.Size = new System.Drawing.Size(425, 138);
+            this.listViewCloudsType.SmallImageList = this.imageList1;
+            this.listViewCloudsType.TabIndex = 3;
+            this.listViewCloudsType.UseCompatibleStateImageBehavior = false;
+            this.listViewCloudsType.SelectedIndexChanged += new System.EventHandler(this.listViewCloudsType_SelectedIndexChanged);
             // 
             // panelCloudLogin
             // 
@@ -156,7 +158,6 @@
             this.Controls.Add(this.panelCloudLogin);
             this.Name = "AddCloudWindow";
             this.Text = "AddCloud";
-            this.Load += new System.EventHandler(this.AddCloudWindow_Load);
             this.panelCloudSelect.ResumeLayout(false);
             this.panelCloudSelect.PerformLayout();
             this.panelCloudLogin.ResumeLayout(false);
@@ -167,7 +168,7 @@
         #endregion
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Panel panelCloudSelect;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listViewCloudsType;
         private System.Windows.Forms.Button buttonNext;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panelCloudLogin;

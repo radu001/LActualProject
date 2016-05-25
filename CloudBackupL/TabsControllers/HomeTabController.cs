@@ -1,4 +1,7 @@
-﻿using CloudBackupL.CustomControllers;
+﻿using CloudBackupL.Clouds;
+using CloudBackupL.CustomControllers;
+using CloudBackupL.Models;
+using CloudBackupL.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,11 +17,13 @@ namespace CloudBackupL.TabsControllers
         MainWindow mainWindowinstance;
         BackgroundWorker backgroundWorkerLoadClouds;
         DatabaseService databaseService;
-        DropBoxController dropBoxController;
+        ICloud dropBoxController;
+        ICloud boxController;
 
         public HomeTabController()
         {
             mainWindowinstance = MainWindow.instance;
+            boxController = new OneDriveController();
             databaseService = new DatabaseService();
             dropBoxController = new DropBoxController();
             mainWindowinstance.ButtonAddCloud.Click += buttonAddCloud_Click;
@@ -58,14 +63,19 @@ namespace CloudBackupL.TabsControllers
                 switch (c.cloudType)
                 {
                     case "dropbox":
-                        double totalSpaceGB = dropBoxController.GetTotalSpaceInGB(c.token);
-                        double freeSpaceGB = dropBoxController.GetFreeSpaceInGB(c.token);
-
-                        control.LabelTotalSpace.Text = Math.Round(totalSpaceGB, 3) + " GB";
-                        control.LabelFreeSpace.Text = Math.Round(freeSpaceGB, 3) + " GB";
-
+                        CloudUserInfo cloudUserInfoDropBox = dropBoxController.GetAccountInfo(c.token);
+                        control.LabelTotalSpace.Text = ArchiveUtils.GetFormatedSpaceInGB(cloudUserInfoDropBox.total_space) + " GB";
+                        control.LabelFreeSpace.Text = ArchiveUtils.GetFormatedSpaceInGB(cloudUserInfoDropBox.free_space) + " GB";
                         control.LabelCloudName.Text = c.name;
                         control.PictureBoxCloudImage.Image = mainWindowinstance.ImageListClouds.Images[0];
+                        control.LabelId.Text = c.id.ToString();
+                        break;
+                    case "box":
+                        CloudUserInfo cloudUserInfoBox = boxController.GetAccountInfo(c.token);
+                        control.LabelTotalSpace.Text = ArchiveUtils.GetFormatedSpaceInGB(cloudUserInfoBox.total_space) + " GB";
+                        control.LabelFreeSpace.Text = ArchiveUtils.GetFormatedSpaceInGB(cloudUserInfoBox.free_space) + " GB";
+                        control.LabelCloudName.Text = c.name;
+                        control.PictureBoxCloudImage.Image = mainWindowinstance.ImageListClouds.Images[1];
                         control.LabelId.Text = c.id.ToString();
                         break;
                 }

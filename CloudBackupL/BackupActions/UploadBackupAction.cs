@@ -1,4 +1,5 @@
-﻿using CloudBackupL.Utils;
+﻿using CloudBackupL.Clouds;
+using CloudBackupL.Utils;
 using Ionic.Zip;
 using System;
 using System.ComponentModel;
@@ -40,6 +41,9 @@ namespace CloudBackupL.BackupActions
             if(cloud.cloudType == "dropbox")
             {
                 cloudController = new DropBoxController();
+            } else
+            {
+                cloudController = new OneDriveController();
             }
         }
 

@@ -8,6 +8,9 @@ using CloudBackupL.Utils;
 using Ionic.Zip;
 using Newtonsoft.Json.Linq;
 using System.Collections;
+using System.Collections.Generic;
+using CloudBackupL.Models;
+using CloudBackupL.Clouds;
 
 namespace CloudBackupL.BackupActions
 {
@@ -22,7 +25,7 @@ namespace CloudBackupL.BackupActions
         Cloud cloud;
         EventHandler<Boolean> downloadCompleteEvent;
         string downloadPath;
-        string requestFilesListResult;
+        List<CloudEntry> requestFilesListResult;
         TaskCompletionSource<bool> tastWaitDownload;
         string password;
         bool isRestoreAction;
@@ -45,6 +48,9 @@ namespace CloudBackupL.BackupActions
             if(cloud.cloudType.Equals("dropbox"))
             {
                 cloudController = new DropBoxController();
+            } else
+            {
+                cloudController = new OneDriveController();
             }
         }
 
@@ -64,9 +70,8 @@ namespace CloudBackupL.BackupActions
 
             Directory.CreateDirectory(tempDownloadZipFolder);
             int i = 1;
-            dynamic files = JObject.Parse(requestFilesListResult);
-            int totalFiles = ((ICollection)files.contents).Count;
-            foreach (var file in files.contents)
+            int totalFiles = requestFilesListResult.Count;
+            foreach (var file in requestFilesListResult)
             {
                 var tcs = new TaskCompletionSource<bool>();
                 labelStatus.Invoke(new Action(() => labelStatus.Text = "Status: Downloading file " + i + " of " + totalFiles));
@@ -95,16 +100,10 @@ namespace CloudBackupL.BackupActions
         }
 
 
-        private void LoadFilesCallback(object sender, DownloadStringCompletedEventArgs e)
+        private void LoadFilesCallback(object sender, List<CloudEntry> e)
         {
-            if(e.Error == null)
-            {
-                requestFilesListResult = e.Result;
+                requestFilesListResult = e;
                 tastWaitDownload.TrySetResult(true);
-            } else
-            {
-                tastWaitDownload.TrySetException(new Exception("Error getting file list"));
-            }
         }
 
 

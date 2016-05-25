@@ -103,7 +103,7 @@ namespace CloudBackupL
                     plan.scheduleTime = dateTimePickerScheduleTime.Value;
                     plan.currentStatus = "";
                     plan.cloudName = comboBoxClouds.Text;
-                    plan.cloudId = Int32.Parse(((ListItem)comboBoxClouds.SelectedItem).Value);
+                    plan.cloudId = ((ListItem)comboBoxClouds.SelectedItem).Value;
                     databaseService.InsertBackupPlan(plan);
                     dialogMessage = "Plan created succesfully";
                 }
@@ -116,7 +116,7 @@ namespace CloudBackupL
                     backupPlanToEdit.scheduleTime = dateTimePickerScheduleTime.Value;
                     backupPlanToEdit.currentStatus = "";
                     backupPlanToEdit.cloudName = comboBoxClouds.Text;
-                    backupPlanToEdit.cloudId = Int32.Parse(((ListItem)comboBoxClouds.SelectedItem).Value);
+                    backupPlanToEdit.cloudId = ((ListItem)comboBoxClouds.SelectedItem).Value;
                     databaseService.UpdateBackupPlan(backupPlanToEdit);
                     dialogMessage = "Plan updated succesfully";
                 }

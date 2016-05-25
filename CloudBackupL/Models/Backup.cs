@@ -15,8 +15,8 @@ namespace CloudBackupL
         [NotNull]
         public DateTime date { get; set; }
 
-        [NotNull]
-        public int cloudId { get; set; }
+        [MaxLength(50), NotNull]
+        public string cloudId { get; set; }
 
         [NotNull]
         public int backupPlanId { get; set; }

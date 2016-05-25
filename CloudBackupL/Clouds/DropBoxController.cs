@@ -6,6 +6,8 @@ using System.Configuration;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
+using CloudBackupL.Models;
+using System.Collections.Generic;
 
 namespace CloudBackupL
 {
@@ -39,46 +41,46 @@ namespace CloudBackupL
             return null;
         }
 
-        public string GetAccountInfo(String accessToken)
+        public CloudUserInfo GetAccountInfo(String accessToken)
         {
             var client = new WebClient();
             client.Headers["Authorization"] = "Bearer " + accessToken;
-            return client.DownloadString("https://www.dropbox.com/1/account/info");
+            string source = client.DownloadString("https://www.dropbox.com/1/account/info");
+            dynamic data = JObject.Parse(source);
+            CloudUserInfo cloudUserInfo = new CloudUserInfo();
+            cloudUserInfo.uid = data.uid;
+            cloudUserInfo.total_space = data.quota_info.quota;
+            cloudUserInfo.used_space = data.quota_info.normal + data.quota_info.shared;
+            cloudUserInfo.free_space = cloudUserInfo.total_space - cloudUserInfo.used_space;
+            return cloudUserInfo;
         }
 
-        public void GetFilesList(String accessToken, DownloadStringCompletedEventHandler eventHandler, string currentPath)
+        EventHandler<List<CloudEntry>> eventHandler;
+        public void GetFilesList(String accessToken, EventHandler<List<CloudEntry>> eventHandler, string currentPath)
         {
+            this.eventHandler = eventHandler;
             var client = new WebClient();
-            client.DownloadStringCompleted += eventHandler;
+            client.DownloadStringCompleted += Client_DownloadStringCompleted; ;
             client.Headers["Authorization"] = "Bearer " + accessToken;
             client.DownloadStringAsync(new Uri("https://api.dropboxapi.com/1/metadata/auto/" + currentPath));
         }
 
-        public double GetFreeSpaceInGB(String accessToken)
+        private void Client_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs args)
         {
-            var client = new WebClient();
-            client.Headers["Authorization"] = "Bearer " + accessToken;
-            string source = client.DownloadString("https://www.dropbox.com/1/account/info");
-
-            dynamic data = JObject.Parse(source);
-            double totalSpaceBytes = data.quota_info.quota;
-            double normal = data.quota_info.normal;
-            double shared = data.quota_info.shared;
-            double freeSpaceBytes = totalSpaceBytes - normal - shared;
-            return ByteSize.FromBytes(freeSpaceBytes).GigaBytes;
+            if (args.Error == null)
+            {
+                List<CloudEntry> list = new List<CloudEntry>();
+                dynamic result = JObject.Parse(args.Result);
+                foreach (var file in result.contents)
+                {
+                    DateTime date = DateTime.Parse((string)file.modified);
+                    string path = file.path.ToString();
+                    CloudEntry entry = new CloudEntry(path, date);
+                    list.Add(entry);
+                }
+                eventHandler(this, list);
+            }
         }
-
-        public double GetTotalSpaceInGB(String accessToken)
-        {
-            var client = new WebClient();
-            client.Headers["Authorization"] = "Bearer " + accessToken;
-            string source = client.DownloadString("https://www.dropbox.com/1/account/info");
-
-            dynamic data = JObject.Parse(source);
-            double totalSpaceBytes = data.quota_info.quota;
-            return ByteSize.FromBytes(totalSpaceBytes).GigaBytes;
-        }
-
 
         public void Download(string cloudPath, string token, string localPath, DownloadProgressChangedEventHandler eh, TaskCompletionSource<bool> tcs)
         {

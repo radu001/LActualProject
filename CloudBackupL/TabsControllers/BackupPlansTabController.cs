@@ -1,4 +1,5 @@
 ﻿using CloudBackupL.BackupActions;
+using CloudBackupL.Clouds;
 using CloudBackupL.CustomControllers;
 using CloudBackupL.Utils;
 using System;
@@ -12,7 +13,6 @@ namespace CloudBackupL.TabsControllers
         DatabaseService databaseService;
         FlowLayoutPanel flowLayoutPanelPlans;
         Label labelTotalPlans;
-        ICloud cloudService;
 
         public BackupPlansTabController()
         {
@@ -154,6 +154,9 @@ namespace CloudBackupL.TabsControllers
                     if(cloud.cloudType.Equals("dropbox"))
                     {
                         new DropBoxController().DeleteFolder(cloud.token, DeleteFolderCompelte, backupPlan.name);
+                    } else
+                    {
+                        new OneDriveController().DeleteFolder(cloud.token, DeleteFolderCompelte, backupPlan.name);
                     }
 
                 }
@@ -191,6 +194,7 @@ namespace CloudBackupL.TabsControllers
             MainWindow.isActiveUploadOperation = false;
             MainWindow.instance.homeTabController.LoadClouds();
             MainWindow.instance.myBackupsTabController.LoadBackupPlansList();
+            MainWindow.instance.manualWorkTabController.LoadCloudList();
             LoadPlans();
         }
 

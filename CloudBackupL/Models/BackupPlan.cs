@@ -24,8 +24,8 @@ namespace CloudBackupL
         [MaxLength(50), NotNull]
         public String cloudName { get; set; }
 
-        [NotNull]
-        public int cloudId { get; set; }
+        [MaxLength(50), NotNull]
+        public string cloudId { get; set; }
 
         public DateTime lastRun { get; set; }
 
