@@ -80,7 +80,7 @@
             this.panel1.Controls.Add(this.labelBackupName);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(782, 233);
+            this.panel1.Size = new System.Drawing.Size(698, 233);
             this.panel1.TabIndex = 0;
             // 
             // linkLabelDownload
@@ -96,14 +96,14 @@
             // labelStatus
             // 
             this.labelStatus.AutoSize = true;
-            this.labelStatus.Location = new System.Drawing.Point(464, 7);
+            this.labelStatus.Location = new System.Drawing.Point(390, 7);
             this.labelStatus.Name = "labelStatus";
             this.labelStatus.Size = new System.Drawing.Size(0, 13);
             this.labelStatus.TabIndex = 8;
             // 
             // progressBarArchiving
             // 
-            this.progressBarArchiving.Location = new System.Drawing.Point(620, 5);
+            this.progressBarArchiving.Location = new System.Drawing.Point(536, 4);
             this.progressBarArchiving.Name = "progressBarArchiving";
             this.progressBarArchiving.Size = new System.Drawing.Size(157, 16);
             this.progressBarArchiving.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
@@ -121,7 +121,7 @@
             // 
             // buttonRunNow
             // 
-            this.buttonRunNow.Location = new System.Drawing.Point(675, 205);
+            this.buttonRunNow.Location = new System.Drawing.Point(607, 205);
             this.buttonRunNow.Name = "buttonRunNow";
             this.buttonRunNow.Size = new System.Drawing.Size(75, 23);
             this.buttonRunNow.TabIndex = 5;
@@ -163,7 +163,7 @@
             this.panel2.Controls.Add(this.label2);
             this.panel2.Location = new System.Drawing.Point(2, 24);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(776, 178);
+            this.panel2.Size = new System.Drawing.Size(693, 178);
             this.panel2.TabIndex = 0;
             // 
             // labelLastResult
@@ -372,7 +372,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel1);
             this.Name = "PlanControl";
-            this.Size = new System.Drawing.Size(782, 258);
+            this.Size = new System.Drawing.Size(701, 258);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);

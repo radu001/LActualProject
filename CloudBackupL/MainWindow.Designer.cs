@@ -100,6 +100,20 @@
             this.label15 = new System.Windows.Forms.Label();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.imageListClouds = new System.Windows.Forms.ImageList(this.components);
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.buttonTabHome = new System.Windows.Forms.Button();
+            this.buttonTabBackupPlans = new System.Windows.Forms.Button();
+            this.buttonTabMyBackups = new System.Windows.Forms.Button();
+            this.buttonTabManualWork = new System.Windows.Forms.Button();
+            this.buttonTabSettings = new System.Windows.Forms.Button();
+            this.buttonTabAbout = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panelTopBar = new System.Windows.Forms.Panel();
+            this.label17 = new System.Windows.Forms.Label();
+            this.buttonExit = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.buttonMinimize = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -119,6 +133,11 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panelTopBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -134,11 +153,12 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(824, 463);
+            this.tabControl1.Size = new System.Drawing.Size(742, 467);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.BackColor = System.Drawing.Color.White;
             this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.flowLayoutPanelClouds);
             this.tabPage1.Controls.Add(this.label3);
@@ -152,10 +172,9 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(816, 433);
+            this.tabPage1.Size = new System.Drawing.Size(734, 437);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Home";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -174,9 +193,9 @@
             this.flowLayoutPanelClouds.AutoScroll = true;
             this.flowLayoutPanelClouds.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.flowLayoutPanelClouds.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanelClouds.Location = new System.Drawing.Point(538, 19);
+            this.flowLayoutPanelClouds.Location = new System.Drawing.Point(456, 19);
             this.flowLayoutPanelClouds.Name = "flowLayoutPanelClouds";
-            this.flowLayoutPanelClouds.Size = new System.Drawing.Size(278, 265);
+            this.flowLayoutPanelClouds.Size = new System.Drawing.Size(278, 269);
             this.flowLayoutPanelClouds.TabIndex = 10;
             this.flowLayoutPanelClouds.WrapContents = false;
             // 
@@ -210,7 +229,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 271);
+            this.label1.Location = new System.Drawing.Point(3, 275);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(33, 13);
             this.label1.TabIndex = 5;
@@ -247,10 +266,10 @@
             // 
             this.textBoxLogs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxLogs.Location = new System.Drawing.Point(0, 287);
+            this.textBoxLogs.Location = new System.Drawing.Point(0, 291);
             this.textBoxLogs.Multiline = true;
             this.textBoxLogs.Name = "textBoxLogs";
-            this.textBoxLogs.Size = new System.Drawing.Size(816, 146);
+            this.textBoxLogs.Size = new System.Drawing.Size(734, 146);
             this.textBoxLogs.TabIndex = 1;
             // 
             // tabPage2
@@ -260,7 +279,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(816, 433);
+            this.tabPage2.Size = new System.Drawing.Size(734, 437);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Backup Plans";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -280,7 +299,7 @@
             this.flowLayoutPanelPlans.AutoScroll = true;
             this.flowLayoutPanelPlans.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanelPlans.Name = "flowLayoutPanelPlans";
-            this.flowLayoutPanelPlans.Size = new System.Drawing.Size(810, 414);
+            this.flowLayoutPanelPlans.Size = new System.Drawing.Size(731, 414);
             this.flowLayoutPanelPlans.TabIndex = 0;
             // 
             // tabPage3
@@ -289,7 +308,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 26);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(816, 433);
+            this.tabPage3.Size = new System.Drawing.Size(734, 437);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "My backups";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -308,8 +327,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.listViewBackupsInfo);
-            this.splitContainer1.Size = new System.Drawing.Size(810, 427);
-            this.splitContainer1.SplitterDistance = 200;
+            this.splitContainer1.Size = new System.Drawing.Size(728, 431);
+            this.splitContainer1.SplitterDistance = 179;
             this.splitContainer1.TabIndex = 0;
             // 
             // label4
@@ -327,9 +346,9 @@
             this.listBoxBackupPlans.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.listBoxBackupPlans.FormattingEnabled = true;
             this.listBoxBackupPlans.IntegralHeight = false;
-            this.listBoxBackupPlans.Location = new System.Drawing.Point(0, 23);
+            this.listBoxBackupPlans.Location = new System.Drawing.Point(0, 27);
             this.listBoxBackupPlans.Name = "listBoxBackupPlans";
-            this.listBoxBackupPlans.Size = new System.Drawing.Size(200, 404);
+            this.listBoxBackupPlans.Size = new System.Drawing.Size(179, 404);
             this.listBoxBackupPlans.TabIndex = 1;
             // 
             // listViewBackupsInfo
@@ -344,7 +363,7 @@
             this.listViewBackupsInfo.FullRowSelect = true;
             this.listViewBackupsInfo.Location = new System.Drawing.Point(0, 0);
             this.listViewBackupsInfo.Name = "listViewBackupsInfo";
-            this.listViewBackupsInfo.Size = new System.Drawing.Size(606, 427);
+            this.listViewBackupsInfo.Size = new System.Drawing.Size(545, 431);
             this.listViewBackupsInfo.TabIndex = 0;
             this.listViewBackupsInfo.UseCompatibleStateImageBehavior = false;
             this.listViewBackupsInfo.View = System.Windows.Forms.View.Details;
@@ -380,7 +399,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 26);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(816, 433);
+            this.tabPage4.Size = new System.Drawing.Size(734, 437);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Manual Work";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -404,8 +423,8 @@
             this.splitContainer2.Panel2.Controls.Add(this.buttonManualDownload);
             this.splitContainer2.Panel2.Controls.Add(this.progressBarManual);
             this.splitContainer2.Panel2.Controls.Add(this.listViewCloudFiles);
-            this.splitContainer2.Size = new System.Drawing.Size(810, 427);
-            this.splitContainer2.SplitterDistance = 168;
+            this.splitContainer2.Size = new System.Drawing.Size(728, 431);
+            this.splitContainer2.SplitterDistance = 150;
             this.splitContainer2.TabIndex = 1;
             // 
             // label5
@@ -423,15 +442,15 @@
             this.listBoxCloudsManual.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.listBoxCloudsManual.FormattingEnabled = true;
             this.listBoxCloudsManual.IntegralHeight = false;
-            this.listBoxCloudsManual.Location = new System.Drawing.Point(0, 23);
+            this.listBoxCloudsManual.Location = new System.Drawing.Point(0, 27);
             this.listBoxCloudsManual.Name = "listBoxCloudsManual";
-            this.listBoxCloudsManual.Size = new System.Drawing.Size(168, 404);
+            this.listBoxCloudsManual.Size = new System.Drawing.Size(150, 404);
             this.listBoxCloudsManual.TabIndex = 1;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(513, 70);
+            this.label16.Location = new System.Drawing.Point(402, 70);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(56, 13);
             this.label16.TabIndex = 5;
@@ -440,15 +459,16 @@
             // 
             // textBoxManualPassword
             // 
-            this.textBoxManualPassword.Location = new System.Drawing.Point(450, 86);
+            this.textBoxManualPassword.Location = new System.Drawing.Point(402, 86);
             this.textBoxManualPassword.Name = "textBoxManualPassword";
-            this.textBoxManualPassword.Size = new System.Drawing.Size(182, 20);
+            this.textBoxManualPassword.Size = new System.Drawing.Size(167, 20);
             this.textBoxManualPassword.TabIndex = 4;
+            this.textBoxManualPassword.UseSystemPasswordChar = true;
             // 
             // labelManualStatus
             // 
             this.labelManualStatus.AutoSize = true;
-            this.labelManualStatus.Location = new System.Drawing.Point(450, 7);
+            this.labelManualStatus.Location = new System.Drawing.Point(402, 7);
             this.labelManualStatus.Name = "labelManualStatus";
             this.labelManualStatus.Size = new System.Drawing.Size(40, 13);
             this.labelManualStatus.TabIndex = 3;
@@ -456,18 +476,18 @@
             // 
             // buttonManualDownload
             // 
-            this.buttonManualDownload.Location = new System.Drawing.Point(450, 131);
+            this.buttonManualDownload.Location = new System.Drawing.Point(402, 131);
             this.buttonManualDownload.Name = "buttonManualDownload";
-            this.buttonManualDownload.Size = new System.Drawing.Size(182, 23);
+            this.buttonManualDownload.Size = new System.Drawing.Size(167, 23);
             this.buttonManualDownload.TabIndex = 2;
             this.buttonManualDownload.Text = "Download";
             this.buttonManualDownload.UseVisualStyleBackColor = true;
             // 
             // progressBarManual
             // 
-            this.progressBarManual.Location = new System.Drawing.Point(450, 34);
+            this.progressBarManual.Location = new System.Drawing.Point(402, 27);
             this.progressBarManual.Name = "progressBarManual";
-            this.progressBarManual.Size = new System.Drawing.Size(182, 23);
+            this.progressBarManual.Size = new System.Drawing.Size(167, 23);
             this.progressBarManual.TabIndex = 1;
             // 
             // listViewCloudFiles
@@ -481,7 +501,8 @@
             this.listViewCloudFiles.Location = new System.Drawing.Point(0, 0);
             this.listViewCloudFiles.MultiSelect = false;
             this.listViewCloudFiles.Name = "listViewCloudFiles";
-            this.listViewCloudFiles.Size = new System.Drawing.Size(444, 427);
+            this.listViewCloudFiles.Scrollable = false;
+            this.listViewCloudFiles.Size = new System.Drawing.Size(396, 431);
             this.listViewCloudFiles.TabIndex = 0;
             this.listViewCloudFiles.UseCompatibleStateImageBehavior = false;
             this.listViewCloudFiles.View = System.Windows.Forms.View.Details;
@@ -502,7 +523,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 26);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(816, 433);
+            this.tabPage5.Size = new System.Drawing.Size(734, 437);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Settings";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -515,15 +536,14 @@
             this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Location = new System.Drawing.Point(-1, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(810, 427);
+            this.panel1.Size = new System.Drawing.Size(735, 427);
             this.panel1.TabIndex = 1;
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(720, 394);
+            this.buttonSave.Location = new System.Drawing.Point(632, 396);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 6;
@@ -532,7 +552,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(627, 394);
+            this.buttonCancel.Location = new System.Drawing.Point(538, 396);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 5;
@@ -547,16 +567,16 @@
             this.groupBox4.Controls.Add(this.label8);
             this.groupBox4.Controls.Add(this.textBox7);
             this.groupBox4.Controls.Add(this.label9);
-            this.groupBox4.Location = new System.Drawing.Point(415, 197);
+            this.groupBox4.Location = new System.Drawing.Point(378, 200);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(380, 190);
+            this.groupBox4.Size = new System.Drawing.Size(339, 190);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Other";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(332, 57);
+            this.button2.Location = new System.Drawing.Point(286, 56);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(28, 20);
             this.button2.TabIndex = 16;
@@ -565,7 +585,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(332, 17);
+            this.button1.Location = new System.Drawing.Point(286, 16);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(28, 20);
             this.button1.TabIndex = 15;
@@ -574,7 +594,7 @@
             // 
             // textBox6
             // 
-            this.textBox6.Location = new System.Drawing.Point(151, 57);
+            this.textBox6.Location = new System.Drawing.Point(105, 57);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(175, 20);
             this.textBox6.TabIndex = 14;
@@ -590,7 +610,7 @@
             // 
             // textBox7
             // 
-            this.textBox7.Location = new System.Drawing.Point(151, 17);
+            this.textBox7.Location = new System.Drawing.Point(105, 17);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(175, 20);
             this.textBox7.TabIndex = 12;
@@ -610,9 +630,9 @@
             this.groupBox3.Controls.Add(this.checkBox2);
             this.groupBox3.Controls.Add(this.textBoxChunkSize);
             this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Location = new System.Drawing.Point(15, 197);
+            this.groupBox3.Location = new System.Drawing.Point(15, 200);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(380, 190);
+            this.groupBox3.Size = new System.Drawing.Size(340, 190);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Advanced";
@@ -658,9 +678,9 @@
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.textBox4);
             this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Location = new System.Drawing.Point(415, 3);
+            this.groupBox2.Location = new System.Drawing.Point(377, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(380, 190);
+            this.groupBox2.Size = new System.Drawing.Size(340, 190);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Connection";
@@ -710,7 +730,7 @@
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Location = new System.Drawing.Point(15, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(380, 190);
+            this.groupBox1.Size = new System.Drawing.Size(340, 190);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General";
@@ -804,7 +824,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 26);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(816, 433);
+            this.tabPage6.Size = new System.Drawing.Size(734, 437);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "About";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -818,12 +838,235 @@
             this.imageListClouds.Images.SetKeyName(2, "dropbox.png");
             this.imageListClouds.Images.SetKeyName(3, "drive.png");
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(42)))), ((int)(((byte)(55)))));
+            this.panel2.Controls.Add(this.buttonTabAbout);
+            this.panel2.Controls.Add(this.buttonTabSettings);
+            this.panel2.Controls.Add(this.buttonTabManualWork);
+            this.panel2.Controls.Add(this.buttonTabMyBackups);
+            this.panel2.Controls.Add(this.buttonTabBackupPlans);
+            this.panel2.Controls.Add(this.buttonTabHome);
+            this.panel2.Location = new System.Drawing.Point(0, 51);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(156, 445);
+            this.panel2.TabIndex = 1;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(115)))), ((int)(((byte)(0)))));
+            this.panel3.Controls.Add(this.pictureBox1);
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(156, 56);
+            this.panel3.TabIndex = 0;
+            this.panel3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseDown);
+            this.panel3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseMove);
+            this.panel3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseUp);
+            // 
+            // buttonTabHome
+            // 
+            this.buttonTabHome.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(126)))), ((int)(((byte)(149)))), ((int)(((byte)(172)))));
+            this.buttonTabHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.buttonTabHome.FlatAppearance.BorderSize = 0;
+            this.buttonTabHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTabHome.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonTabHome.ForeColor = System.Drawing.Color.White;
+            this.buttonTabHome.Location = new System.Drawing.Point(-7, 0);
+            this.buttonTabHome.Name = "buttonTabHome";
+            this.buttonTabHome.Size = new System.Drawing.Size(172, 50);
+            this.buttonTabHome.TabIndex = 0;
+            this.buttonTabHome.Tag = "0";
+            this.buttonTabHome.Text = "        Home";
+            this.buttonTabHome.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonTabHome.UseVisualStyleBackColor = false;
+            this.buttonTabHome.Click += new System.EventHandler(this.buttonTab_Click);
+            // 
+            // buttonTabBackupPlans
+            // 
+            this.buttonTabBackupPlans.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(77)))), ((int)(((byte)(101)))));
+            this.buttonTabBackupPlans.FlatAppearance.BorderSize = 0;
+            this.buttonTabBackupPlans.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTabBackupPlans.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonTabBackupPlans.ForeColor = System.Drawing.Color.White;
+            this.buttonTabBackupPlans.Location = new System.Drawing.Point(-8, 50);
+            this.buttonTabBackupPlans.Name = "buttonTabBackupPlans";
+            this.buttonTabBackupPlans.Size = new System.Drawing.Size(172, 51);
+            this.buttonTabBackupPlans.TabIndex = 1;
+            this.buttonTabBackupPlans.Tag = "1";
+            this.buttonTabBackupPlans.Text = "        Backup Plans";
+            this.buttonTabBackupPlans.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonTabBackupPlans.UseVisualStyleBackColor = false;
+            this.buttonTabBackupPlans.Click += new System.EventHandler(this.buttonTab_Click);
+            // 
+            // buttonTabMyBackups
+            // 
+            this.buttonTabMyBackups.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(77)))), ((int)(((byte)(101)))));
+            this.buttonTabMyBackups.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.buttonTabMyBackups.FlatAppearance.BorderSize = 0;
+            this.buttonTabMyBackups.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTabMyBackups.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.buttonTabMyBackups.ForeColor = System.Drawing.Color.White;
+            this.buttonTabMyBackups.Location = new System.Drawing.Point(-7, 100);
+            this.buttonTabMyBackups.Name = "buttonTabMyBackups";
+            this.buttonTabMyBackups.Size = new System.Drawing.Size(172, 51);
+            this.buttonTabMyBackups.TabIndex = 2;
+            this.buttonTabMyBackups.Tag = "2";
+            this.buttonTabMyBackups.Text = "        My Backups";
+            this.buttonTabMyBackups.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonTabMyBackups.UseVisualStyleBackColor = false;
+            this.buttonTabMyBackups.Click += new System.EventHandler(this.buttonTab_Click);
+            // 
+            // buttonTabManualWork
+            // 
+            this.buttonTabManualWork.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(77)))), ((int)(((byte)(101)))));
+            this.buttonTabManualWork.FlatAppearance.BorderSize = 0;
+            this.buttonTabManualWork.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTabManualWork.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.buttonTabManualWork.ForeColor = System.Drawing.Color.White;
+            this.buttonTabManualWork.Location = new System.Drawing.Point(-7, 150);
+            this.buttonTabManualWork.Name = "buttonTabManualWork";
+            this.buttonTabManualWork.Size = new System.Drawing.Size(172, 51);
+            this.buttonTabManualWork.TabIndex = 3;
+            this.buttonTabManualWork.Tag = "3";
+            this.buttonTabManualWork.Text = "        Manual Work";
+            this.buttonTabManualWork.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonTabManualWork.UseVisualStyleBackColor = false;
+            this.buttonTabManualWork.Click += new System.EventHandler(this.buttonTab_Click);
+            // 
+            // buttonTabSettings
+            // 
+            this.buttonTabSettings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(77)))), ((int)(((byte)(101)))));
+            this.buttonTabSettings.FlatAppearance.BorderSize = 0;
+            this.buttonTabSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTabSettings.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.buttonTabSettings.ForeColor = System.Drawing.Color.White;
+            this.buttonTabSettings.Location = new System.Drawing.Point(-7, 200);
+            this.buttonTabSettings.Name = "buttonTabSettings";
+            this.buttonTabSettings.Size = new System.Drawing.Size(172, 51);
+            this.buttonTabSettings.TabIndex = 4;
+            this.buttonTabSettings.Tag = "4";
+            this.buttonTabSettings.Text = "        Settings";
+            this.buttonTabSettings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonTabSettings.UseVisualStyleBackColor = false;
+            this.buttonTabSettings.Click += new System.EventHandler(this.buttonTab_Click);
+            // 
+            // buttonTabAbout
+            // 
+            this.buttonTabAbout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(56)))), ((int)(((byte)(77)))), ((int)(((byte)(101)))));
+            this.buttonTabAbout.FlatAppearance.BorderSize = 0;
+            this.buttonTabAbout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTabAbout.Font = new System.Drawing.Font("Century Gothic", 12F);
+            this.buttonTabAbout.ForeColor = System.Drawing.Color.White;
+            this.buttonTabAbout.Location = new System.Drawing.Point(-7, 250);
+            this.buttonTabAbout.Name = "buttonTabAbout";
+            this.buttonTabAbout.Size = new System.Drawing.Size(172, 51);
+            this.buttonTabAbout.TabIndex = 5;
+            this.buttonTabAbout.Tag = "5";
+            this.buttonTabAbout.Text = "        About";
+            this.buttonTabAbout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonTabAbout.UseVisualStyleBackColor = false;
+            this.buttonTabAbout.Click += new System.EventHandler(this.buttonTab_Click);
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.tabControl1);
+            this.panel4.Location = new System.Drawing.Point(155, 29);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(742, 467);
+            this.panel4.TabIndex = 2;
+            // 
+            // panelTopBar
+            // 
+            this.panelTopBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(42)))), ((int)(((byte)(55)))));
+            this.panelTopBar.Controls.Add(this.buttonMinimize);
+            this.panelTopBar.Controls.Add(this.buttonExit);
+            this.panelTopBar.Controls.Add(this.label17);
+            this.panelTopBar.Location = new System.Drawing.Point(155, 0);
+            this.panelTopBar.Name = "panelTopBar";
+            this.panelTopBar.Size = new System.Drawing.Size(827, 56);
+            this.panelTopBar.TabIndex = 3;
+            this.panelTopBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseDown);
+            this.panelTopBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseMove);
+            this.panelTopBar.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseUp);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Century Schoolbook", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.White;
+            this.label17.Location = new System.Drawing.Point(7, 15);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(173, 25);
+            this.label17.TabIndex = 0;
+            this.label17.Text = "Secure Backup";
+            this.label17.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseDown);
+            this.label17.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseMove);
+            this.label17.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseUp);
+            // 
+            // buttonExit
+            // 
+            this.buttonExit.BackColor = System.Drawing.Color.Transparent;
+            this.buttonExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.buttonExit.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.buttonExit.FlatAppearance.BorderSize = 0;
+            this.buttonExit.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.buttonExit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.buttonExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonExit.Font = new System.Drawing.Font("Lucida Fax", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonExit.ForeColor = System.Drawing.Color.White;
+            this.buttonExit.Location = new System.Drawing.Point(691, 12);
+            this.buttonExit.Name = "buttonExit";
+            this.buttonExit.Size = new System.Drawing.Size(39, 37);
+            this.buttonExit.TabIndex = 1;
+            this.buttonExit.Text = "X";
+            this.buttonExit.UseVisualStyleBackColor = false;
+            this.buttonExit.Click += new System.EventHandler(this.button3_Click);
+            this.buttonExit.MouseLeave += new System.EventHandler(this.buttonExit_MouseLeave);
+            this.buttonExit.MouseMove += new System.Windows.Forms.MouseEventHandler(this.buttonExit_MouseMove);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::CloudBackupL.Properties.Resources.upload_512;
+            this.pictureBox1.Location = new System.Drawing.Point(28, -9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(70, 70);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // buttonMinimize
+            // 
+            this.buttonMinimize.BackColor = System.Drawing.Color.Transparent;
+            this.buttonMinimize.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.buttonMinimize.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
+            this.buttonMinimize.FlatAppearance.BorderSize = 0;
+            this.buttonMinimize.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.buttonMinimize.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.buttonMinimize.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonMinimize.Font = new System.Drawing.Font("Lucida Fax", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonMinimize.ForeColor = System.Drawing.Color.White;
+            this.buttonMinimize.Location = new System.Drawing.Point(646, 12);
+            this.buttonMinimize.Name = "buttonMinimize";
+            this.buttonMinimize.Size = new System.Drawing.Size(39, 37);
+            this.buttonMinimize.TabIndex = 2;
+            this.buttonMinimize.Text = "-";
+            this.buttonMinimize.UseVisualStyleBackColor = false;
+            this.buttonMinimize.Click += new System.EventHandler(this.buttonMinimize_Click);
+            this.buttonMinimize.MouseLeave += new System.EventHandler(this.buttonExit_MouseLeave);
+            this.buttonMinimize.MouseMove += new System.Windows.Forms.MouseEventHandler(this.buttonExit_MouseMove);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(824, 463);
-            this.Controls.Add(this.tabControl1);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ClientSize = new System.Drawing.Size(897, 495);
+            this.Controls.Add(this.panelTopBar);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainWindow";
             this.Text = "CLoud Backup";
             this.Load += new System.EventHandler(this.MainWindow_Load);
@@ -855,6 +1098,12 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panelTopBar.ResumeLayout(false);
+            this.panelTopBar.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -931,6 +1180,20 @@
         private System.Windows.Forms.Label labelManualStatus;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox textBoxManualPassword;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button buttonTabAbout;
+        private System.Windows.Forms.Button buttonTabSettings;
+        private System.Windows.Forms.Button buttonTabManualWork;
+        private System.Windows.Forms.Button buttonTabMyBackups;
+        private System.Windows.Forms.Button buttonTabBackupPlans;
+        private System.Windows.Forms.Button buttonTabHome;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panelTopBar;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button buttonExit;
+        private System.Windows.Forms.Button buttonMinimize;
     }
 }
 

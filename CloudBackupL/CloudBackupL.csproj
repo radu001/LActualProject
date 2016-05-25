@@ -168,7 +168,14 @@
     <Compile Include="TabsControllers\ManualWorkTabController.cs" />
     <Compile Include="TabsControllers\SettingsTabController.cs" />
     <Compile Include="Utils\ArchiveUtils.cs" />
+    <Content Include="Resources\clouds.png" />
     <Content Include="Resources\Box.png" />
+    <None Include="Resources\clouds1.png" />
+    <None Include="Resources\upload-512.png" />
+    <None Include="Resources\xxx.png" />
+    <None Include="Resources\x-white.png" />
+    <None Include="Resources\x-normal.png" />
+    <None Include="Resources\x-hover.png" />
     <Content Include="sqlite3.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -214,7 +221,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\dropbox.jpg" />
+    <Content Include="Resources\dropbox.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
