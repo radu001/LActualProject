@@ -47,6 +47,13 @@ namespace CloudBackupL
             selectedColor = buttonTabHome.BackColor;
             normalColor = buttonTabBackupPlans.BackColor;
             precedentButton = buttonTabHome;
+            this.Paint += MainWindow_Paint;
+        }
+
+        private void MainWindow_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawRectangle(new Pen(Color.Black, 3),
+                            this.DisplayRectangle);
         }
 
         //Main Window Load
@@ -106,6 +113,12 @@ namespace CloudBackupL
         {
             get { return this.buttonAddBackupPlan; }
             set { this.buttonAddBackupPlan = value; }
+        }
+
+        public Button ButtonTabMyBackups
+        {
+            get { return this.buttonTabMyBackups; }
+            set { this.buttonTabMyBackups = value; }
         }
 
         public ListBox ListBoxBackupPlans
@@ -195,7 +208,7 @@ namespace CloudBackupL
         }
 
 
-        private void buttonTab_Click(object sender, EventArgs e)
+        public void buttonTab_Click(object sender, EventArgs e)
         {
             Button button = (Button)sender;
             if (precedentButton == button) return;

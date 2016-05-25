@@ -112,8 +112,8 @@
             this.panelTopBar = new System.Windows.Forms.Panel();
             this.label17 = new System.Windows.Forms.Label();
             this.buttonExit = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonMinimize = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -984,7 +984,7 @@
             this.panelTopBar.Controls.Add(this.label17);
             this.panelTopBar.Location = new System.Drawing.Point(155, 0);
             this.panelTopBar.Name = "panelTopBar";
-            this.panelTopBar.Size = new System.Drawing.Size(827, 56);
+            this.panelTopBar.Size = new System.Drawing.Size(742, 56);
             this.panelTopBar.TabIndex = 3;
             this.panelTopBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseDown);
             this.panelTopBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseMove);
@@ -1025,16 +1025,6 @@
             this.buttonExit.MouseLeave += new System.EventHandler(this.buttonExit_MouseLeave);
             this.buttonExit.MouseMove += new System.Windows.Forms.MouseEventHandler(this.buttonExit_MouseMove);
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::CloudBackupL.Properties.Resources.upload_512;
-            this.pictureBox1.Location = new System.Drawing.Point(28, -9);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(70, 70);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // buttonMinimize
             // 
             this.buttonMinimize.BackColor = System.Drawing.Color.Transparent;
@@ -1056,18 +1046,36 @@
             this.buttonMinimize.MouseLeave += new System.EventHandler(this.buttonExit_MouseLeave);
             this.buttonMinimize.MouseMove += new System.Windows.Forms.MouseEventHandler(this.buttonExit_MouseMove);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::CloudBackupL.Properties.Resources.upload_512;
+            this.pictureBox1.Location = new System.Drawing.Point(28, -9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(70, 70);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseDown);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseMove);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseUp);
+            // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(897, 495);
+            this.ClientSize = new System.Drawing.Size(895, 495);
+            this.ControlBox = false;
             this.Controls.Add(this.panelTopBar);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MainWindow";
+            this.Padding = new System.Windows.Forms.Padding(1);
+            this.ShowInTaskbar = false;
             this.Text = "CLoud Backup";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.tabControl1.ResumeLayout(false);

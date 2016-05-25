@@ -98,7 +98,7 @@ namespace CloudBackupL.TabsControllers
         {
             string backupPlanName = ((PlanControl)sender).LabelBackupName.Text;
             MainWindow.instance.ListBoxBackupPlans.SelectedIndex = MainWindow.instance.ListBoxBackupPlans.FindStringExact(backupPlanName);
-            MainWindow.instance.TabControl.SelectedIndex = 2;
+            MainWindow.instance.buttonTab_Click(MainWindow.instance.ButtonTabMyBackups, new EventArgs());
         }
 
         private void EditButtonClicked(object sender, EventArgs e)

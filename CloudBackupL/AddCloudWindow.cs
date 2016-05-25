@@ -51,7 +51,6 @@ namespace CloudBackupL
                     dynamic data1 = JObject.Parse(result);
                     refresh_token = data1.refresh_token;
                     accessToken = data1.access_token;
-                    //cloudController.CreateFolder("CloudBackupL", "0", accessToken);
                 } else
                 {
                     accessToken = result;
