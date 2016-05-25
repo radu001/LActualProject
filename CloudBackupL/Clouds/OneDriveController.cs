@@ -78,6 +78,7 @@ namespace CloudBackupL.Clouds
 
         public void Upload(string cloudPath, string token, string clientPath, UploadProgressChangedEventHandler peh, TaskCompletionSource<bool> tcs)
         {
+            token = RefreshToken(token);
             using (var web = new WebClient())
             {
                 web.Headers["Authorization"] = "Bearer " + token;
@@ -106,6 +107,7 @@ namespace CloudBackupL.Clouds
 
         public void Download(string cloudPath, string token, string localPath, DownloadProgressChangedEventHandler eh, TaskCompletionSource<bool> tcs)
         {
+            token = RefreshToken(token);
             var web = new WebClient();
             web.DownloadProgressChanged += eh;
             web.Headers["Authorization"] = "Bearer " + token;
@@ -135,6 +137,7 @@ namespace CloudBackupL.Clouds
         string currentPath;
         public void GetFilesList(string accessToken, EventHandler<List<CloudEntry>> eventHandler, string currentPath)
         {
+            accessToken = RefreshToken(accessToken);
             this.currentPath = currentPath;
             this.eventHandler = eventHandler;
             var client = new WebClient();
@@ -169,6 +172,7 @@ namespace CloudBackupL.Clouds
 
         public void DeleteFolder(string accessToken, DownloadStringCompletedEventHandler eventHandler, string currentPath)
         {
+            accessToken = RefreshToken(accessToken);
             var request = WebRequest.Create(new Uri(string.Format("https://api.onedrive.com/v1.0/drive/special/approot:/{0}", currentPath)));
             request.Method = "DELETE";
             request.Headers["Authorization"] = "Bearer " + accessToken;

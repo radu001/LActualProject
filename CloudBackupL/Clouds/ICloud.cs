@@ -9,7 +9,7 @@ namespace CloudBackupL
     public enum CloudsEnum
     {
         DropBox,
-        Box
+        OneDrive
     }
 
     interface ICloud

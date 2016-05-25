@@ -30,7 +30,7 @@ namespace CloudBackupL
                 } else
                 {
                     cloudController = new OneDriveController();
-                    cloudType = (int)CloudsEnum.Box;
+                    cloudType = (int)CloudsEnum.OneDrive;
                 }
                 buttonNext.Enabled = true;
             }else
@@ -46,7 +46,7 @@ namespace CloudBackupL
             var result = cloudController.ParseUriForToken(e.Url);
             if (result != null)
             {
-                if(cloudType == (int)CloudsEnum.Box)
+                if(cloudType == (int)CloudsEnum.OneDrive)
                 {
                     dynamic data1 = JObject.Parse(result);
                     refresh_token = data1.refresh_token;
