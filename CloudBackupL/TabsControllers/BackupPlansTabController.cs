@@ -35,6 +35,7 @@ namespace CloudBackupL.TabsControllers
                 control.LabelCloudName.Text = plan.cloudName;
                 control.LabelCreated.Text = plan.creationDate.ToShortDateString();
                 control.LabelCurrentStatus.Text = plan.currentStatus;
+                control.LabelOverrideBackup.Text = plan.overrideBackup ? "Yes" : "No";
                 Backup backup = databaseService.GetLastBackup(plan.id);
                 if(backup != null)
                 {

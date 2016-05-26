@@ -59,6 +59,8 @@
             this.linkLabelDeletePlan = new System.Windows.Forms.LinkLabel();
             this.linkLabelEdit = new System.Windows.Forms.LinkLabel();
             this.labelBackupName = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.labelOverrideBackup = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -142,6 +144,8 @@
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ControlLight;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.labelOverrideBackup);
+            this.panel2.Controls.Add(this.label1);
             this.panel2.Controls.Add(this.labelLastResult);
             this.panel2.Controls.Add(this.labelLastRun);
             this.panel2.Controls.Add(this.labelCurrentStatus);
@@ -366,6 +370,23 @@
             this.labelBackupName.TabIndex = 0;
             this.labelBackupName.Text = "Bakcup Name:";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(374, 155);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 13);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Override:";
+            // 
+            // labelOverrideBackup
+            // 
+            this.labelOverrideBackup.AutoSize = true;
+            this.labelOverrideBackup.Location = new System.Drawing.Point(461, 155);
+            this.labelOverrideBackup.Name = "labelOverrideBackup";
+            this.labelOverrideBackup.Size = new System.Drawing.Size(0, 13);
+            this.labelOverrideBackup.TabIndex = 21;
+            // 
             // PlanControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -414,5 +435,7 @@
         private System.Windows.Forms.ProgressBar progressBarArchiving;
         private System.Windows.Forms.Label labelStatus;
         private System.Windows.Forms.LinkLabel linkLabelDownload;
+        private System.Windows.Forms.Label labelOverrideBackup;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -129,5 +129,11 @@ namespace CloudBackupL.CustomControllers
             get { return this.labelStatus ; }
             set { this.labelStatus = value; }
         }
+
+        public Label LabelOverrideBackup
+        {
+            get { return this.labelOverrideBackup; }
+            set { this.labelOverrideBackup = value; }
+        }
     }
 }

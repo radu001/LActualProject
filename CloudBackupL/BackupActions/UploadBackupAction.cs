@@ -99,10 +99,24 @@ namespace CloudBackupL.BackupActions
             MyUtils.DeleteDirectory(tempUploadZipFolder);
 
             watch.Stop();
+            if(backupPlan.overrideBackup)
+            {
+                Backup lastBackup = databaseService.GetLastBackup(backupPlan.id);
+                if (lastBackup != null)
+                {
+                    cloudController.DeleteFolder(cloud.token, DeleteFolderCompelte, lastBackup.targetPath);
+                    databaseService.DeleteBackup(lastBackup.id);
+                }
+            }
             backupPlan.nextExecution = MyUtils.GetNextExecution(backupPlan);
             databaseService.UpdateBackupPlan(backupPlan);
             currentBackup.runTime = watch.ElapsedMilliseconds;
             databaseService.InsertBackup(currentBackup);
+        }
+
+        private void DeleteFolderCompelte(object sender, object args)
+        {
+
         }
 
 
