@@ -36,6 +36,8 @@
             this.buttonRunNow = new System.Windows.Forms.Button();
             this.linkLabelViewHistory = new System.Windows.Forms.LinkLabel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.labelOverrideBackup = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.labelLastResult = new System.Windows.Forms.Label();
             this.labelLastRun = new System.Windows.Forms.Label();
             this.labelCurrentStatus = new System.Windows.Forms.Label();
@@ -59,8 +61,6 @@
             this.linkLabelDeletePlan = new System.Windows.Forms.LinkLabel();
             this.linkLabelEdit = new System.Windows.Forms.LinkLabel();
             this.labelBackupName = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.labelOverrideBackup = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -88,7 +88,7 @@
             // linkLabelDownload
             // 
             this.linkLabelDownload.AutoSize = true;
-            this.linkLabelDownload.Location = new System.Drawing.Point(361, 207);
+            this.linkLabelDownload.Location = new System.Drawing.Point(370, 207);
             this.linkLabelDownload.Name = "linkLabelDownload";
             this.linkLabelDownload.Size = new System.Drawing.Size(79, 13);
             this.linkLabelDownload.TabIndex = 9;
@@ -133,7 +133,7 @@
             // linkLabelViewHistory
             // 
             this.linkLabelViewHistory.AutoSize = true;
-            this.linkLabelViewHistory.Location = new System.Drawing.Point(444, 207);
+            this.linkLabelViewHistory.Location = new System.Drawing.Point(474, 207);
             this.linkLabelViewHistory.Name = "linkLabelViewHistory";
             this.linkLabelViewHistory.Size = new System.Drawing.Size(65, 13);
             this.linkLabelViewHistory.TabIndex = 4;
@@ -169,6 +169,23 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(693, 178);
             this.panel2.TabIndex = 0;
+            // 
+            // labelOverrideBackup
+            // 
+            this.labelOverrideBackup.AutoSize = true;
+            this.labelOverrideBackup.Location = new System.Drawing.Point(461, 155);
+            this.labelOverrideBackup.Name = "labelOverrideBackup";
+            this.labelOverrideBackup.Size = new System.Drawing.Size(0, 13);
+            this.labelOverrideBackup.TabIndex = 21;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(374, 155);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 13);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Override:";
             // 
             // labelLastResult
             // 
@@ -369,23 +386,6 @@
             this.labelBackupName.Size = new System.Drawing.Size(97, 16);
             this.labelBackupName.TabIndex = 0;
             this.labelBackupName.Text = "Bakcup Name:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(374, 155);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 13);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "Override:";
-            // 
-            // labelOverrideBackup
-            // 
-            this.labelOverrideBackup.AutoSize = true;
-            this.labelOverrideBackup.Location = new System.Drawing.Point(461, 155);
-            this.labelOverrideBackup.Name = "labelOverrideBackup";
-            this.labelOverrideBackup.Size = new System.Drawing.Size(0, 13);
-            this.labelOverrideBackup.TabIndex = 21;
             // 
             // PlanControl
             // 

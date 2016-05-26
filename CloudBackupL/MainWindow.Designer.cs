@@ -32,6 +32,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.labelMainPlanName = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.listViewBackupQueue = new System.Windows.Forms.ListView();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label6 = new System.Windows.Forms.Label();
             this.flowLayoutPanelClouds = new System.Windows.Forms.FlowLayoutPanel();
             this.labelMainStatus = new System.Windows.Forms.Label();
@@ -70,15 +76,15 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.buttonSelectDatabase = new System.Windows.Forms.Button();
+            this.buttonSelectLogFile = new System.Windows.Forms.Button();
+            this.textBoxDatabaseLocation = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBoxLogToFile = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBoxPreventSleep = new System.Windows.Forms.CheckBox();
             this.textBoxChunkSize = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -87,14 +93,14 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxRepeatPassword = new System.Windows.Forms.TextBox();
+            this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.checkBoxPassword = new System.Windows.Forms.CheckBox();
+            this.radioButtonTrayNever = new System.Windows.Forms.RadioButton();
+            this.radioButtonTrayMinimized = new System.Windows.Forms.RadioButton();
+            this.radioButtonTrayAlways = new System.Windows.Forms.RadioButton();
             this.label15 = new System.Windows.Forms.Label();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.imageListClouds = new System.Windows.Forms.ImageList(this.components);
@@ -112,12 +118,7 @@
             this.buttonMinimize = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
-            this.listViewBackupQueue = new System.Windows.Forms.ListView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.labelMainPlanName = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.notifyIconApp = new System.Windows.Forms.NotifyIcon(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -181,6 +182,59 @@
             this.tabPage1.Size = new System.Drawing.Size(734, 437);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Home";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.White;
+            this.label3.Font = new System.Drawing.Font("Palatino Linotype", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(64, 10);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(79, 20);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Executing:";
+            // 
+            // labelMainPlanName
+            // 
+            this.labelMainPlanName.BackColor = System.Drawing.Color.White;
+            this.labelMainPlanName.Font = new System.Drawing.Font("Palatino Linotype", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelMainPlanName.Location = new System.Drawing.Point(12, 30);
+            this.labelMainPlanName.Name = "labelMainPlanName";
+            this.labelMainPlanName.Size = new System.Drawing.Size(178, 23);
+            this.labelMainPlanName.TabIndex = 14;
+            this.labelMainPlanName.Text = "-";
+            this.labelMainPlanName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(130, 65);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(82, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Backup Queue:";
+            // 
+            // listViewBackupQueue
+            // 
+            this.listViewBackupQueue.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4});
+            this.listViewBackupQueue.Location = new System.Drawing.Point(130, 85);
+            this.listViewBackupQueue.Name = "listViewBackupQueue";
+            this.listViewBackupQueue.Size = new System.Drawing.Size(322, 200);
+            this.listViewBackupQueue.TabIndex = 12;
+            this.listViewBackupQueue.UseCompatibleStateImageBehavior = false;
+            this.listViewBackupQueue.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Plan Name";
+            this.columnHeader3.Width = 150;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Backup Time";
+            this.columnHeader4.Width = 150;
             // 
             // label6
             // 
@@ -267,7 +321,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(734, 437);
+            this.tabPage2.Size = new System.Drawing.Size(722, 437);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Backup Plans";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -296,7 +350,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 26);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(734, 437);
+            this.tabPage3.Size = new System.Drawing.Size(722, 437);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "My backups";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -315,8 +369,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.listViewBackupsInfo);
-            this.splitContainer1.Size = new System.Drawing.Size(728, 431);
-            this.splitContainer1.SplitterDistance = 179;
+            this.splitContainer1.Size = new System.Drawing.Size(716, 431);
+            this.splitContainer1.SplitterDistance = 176;
             this.splitContainer1.TabIndex = 0;
             // 
             // label4
@@ -336,7 +390,7 @@
             this.listBoxBackupPlans.IntegralHeight = false;
             this.listBoxBackupPlans.Location = new System.Drawing.Point(0, 27);
             this.listBoxBackupPlans.Name = "listBoxBackupPlans";
-            this.listBoxBackupPlans.Size = new System.Drawing.Size(179, 404);
+            this.listBoxBackupPlans.Size = new System.Drawing.Size(176, 404);
             this.listBoxBackupPlans.TabIndex = 1;
             // 
             // listViewBackupsInfo
@@ -351,7 +405,7 @@
             this.listViewBackupsInfo.FullRowSelect = true;
             this.listViewBackupsInfo.Location = new System.Drawing.Point(0, 0);
             this.listViewBackupsInfo.Name = "listViewBackupsInfo";
-            this.listViewBackupsInfo.Size = new System.Drawing.Size(545, 431);
+            this.listViewBackupsInfo.Size = new System.Drawing.Size(536, 431);
             this.listViewBackupsInfo.TabIndex = 0;
             this.listViewBackupsInfo.UseCompatibleStateImageBehavior = false;
             this.listViewBackupsInfo.View = System.Windows.Forms.View.Details;
@@ -387,7 +441,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 26);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(734, 437);
+            this.tabPage4.Size = new System.Drawing.Size(722, 437);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Manual Work";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -411,8 +465,8 @@
             this.splitContainer2.Panel2.Controls.Add(this.buttonManualDownload);
             this.splitContainer2.Panel2.Controls.Add(this.progressBarManual);
             this.splitContainer2.Panel2.Controls.Add(this.listViewCloudFiles);
-            this.splitContainer2.Size = new System.Drawing.Size(728, 431);
-            this.splitContainer2.SplitterDistance = 150;
+            this.splitContainer2.Size = new System.Drawing.Size(716, 431);
+            this.splitContainer2.SplitterDistance = 147;
             this.splitContainer2.TabIndex = 1;
             // 
             // label5
@@ -432,7 +486,7 @@
             this.listBoxCloudsManual.IntegralHeight = false;
             this.listBoxCloudsManual.Location = new System.Drawing.Point(0, 27);
             this.listBoxCloudsManual.Name = "listBoxCloudsManual";
-            this.listBoxCloudsManual.Size = new System.Drawing.Size(150, 404);
+            this.listBoxCloudsManual.Size = new System.Drawing.Size(147, 404);
             this.listBoxCloudsManual.TabIndex = 1;
             // 
             // label16
@@ -511,7 +565,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 26);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(734, 437);
+            this.tabPage5.Size = new System.Drawing.Size(722, 437);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Settings";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -549,11 +603,11 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.button2);
-            this.groupBox4.Controls.Add(this.button1);
-            this.groupBox4.Controls.Add(this.textBox6);
+            this.groupBox4.Controls.Add(this.buttonSelectDatabase);
+            this.groupBox4.Controls.Add(this.buttonSelectLogFile);
+            this.groupBox4.Controls.Add(this.textBoxDatabaseLocation);
             this.groupBox4.Controls.Add(this.label8);
-            this.groupBox4.Controls.Add(this.textBox7);
+            this.groupBox4.Controls.Add(this.textBoxLogToFile);
             this.groupBox4.Controls.Add(this.label9);
             this.groupBox4.Location = new System.Drawing.Point(378, 200);
             this.groupBox4.Name = "groupBox4";
@@ -562,30 +616,30 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Other";
             // 
-            // button2
+            // buttonSelectDatabase
             // 
-            this.button2.Location = new System.Drawing.Point(286, 56);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(28, 20);
-            this.button2.TabIndex = 16;
-            this.button2.Text = "...";
-            this.button2.UseVisualStyleBackColor = true;
+            this.buttonSelectDatabase.Location = new System.Drawing.Point(286, 56);
+            this.buttonSelectDatabase.Name = "buttonSelectDatabase";
+            this.buttonSelectDatabase.Size = new System.Drawing.Size(28, 20);
+            this.buttonSelectDatabase.TabIndex = 16;
+            this.buttonSelectDatabase.Text = "...";
+            this.buttonSelectDatabase.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // buttonSelectLogFile
             // 
-            this.button1.Location = new System.Drawing.Point(286, 16);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(28, 20);
-            this.button1.TabIndex = 15;
-            this.button1.Text = "...";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonSelectLogFile.Location = new System.Drawing.Point(286, 16);
+            this.buttonSelectLogFile.Name = "buttonSelectLogFile";
+            this.buttonSelectLogFile.Size = new System.Drawing.Size(28, 20);
+            this.buttonSelectLogFile.TabIndex = 15;
+            this.buttonSelectLogFile.Text = "...";
+            this.buttonSelectLogFile.UseVisualStyleBackColor = true;
             // 
-            // textBox6
+            // textBoxDatabaseLocation
             // 
-            this.textBox6.Location = new System.Drawing.Point(105, 57);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(175, 20);
-            this.textBox6.TabIndex = 14;
+            this.textBoxDatabaseLocation.Location = new System.Drawing.Point(105, 57);
+            this.textBoxDatabaseLocation.Name = "textBoxDatabaseLocation";
+            this.textBoxDatabaseLocation.Size = new System.Drawing.Size(175, 20);
+            this.textBoxDatabaseLocation.TabIndex = 14;
             // 
             // label8
             // 
@@ -596,12 +650,12 @@
             this.label8.TabIndex = 13;
             this.label8.Text = "Database location:";
             // 
-            // textBox7
+            // textBoxLogToFile
             // 
-            this.textBox7.Location = new System.Drawing.Point(105, 17);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(175, 20);
-            this.textBox7.TabIndex = 12;
+            this.textBoxLogToFile.Location = new System.Drawing.Point(105, 17);
+            this.textBoxLogToFile.Name = "textBoxLogToFile";
+            this.textBoxLogToFile.Size = new System.Drawing.Size(175, 20);
+            this.textBoxLogToFile.TabIndex = 12;
             // 
             // label9
             // 
@@ -615,7 +669,7 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Controls.Add(this.checkBox2);
+            this.groupBox3.Controls.Add(this.checkBoxPreventSleep);
             this.groupBox3.Controls.Add(this.textBoxChunkSize);
             this.groupBox3.Controls.Add(this.label10);
             this.groupBox3.Location = new System.Drawing.Point(15, 200);
@@ -634,15 +688,15 @@
             this.label7.TabIndex = 7;
             this.label7.Text = "MB";
             // 
-            // checkBox2
+            // checkBoxPreventSleep
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(10, 52);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(273, 17);
-            this.checkBox2.TabIndex = 6;
-            this.checkBox2.Text = "Prevent computer from sleeping while plan is running";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBoxPreventSleep.AutoSize = true;
+            this.checkBoxPreventSleep.Location = new System.Drawing.Point(10, 52);
+            this.checkBoxPreventSleep.Name = "checkBoxPreventSleep";
+            this.checkBoxPreventSleep.Size = new System.Drawing.Size(273, 17);
+            this.checkBoxPreventSleep.TabIndex = 6;
+            this.checkBoxPreventSleep.Text = "Prevent computer from sleeping while plan is running";
+            this.checkBoxPreventSleep.UseVisualStyleBackColor = true;
             // 
             // textBoxChunkSize
             // 
@@ -707,14 +761,14 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.textBoxRepeatPassword);
+            this.groupBox1.Controls.Add(this.textBoxPassword);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.label14);
-            this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
+            this.groupBox1.Controls.Add(this.checkBoxPassword);
+            this.groupBox1.Controls.Add(this.radioButtonTrayNever);
+            this.groupBox1.Controls.Add(this.radioButtonTrayMinimized);
+            this.groupBox1.Controls.Add(this.radioButtonTrayAlways);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Location = new System.Drawing.Point(15, 3);
             this.groupBox1.Name = "groupBox1";
@@ -723,19 +777,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "General";
             // 
-            // textBox2
+            // textBoxRepeatPassword
             // 
-            this.textBox2.Location = new System.Drawing.Point(117, 157);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(143, 20);
-            this.textBox2.TabIndex = 9;
+            this.textBoxRepeatPassword.Location = new System.Drawing.Point(117, 157);
+            this.textBoxRepeatPassword.Name = "textBoxRepeatPassword";
+            this.textBoxRepeatPassword.Size = new System.Drawing.Size(143, 20);
+            this.textBoxRepeatPassword.TabIndex = 9;
             // 
-            // textBox1
+            // textBoxPassword
             // 
-            this.textBox1.Location = new System.Drawing.Point(117, 133);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(143, 20);
-            this.textBox1.TabIndex = 8;
+            this.textBoxPassword.Location = new System.Drawing.Point(117, 133);
+            this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.Size = new System.Drawing.Size(143, 20);
+            this.textBoxPassword.TabIndex = 8;
             // 
             // label13
             // 
@@ -755,48 +809,48 @@
             this.label14.TabIndex = 6;
             this.label14.Text = "Password:";
             // 
-            // checkBox1
+            // checkBoxPassword
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(10, 110);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(169, 17);
-            this.checkBox1.TabIndex = 5;
-            this.checkBox1.Text = "Protect the app with password";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBoxPassword.AutoSize = true;
+            this.checkBoxPassword.Location = new System.Drawing.Point(10, 110);
+            this.checkBoxPassword.Name = "checkBoxPassword";
+            this.checkBoxPassword.Size = new System.Drawing.Size(169, 17);
+            this.checkBoxPassword.TabIndex = 5;
+            this.checkBoxPassword.Text = "Protect the app with password";
+            this.checkBoxPassword.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // radioButtonTrayNever
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(23, 83);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(54, 17);
-            this.radioButton3.TabIndex = 3;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Never";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButtonTrayNever.AutoSize = true;
+            this.radioButtonTrayNever.Location = new System.Drawing.Point(23, 83);
+            this.radioButtonTrayNever.Name = "radioButtonTrayNever";
+            this.radioButtonTrayNever.Size = new System.Drawing.Size(54, 17);
+            this.radioButtonTrayNever.TabIndex = 3;
+            this.radioButtonTrayNever.TabStop = true;
+            this.radioButtonTrayNever.Text = "Never";
+            this.radioButtonTrayNever.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // radioButtonTrayMinimized
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(23, 60);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(123, 17);
-            this.radioButton2.TabIndex = 2;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Only when minimized";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButtonTrayMinimized.AutoSize = true;
+            this.radioButtonTrayMinimized.Location = new System.Drawing.Point(23, 60);
+            this.radioButtonTrayMinimized.Name = "radioButtonTrayMinimized";
+            this.radioButtonTrayMinimized.Size = new System.Drawing.Size(123, 17);
+            this.radioButtonTrayMinimized.TabIndex = 2;
+            this.radioButtonTrayMinimized.TabStop = true;
+            this.radioButtonTrayMinimized.Text = "Only when minimized";
+            this.radioButtonTrayMinimized.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // radioButtonTrayAlways
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(23, 36);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(58, 17);
-            this.radioButton1.TabIndex = 1;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Always";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButtonTrayAlways.AutoSize = true;
+            this.radioButtonTrayAlways.Location = new System.Drawing.Point(23, 36);
+            this.radioButtonTrayAlways.Name = "radioButtonTrayAlways";
+            this.radioButtonTrayAlways.Size = new System.Drawing.Size(58, 17);
+            this.radioButtonTrayAlways.TabIndex = 1;
+            this.radioButtonTrayAlways.TabStop = true;
+            this.radioButtonTrayAlways.Text = "Always";
+            this.radioButtonTrayAlways.UseVisualStyleBackColor = true;
             // 
             // label15
             // 
@@ -812,7 +866,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 26);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(734, 437);
+            this.tabPage6.Size = new System.Drawing.Size(722, 437);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "About";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1047,63 +1101,16 @@
             this.label17.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseMove);
             this.label17.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseUp);
             // 
-            // listViewBackupQueue
+            // notifyIconApp
             // 
-            this.listViewBackupQueue.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3,
-            this.columnHeader4});
-            this.listViewBackupQueue.Location = new System.Drawing.Point(130, 85);
-            this.listViewBackupQueue.Name = "listViewBackupQueue";
-            this.listViewBackupQueue.Size = new System.Drawing.Size(322, 200);
-            this.listViewBackupQueue.TabIndex = 12;
-            this.listViewBackupQueue.UseCompatibleStateImageBehavior = false;
-            this.listViewBackupQueue.View = System.Windows.Forms.View.Details;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(130, 65);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 13);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "Backup Queue:";
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Plan Name";
-            this.columnHeader3.Width = 150;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Backup Time";
-            this.columnHeader4.Width = 150;
-            // 
-            // labelMainPlanName
-            // 
-            this.labelMainPlanName.BackColor = System.Drawing.Color.White;
-            this.labelMainPlanName.Font = new System.Drawing.Font("Palatino Linotype", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMainPlanName.Location = new System.Drawing.Point(12, 30);
-            this.labelMainPlanName.Name = "labelMainPlanName";
-            this.labelMainPlanName.Size = new System.Drawing.Size(178, 23);
-            this.labelMainPlanName.TabIndex = 14;
-            this.labelMainPlanName.Text = "-";
-            this.labelMainPlanName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.White;
-            this.label3.Font = new System.Drawing.Font("Palatino Linotype", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(64, 10);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 20);
-            this.label3.TabIndex = 15;
-            this.label3.Text = "Executing:";
+            this.notifyIconApp.Text = "notifyIcon1";
+            this.notifyIconApp.Visible = true;
             // 
             // MainWindow
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(42)))), ((int)(((byte)(55)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(895, 495);
             this.ControlBox = false;
@@ -1111,12 +1118,12 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainWindow";
-            this.Padding = new System.Windows.Forms.Padding(1);
-            this.Text = "CLoud Backup";
+            this.Text = "Secure Backup";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -1195,15 +1202,15 @@
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Button buttonSelectDatabase;
+        private System.Windows.Forms.Button buttonSelectLogFile;
+        private System.Windows.Forms.TextBox textBoxDatabaseLocation;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox textBoxLogToFile;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBoxPreventSleep;
         private System.Windows.Forms.TextBox textBoxChunkSize;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -1212,14 +1219,14 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxRepeatPassword;
+        private System.Windows.Forms.TextBox textBoxPassword;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.CheckBox checkBoxPassword;
+        private System.Windows.Forms.RadioButton radioButtonTrayNever;
+        private System.Windows.Forms.RadioButton radioButtonTrayMinimized;
+        private System.Windows.Forms.RadioButton radioButtonTrayAlways;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button buttonManualDownload;
         private System.Windows.Forms.ProgressBar progressBarManual;
@@ -1246,6 +1253,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Label labelMainPlanName;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NotifyIcon notifyIconApp;
     }
 }
 

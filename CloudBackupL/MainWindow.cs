@@ -1,5 +1,6 @@
 ﻿using CloudBackupL.TabsControllers;
 using System;
+using System.Configuration;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -19,7 +20,7 @@ namespace CloudBackupL
         private Button precedentButton;
         Color selectedColor;
         Color normalColor;
-
+        
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
         (
@@ -30,7 +31,7 @@ namespace CloudBackupL
         int nWidthEllipse, // height of ellipse
         int nHeightEllipse // width of ellipse
         );
-
+        
         //Main Window Constructor
         public MainWindow()
         {
@@ -45,13 +46,45 @@ namespace CloudBackupL
             selectedColor = buttonTabHome.BackColor;
             normalColor = buttonTabBackupPlans.BackColor;
             precedentButton = buttonTabHome;
-            this.Paint += MainWindow_Paint;
+
+            notifyIconApp.Icon = SystemIcons.Information;
+            notifyIconApp.Text = "Secure Backup";
+            notifyIconApp.DoubleClick += NotifyIconApp_DoubleClick;
+            LoadTrayType();
         }
 
-        private void MainWindow_Paint(object sender, PaintEventArgs e)
+        private void NotifyIconApp_DoubleClick(object sender, EventArgs e)
         {
-            e.Graphics.DrawRectangle(new Pen(Color.Black, 3),
-                            this.DisplayRectangle);
+            string traySetting = ConfigurationManager.AppSettings["trayType"];
+            if (traySetting.Equals("minimized"))
+            {
+                notifyIconApp.Visible = false;
+                this.Show();
+            }
+
+            if (traySetting.Equals("always"))
+            {
+                this.Show();
+            }
+        }
+
+        public void LoadTrayType()
+        {
+            switch (ConfigurationManager.AppSettings["trayType"])
+            {
+                case "minimized":
+                    notifyIconApp.Visible = true;
+                    ShowInTaskbar = true;
+                    break;
+                case "never":
+                    notifyIconApp.Visible = false;
+                    ShowInTaskbar = true;
+                    break;
+                case "always":
+                    notifyIconApp.Visible = true;
+                    ShowInTaskbar = false;
+                    break;
+            }
         }
 
         //Main Window Load
@@ -211,6 +244,42 @@ namespace CloudBackupL
             set { this.labelMainPlanName = value; }
         }
 
+        public NotifyIcon NotifyIconApp
+        {
+            get { return notifyIconApp; }
+            set { notifyIconApp = value; }
+        }
+
+        public RadioButton RadioButtonTrayAlways
+        {
+            get { return radioButtonTrayAlways; }
+            set { radioButtonTrayAlways = value; }
+        }
+
+        public RadioButton RadioButtonTrayMinimized
+        {
+            get { return radioButtonTrayMinimized; }
+            set { radioButtonTrayMinimized = value; }
+        }
+
+        public RadioButton RadioButtonTrayNever
+        {
+            get { return radioButtonTrayNever; }
+            set { radioButtonTrayNever = value; }
+        }
+
+        public Button ButtonSave
+        {
+            get { return buttonSave; }
+            set { buttonSave = value; }
+        }
+
+        public Button ButtonCancel
+        {
+            get { return buttonCancel; }
+            set { buttonCancel = value; }
+        }
+
         private bool dragging = false;
         private Point dragCursorPoint;
         private Point dragFormPoint;
@@ -265,7 +334,15 @@ namespace CloudBackupL
 
         private void buttonMinimize_Click(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Minimized;
-        }
+            if (ConfigurationManager.AppSettings["trayType"].Equals("minimized") || ConfigurationManager.AppSettings["trayType"].Equals("always"))
+            {
+                notifyIconApp.Visible = true;
+                this.Hide();
+            } else
+            {
+                WindowState = FormWindowState.Minimized;
+            }
+        }       
+            
     }
 }
