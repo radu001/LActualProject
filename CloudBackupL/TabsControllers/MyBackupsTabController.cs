@@ -43,7 +43,7 @@ namespace CloudBackupL.TabsControllers
             {
                 if (selectedItem != null && !MainWindow.isActiveDownloadOperation)
                 {
-                    string password = ArchiveUtils.Encript("mypassword");
+                    string password = MyUtils.Encript("mypassword");
                     Backup backup = databaseService.GetBackup((int)selectedItem.Tag);
                     BackupPlan backupPlan = databaseService.GetBackupPlan(backup.backupPlanId);
                     Cloud cloud = databaseService.GetCloud(backup.cloudId);
@@ -58,7 +58,7 @@ namespace CloudBackupL.TabsControllers
         {
             if (selectedItem != null && !MainWindow.isActiveDownloadOperation)
             {
-                string password = ArchiveUtils.Encript("mypassword");
+                string password = MyUtils.Encript("mypassword");
                 Backup backup = databaseService.GetBackup((int)selectedItem.Tag);
                 Cloud cloud = databaseService.GetCloud(backup.cloudId);
                 FolderBrowserDialog folderBrowser = new FolderBrowserDialog();

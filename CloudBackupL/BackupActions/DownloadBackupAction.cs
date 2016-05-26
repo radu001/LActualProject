@@ -6,8 +6,6 @@ using System.IO;
 using System.Net;
 using CloudBackupL.Utils;
 using Ionic.Zip;
-using Newtonsoft.Json.Linq;
-using System.Collections;
 using System.Collections.Generic;
 using CloudBackupL.Models;
 using CloudBackupL.Clouds;
@@ -21,6 +19,8 @@ namespace CloudBackupL.BackupActions
         string tempDownloadZipFolder = AppDomain.CurrentDomain.BaseDirectory + "tmpZipDownloadFolder\\";
         Label labelStatus;
         ProgressBar progressBar;
+        Label labelStatusMain = MainWindow.instance.LabelMainStatus;
+        ProgressBar progressBarMain = MainWindow.instance.ProgressBarMain;
         ICloud cloudController;
         Cloud cloud;
         EventHandler<Boolean> downloadCompleteEvent;
@@ -75,28 +75,34 @@ namespace CloudBackupL.BackupActions
             {
                 var tcs = new TaskCompletionSource<bool>();
                 labelStatus.Invoke(new Action(() => labelStatus.Text = "Status: Downloading file " + i + " of " + totalFiles));
+                labelStatusMain.Invoke(new Action(() => labelStatusMain.Text = "Status: Downloading file " + i + " of " + totalFiles));
                 progressBar.Invoke(new Action(() => progressBar.Value = 0));
+                progressBarMain.Invoke(new Action(() => progressBarMain.Value = 0));
                 string fileName = Path.GetFileName((string)file.path);
-
                 cloudController.Download((string)file.path, cloud.token, tempDownloadZipFolder + fileName, Web_DownloadProgressChanged, tcs);
                 tcs.Task.Wait();
                 i++;
             }
             labelStatus.Invoke(new Action(() => labelStatus.Text = ""));
+            labelStatusMain.Invoke(new Action(() => labelStatusMain.Text = ""));
             progressBar.Invoke(new Action(() => progressBar.Value = 0));
+            progressBarMain.Invoke(new Action(() => progressBarMain.Value = 0));
 
             //now save file to directory
-            ArchiveUtils.ExtractZip(tempDownloadZipFolder, downloadPath, Zip_ExtractProgress, password, isRestoreAction);
+            MyUtils.ExtractZip(tempDownloadZipFolder, downloadPath, Zip_ExtractProgress, password, isRestoreAction);
 
             labelStatus.Invoke(new Action(() => labelStatus.Text = "Status:"));
+            labelStatusMain.Invoke(new Action(() => labelStatusMain.Text = "Status:"));
             progressBar.Invoke(new Action(() => progressBar.Value = 0));
-            ArchiveUtils.DeleteDirectory(tempDownloadZipFolder);
+            progressBarMain.Invoke(new Action(() => progressBarMain.Value = 0));
+            MyUtils.DeleteDirectory(tempDownloadZipFolder);
         }
 
         private void Web_DownloadProgressChanged(object sender, object e)
         {
             DownloadProgressChangedEventArgs args = (DownloadProgressChangedEventArgs)e;
             progressBar.Invoke(new Action(() => progressBar.Value = args.ProgressPercentage));
+            progressBarMain.Invoke(new Action(() => progressBarMain.Value = args.ProgressPercentage));
         }
 
 
@@ -115,10 +121,12 @@ namespace CloudBackupL.BackupActions
             {
                 int progress = (int)((args.BytesTransferred * 100) / args.TotalBytesToTransfer);
                 progressBar.Invoke(new Action(() => progressBar.Value = progress));
+                progressBarMain.Invoke(new Action(() => progressBarMain.Value = progress));
             }
             if (args.EventType == ZipProgressEventType.Extracting_BeforeExtractEntry)
             {
                 labelStatus.Invoke(new Action(() => labelStatus.Text = "Status: Extracting file " + currentEntryNr + " of " + args.EntriesTotal));
+                labelStatusMain.Invoke(new Action(() => labelStatusMain.Text = "Status: Extracting file " + currentEntryNr + " of " + args.EntriesTotal));
                 currentEntryNr++;
             }
             if(args.EventType == ZipProgressEventType.Extracting_AfterExtractAll)

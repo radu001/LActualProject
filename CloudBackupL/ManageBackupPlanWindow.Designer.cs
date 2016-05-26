@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.comboBoxMonthOrWeekDay = new System.Windows.Forms.ComboBox();
+            this.radioButtonNo = new System.Windows.Forms.RadioButton();
+            this.radioButtonYes = new System.Windows.Forms.RadioButton();
+            this.label5 = new System.Windows.Forms.Label();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonComplete = new System.Windows.Forms.Button();
             this.buttonBrowseFolder = new System.Windows.Forms.Button();
@@ -49,6 +53,10 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.comboBoxMonthOrWeekDay);
+            this.panel1.Controls.Add(this.radioButtonNo);
+            this.panel1.Controls.Add(this.radioButtonYes);
+            this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.buttonCancel);
             this.panel1.Controls.Add(this.buttonComplete);
             this.panel1.Controls.Add(this.buttonBrowseFolder);
@@ -68,6 +76,47 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(556, 307);
             this.panel1.TabIndex = 0;
+            // 
+            // comboBoxMonthOrWeekDay
+            // 
+            this.comboBoxMonthOrWeekDay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxMonthOrWeekDay.Enabled = false;
+            this.comboBoxMonthOrWeekDay.FormattingEnabled = true;
+            this.comboBoxMonthOrWeekDay.Location = new System.Drawing.Point(113, 195);
+            this.comboBoxMonthOrWeekDay.Name = "comboBoxMonthOrWeekDay";
+            this.comboBoxMonthOrWeekDay.Size = new System.Drawing.Size(87, 21);
+            this.comboBoxMonthOrWeekDay.TabIndex = 19;
+            // 
+            // radioButtonNo
+            // 
+            this.radioButtonNo.AutoSize = true;
+            this.radioButtonNo.Checked = true;
+            this.radioButtonNo.Location = new System.Drawing.Point(309, 167);
+            this.radioButtonNo.Name = "radioButtonNo";
+            this.radioButtonNo.Size = new System.Drawing.Size(39, 17);
+            this.radioButtonNo.TabIndex = 18;
+            this.radioButtonNo.TabStop = true;
+            this.radioButtonNo.Text = "No";
+            this.radioButtonNo.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonYes
+            // 
+            this.radioButtonYes.AutoSize = true;
+            this.radioButtonYes.Location = new System.Drawing.Point(309, 144);
+            this.radioButtonYes.Name = "radioButtonYes";
+            this.radioButtonYes.Size = new System.Drawing.Size(43, 17);
+            this.radioButtonYes.TabIndex = 17;
+            this.radioButtonYes.Text = "Yes";
+            this.radioButtonYes.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(306, 118);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(90, 13);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Override Backup:";
             // 
             // buttonCancel
             // 
@@ -109,13 +158,16 @@
             // 
             // dateTimePickerScheduleTime
             // 
+            this.dateTimePickerScheduleTime.Checked = false;
             this.dateTimePickerScheduleTime.CustomFormat = "";
             this.dateTimePickerScheduleTime.Enabled = false;
-            this.dateTimePickerScheduleTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePickerScheduleTime.Location = new System.Drawing.Point(113, 195);
+            this.dateTimePickerScheduleTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePickerScheduleTime.Location = new System.Drawing.Point(204, 195);
             this.dateTimePickerScheduleTime.Name = "dateTimePickerScheduleTime";
-            this.dateTimePickerScheduleTime.Size = new System.Drawing.Size(174, 20);
+            this.dateTimePickerScheduleTime.ShowUpDown = true;
+            this.dateTimePickerScheduleTime.Size = new System.Drawing.Size(83, 20);
             this.dateTimePickerScheduleTime.TabIndex = 9;
+            this.dateTimePickerScheduleTime.Value = new System.DateTime(2016, 5, 26, 13, 6, 0, 0);
             // 
             // comboBoxScheduleType
             // 
@@ -203,13 +255,13 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Fill all data to create a plan";
             // 
-            // AddBackupPlanWindow
+            // ManageBackupPlanWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(556, 307);
             this.Controls.Add(this.panel1);
-            this.Name = "AddBackupPlanWindow";
+            this.Name = "ManageBackupPlanWindow";
             this.Text = "Add Backup Plan";
             this.Load += new System.EventHandler(this.AddBackupPlanWindow_Load);
             this.panel1.ResumeLayout(false);
@@ -236,5 +288,9 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonComplete;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
+        private System.Windows.Forms.RadioButton radioButtonNo;
+        private System.Windows.Forms.RadioButton radioButtonYes;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox comboBoxMonthOrWeekDay;
     }
 }

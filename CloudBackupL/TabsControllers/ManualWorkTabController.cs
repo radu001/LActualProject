@@ -115,7 +115,7 @@ namespace CloudBackupL.TabsControllers
                 if (dialogResult == DialogResult.OK)
                 {
                     mainWindowInstance.RestrictDownloadAction();
-                    DownloadBackupAction downloadBackupAction = new DownloadBackupAction(currentCLoud, listViewCloudFiles.SelectedItems[0].Tag.ToString(), labelStatus, progressBar, folderBrowser.SelectedPath, DownloadCompleteEvent, ArchiveUtils.Encript(textBoxPassword.Text), false);
+                    DownloadBackupAction downloadBackupAction = new DownloadBackupAction(currentCLoud, listViewCloudFiles.SelectedItems[0].Tag.ToString(), labelStatus, progressBar, folderBrowser.SelectedPath, DownloadCompleteEvent, MyUtils.Encript(textBoxPassword.Text), false);
                     downloadBackupAction.StartDownloadBackupAction();
                 }
             } else

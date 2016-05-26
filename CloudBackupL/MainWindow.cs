@@ -1,10 +1,8 @@
-﻿using CloudBackupL.CustomControllers;
-using CloudBackupL.TabsControllers;
+﻿using CloudBackupL.TabsControllers;
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using System.Windows;
 
 namespace CloudBackupL
 {
@@ -39,11 +37,11 @@ namespace CloudBackupL
             instance = this;
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
-            homeTabController = new HomeTabController();
             backupPlansTabController = new BackupPlansTabController();
             myBackupsTabController = new MyBackupsTabController();
             manualWorkTabController = new ManualWorkTabController();
             settingsTabController = new SettingsTabController();
+            homeTabController = new HomeTabController();
             selectedColor = buttonTabHome.BackColor;
             normalColor = buttonTabBackupPlans.BackColor;
             precedentButton = buttonTabHome;
@@ -59,10 +57,17 @@ namespace CloudBackupL
         //Main Window Load
         private void MainWindow_Load(object sender, EventArgs e)
         {
+            LoadAllControlls();
+        }
+
+        public void LoadAllControlls()
+        {
             homeTabController.LoadClouds();
             backupPlansTabController.LoadPlans();
             myBackupsTabController.LoadBackupPlansList();
             manualWorkTabController.LoadCloudList();
+            homeTabController.LoadQueueList();
+            LabelMainPlanName.Text = "-";
         }
 
         public void RestrictDownloadAction()
@@ -192,6 +197,18 @@ namespace CloudBackupL
         {
             get { return this.progressBarMain; }
             set { this.progressBarMain = value; }
+        }
+
+        public ListView ListViewBackupQueue
+        {
+            get { return this.listViewBackupQueue; }
+            set { this.listViewBackupQueue = value; }
+        }
+
+        public Label LabelMainPlanName
+        {
+            get { return this.labelMainPlanName; }
+            set { this.labelMainPlanName = value; }
         }
 
         private bool dragging = false;

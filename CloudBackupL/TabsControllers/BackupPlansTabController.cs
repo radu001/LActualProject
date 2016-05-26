@@ -28,37 +28,43 @@ namespace CloudBackupL.TabsControllers
 
             List<BackupPlan> plans = databaseService.GetAllPlans();
             labelTotalPlans.Text = "Total plans: " + plans.Count;
-            foreach (var c in plans)
+            foreach (var plan in plans)
             {
                 PlanControl control = new PlanControl();
-                control.LabelBackupName.Text = c.name;
-                control.LabelCloudName.Text = c.cloudName;
-                control.LabelCreated.Text = c.creationDate.ToShortDateString();
-                control.LabelCurrentStatus.Text = c.currentStatus;
-                Backup backup = databaseService.GetLastBackup(c.id);
+                control.LabelBackupName.Text = plan.name;
+                control.LabelCloudName.Text = plan.cloudName;
+                control.LabelCreated.Text = plan.creationDate.ToShortDateString();
+                control.LabelCurrentStatus.Text = plan.currentStatus;
+                Backup backup = databaseService.GetLastBackup(plan.id);
                 if(backup != null)
                 {
                     TimeSpan runTimeTimeSpan = new TimeSpan(0, 0, 0, 0, (int)backup.runTime);
                     String runTime = (runTimeTimeSpan.Days > 0 ? runTimeTimeSpan.Days + " d - " : "") +
                         runTimeTimeSpan.Hours + " h : " + runTimeTimeSpan.Minutes + " m : " + runTimeTimeSpan.Seconds + " s";
                     control.LabelLastDuration.Text = runTime;
-                    control.LabelLastRun.Text = c.lastRun.ToLongTimeString();
+                    control.LabelLastRun.Text = plan.lastExecution.ToLongTimeString();
                 }
                 else
                 {
                     control.DisableActionsWhenNoBackup();
                 }
-                control.LabelFolderPath.Text = c.path;
-                control.LabelLastResult.Text = (c.lastResult ? "Succes" : "");
-                control.LabelScheduleTime.Text = c.scheduleTime.ToLongTimeString();
-                control.LabelScheduleType.Text = c.scheduleType;
-                control.LabelPlanId.Text = c.id + "";
+                control.LabelFolderPath.Text = plan.path;
+                control.LabelLastResult.Text = (plan.lastResult ? "Succes" : "");
+                if(plan.scheduleType.Equals("Monthly"))
+                    control.LabelScheduleTime.Text = "Day " + plan.scheduleDay + " of each month, at "+  plan.scheduleTime.ToString("HH:mm");
+                if (plan.scheduleType.Equals("Weekly"))
+                    control.LabelScheduleTime.Text = "Each " + ((DayOfWeek)((plan.scheduleDay) % 7)).ToString() + ", at " + plan.scheduleTime.ToString("HH:mm");
+                if(plan.scheduleType.Equals("Daily"))
+                    control.LabelScheduleTime.Text = "Each Day at " + plan.scheduleTime.ToString("HH:mm");
+                control.LabelScheduleType.Text = plan.scheduleType;
+                control.LabelPlanId.Text = plan.id.ToString();
                 control.OnUserControlDeletePlanButtonClicked += (s, e) => DeletePlanButtonClicked(s, e);
                 control.OnUserControlRunNowButtonClicked += (s, e) => RunNowButtonClicked(s, e);
                 control.OnUserControlDownloadButtonClicked += (s, e) => DownloadButtonClicked(s, e);
                 control.OnUserControlEditButtonClicked += (s, e) => EditButtonClicked(s, e);
                 control.OnUserControlViewHystoryButtonClicked += (s, e) => ViewHistoryButtonClicked(s, e);
                 control.OnUserControlRestoreButtonClicked += (s, e) => RestoreButtonClicked(s, e);
+                //control.ProgressBarArchiving
                 flowLayoutPanelPlans.Controls.Add(control);
             }
         }
@@ -83,11 +89,11 @@ namespace CloudBackupL.TabsControllers
                     MainWindow.isActiveDownloadOperation = true;
                     DisableActions();
                     //to do
-                    string password = ArchiveUtils.Encript("mypassword");
+                    string password = MyUtils.Encript("mypassword");
                     PlanControl planControl = (PlanControl)sender;
                     Cloud cloud = databaseService.GetCloudByName(planControl.LabelCloudName.Text);    
                     Backup lastBackup = databaseService.GetLastBackup(Int32.Parse(planControl.LabelPlanId.Text));
-
+                    MainWindow.instance.LabelMainPlanName.Text = "Plan: " + planControl.LabelBackupName.Text;
                     DownloadBackupAction downloadBackupAction = new DownloadBackupAction(cloud, lastBackup.targetPath, planControl.LabelStatus, planControl.ProgressBarArchiving, planControl.LabelFolderPath.Text, DownloadCompleteEvent, password, true);
                     downloadBackupAction.StartDownloadBackupAction();
                 }
@@ -115,7 +121,7 @@ namespace CloudBackupL.TabsControllers
                 MainWindow.isActiveDownloadOperation = true;
                 //to do
                 DisableActions();
-                string password = ArchiveUtils.Encript("mypassword");
+                string password = MyUtils.Encript("mypassword");
                 PlanControl planControl = (PlanControl)sender;
                 Backup lastBackup = databaseService.GetLastBackup(Int32.Parse(planControl.LabelPlanId.Text));
                 Cloud cloud = databaseService.GetCloudByName(planControl.LabelCloudName.Text);
@@ -123,10 +129,12 @@ namespace CloudBackupL.TabsControllers
                 DialogResult dialogResult = folderBrowser.ShowDialog();
                 if (dialogResult == DialogResult.OK)
                 {
+                    MainWindow.instance.LabelMainPlanName.Text = "Plan: " + planControl.LabelBackupName.Text;
                     DownloadBackupAction downloadBackupAction = new DownloadBackupAction(cloud ,lastBackup.targetPath, planControl.LabelStatus, planControl.ProgressBarArchiving, folderBrowser.SelectedPath, DownloadCompleteEvent, password, false);
                     downloadBackupAction.StartDownloadBackupAction();
                 } else
                 {
+                    MainWindow.instance.ResetDownloadAction();
                     MainWindow.isActiveDownloadOperation = false;
                 }
             }
@@ -134,7 +142,7 @@ namespace CloudBackupL.TabsControllers
 
         private void DownloadCompleteEvent(object sender, bool e)
         {
-            LoadPlans();
+            MainWindow.instance.LoadAllControlls();
             Console.WriteLine("Download complete");
             MainWindow.isActiveDownloadOperation = false;
         }
@@ -161,8 +169,7 @@ namespace CloudBackupL.TabsControllers
 
                 }
                 databaseService.DeletePlan(Int32.Parse(id));
-                LoadPlans();
-                MainWindow.instance.myBackupsTabController.LoadBackupPlansList();
+                MainWindow.instance.LoadAllControlls(); 
                 MessageBox.Show("Plan deleted!");
             } 
         }
@@ -176,13 +183,18 @@ namespace CloudBackupL.TabsControllers
         //Button Run Backup Clicked
         private void RunNowButtonClicked(object sender, EventArgs e)
         {
+            PlanControl planControl = (PlanControl)sender;
+            MainWindow.instance.LabelMainPlanName.Text = "Plan: " + planControl.LabelBackupName.Text;
+            PerformBackup(planControl);
+        }
+
+        public void PerformBackup(PlanControl planControl)
+        {
             if (!MainWindow.isActiveUploadOperation)
             {
                 MainWindow.isActiveUploadOperation = true;
                 DisableActions();
-                PlanControl planControl = (PlanControl)sender;
-                //to do
-                string password = ArchiveUtils.Encript("mypassword");
+                string password = MyUtils.Encript("mypassword");
                 BackupPlan backupPlan = databaseService.GetBackupPlan(Int32.Parse(planControl.LabelPlanId.Text));
                 UploadBackupAction uploadBackupAction = new UploadBackupAction(backupPlan, planControl.LabelStatus, planControl.ProgressBarArchiving, BackupCompleteEvent, password);
                 uploadBackupAction.StartBackupAction();
@@ -192,10 +204,9 @@ namespace CloudBackupL.TabsControllers
         private void BackupCompleteEvent(object sender, bool e)
         {
             MainWindow.isActiveUploadOperation = false;
-            MainWindow.instance.homeTabController.LoadClouds();
-            MainWindow.instance.myBackupsTabController.LoadBackupPlansList();
-            MainWindow.instance.manualWorkTabController.LoadCloudList();
-            LoadPlans();
+            MainWindow.instance.LoadAllControlls();
+            MainWindow.instance.LabelMainStatus.Text = "Status:";
+            MainWindow.instance.ProgressBarMain.Value = 100;
         }
 
     }

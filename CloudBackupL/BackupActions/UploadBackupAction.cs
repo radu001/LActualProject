@@ -20,6 +20,8 @@ namespace CloudBackupL.BackupActions
         BackupPlan backupPlan;
         Label labelStatus;
         ProgressBar progressBar;
+        Label labelStatusMain = MainWindow.instance.LabelMainStatus;
+        ProgressBar progressBarMain = MainWindow.instance.ProgressBarMain;
         ICloud cloudController;
         Cloud cloud;
         EventHandler<Boolean> backupCompleteEvent;
@@ -61,10 +63,10 @@ namespace CloudBackupL.BackupActions
             //start counting time
             Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
             //clear temp directory
-            ArchiveUtils.DeleteDirectory(tempUploadZipFolder);
-            long size = ArchiveUtils.GetDirectorySize(backupPlan.path);
-            ArchiveUtils.ZipFiles(backupPlan.path, tempUploadZipFolder, Zip_SaveProgress, password);
-            var compressedSize = ArchiveUtils.GetDirectorySize(tempUploadZipFolder);
+            MyUtils.DeleteDirectory(tempUploadZipFolder);
+            long size = MyUtils.GetDirectorySize(backupPlan.path);
+            MyUtils.ZipFiles(backupPlan.path, tempUploadZipFolder, Zip_SaveProgress, password);
+            var compressedSize = MyUtils.GetDirectorySize(tempUploadZipFolder);
             string date = DateTime.Now.ToString("yyyyMMddHHmmss");
 
             Backup currentBackup = new Backup();
@@ -82,7 +84,9 @@ namespace CloudBackupL.BackupActions
             foreach (FileInfo file in di.GetFiles())
             {
                 progressBar.Invoke(new Action(() => progressBar.Value = 0));
+                progressBarMain.Invoke(new Action(() => progressBarMain.Value = 0));
                 labelStatus.Invoke(new Action(() => labelStatus.Text = "Uploading file " + i + " of " + total));
+                labelStatusMain.Invoke(new Action(() => labelStatusMain.Text = "Uploading file " + i + " of " + total));
                 var tcs = new TaskCompletionSource<bool>();
                 String targetPath = currentBackup.targetPath + file.Name;
                 cloudController.Upload(targetPath, cloud.token, file.FullName, Web_UploadProgressChanged, tcs);
@@ -92,9 +96,11 @@ namespace CloudBackupL.BackupActions
                 GC.WaitForPendingFinalizers();
             }
 
-            ArchiveUtils.DeleteDirectory(tempUploadZipFolder);
+            MyUtils.DeleteDirectory(tempUploadZipFolder);
 
             watch.Stop();
+            backupPlan.nextExecution = MyUtils.GetNextExecution(backupPlan);
+            databaseService.UpdateBackupPlan(backupPlan);
             currentBackup.runTime = watch.ElapsedMilliseconds;
             databaseService.InsertBackup(currentBackup);
         }
@@ -106,15 +112,20 @@ namespace CloudBackupL.BackupActions
             {
                 int progress = (int)((e.BytesTransferred * 100) / e.TotalBytesToTransfer);
                 progressBar.Invoke(new Action(() => progressBar.Value = progress));
-            }else if (e.EventType == ZipProgressEventType.Saving_BeforeWriteEntry)
+                progressBarMain.Invoke(new Action(() => progressBarMain.Value = progress));
+            }
+            else if (e.EventType == ZipProgressEventType.Saving_BeforeWriteEntry)
             {
                 labelStatus.Invoke(new Action(() => labelStatus.Text = "Status: Archiving file " + e.EntriesSaved + " of " + e.EntriesTotal));
+                labelStatusMain.Invoke(new Action(() => labelStatusMain.Text = "Status: Archiving file " + e.EntriesSaved + " of " + e.EntriesTotal));
             }
         }
 
         private void Web_UploadProgressChanged(object sender, UploadProgressChangedEventArgs e)
         {
-                progressBar.Invoke(new Action(() => progressBar.Value = (int)(e.BytesSent * 100 / e.TotalBytesToSend)));
+            int progress = (int)(e.BytesSent * 100 / e.TotalBytesToSend);
+            progressBar.Invoke(new Action(() => progressBar.Value = progress));
+            progressBarMain.Invoke(new Action(() => progressBarMain.Value = progress));
         }
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

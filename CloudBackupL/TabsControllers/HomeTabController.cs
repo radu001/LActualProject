@@ -19,6 +19,7 @@ namespace CloudBackupL.TabsControllers
         DatabaseService databaseService;
         ICloud dropBoxController;
         ICloud boxController;
+        ListView listViewPlansQueue;
 
         public HomeTabController()
         {
@@ -26,6 +27,7 @@ namespace CloudBackupL.TabsControllers
             boxController = new OneDriveController();
             databaseService = new DatabaseService();
             dropBoxController = new DropBoxController();
+            this.listViewPlansQueue = mainWindowinstance.ListViewBackupQueue;
             mainWindowinstance.ButtonAddCloud.Click += buttonAddCloud_Click;
             mainWindowinstance.ButtonAddBackupPlan.Click += buttonAddBackupPlan_Click;
             backgroundWorkerLoadClouds = new BackgroundWorker();
@@ -55,32 +57,38 @@ namespace CloudBackupL.TabsControllers
         //Load Clouds in another thread
         private void backgroundWorkerLoadClouds_DoWork(object sender, DoWorkEventArgs e)
         {
-            List<Cloud> clouds = databaseService.GetAllClouds();
-            foreach (var c in clouds)
+            try
             {
-
-                CloudControl control = new CloudControl();
-                switch (c.cloudType)
+                List<Cloud> clouds = databaseService.GetAllClouds();
+                foreach (var c in clouds)
                 {
-                    case "dropbox":
-                        CloudUserInfo cloudUserInfoDropBox = dropBoxController.GetAccountInfo(c.token);
-                        control.LabelTotalSpace.Text = ArchiveUtils.GetFormatedSpaceInGB(cloudUserInfoDropBox.total_space) + " GB";
-                        control.LabelFreeSpace.Text = ArchiveUtils.GetFormatedSpaceInGB(cloudUserInfoDropBox.free_space) + " GB";
-                        control.LabelCloudName.Text = c.name;
-                        control.PictureBoxCloudImage.Image = mainWindowinstance.ImageListClouds.Images[0];
-                        control.LabelId.Text = c.id.ToString();
-                        break;
-                    case "box":
-                        CloudUserInfo cloudUserInfoBox = boxController.GetAccountInfo(c.token);
-                        control.LabelTotalSpace.Text = ArchiveUtils.GetFormatedSpaceInGB(cloudUserInfoBox.total_space) + " GB";
-                        control.LabelFreeSpace.Text = ArchiveUtils.GetFormatedSpaceInGB(cloudUserInfoBox.free_space) + " GB";
-                        control.LabelCloudName.Text = c.name;
-                        control.PictureBoxCloudImage.Image = mainWindowinstance.ImageListClouds.Images[1];
-                        control.LabelId.Text = c.id.ToString();
-                        break;
+
+                    CloudControl control = new CloudControl();
+                    switch (c.cloudType)
+                    {
+                        case "dropbox":
+                            CloudUserInfo cloudUserInfoDropBox = dropBoxController.GetAccountInfo(c.token);
+                            control.LabelTotalSpace.Text = MyUtils.GetFormatedSpaceInGB(cloudUserInfoDropBox.total_space) + " GB";
+                            control.LabelFreeSpace.Text = MyUtils.GetFormatedSpaceInGB(cloudUserInfoDropBox.free_space) + " GB";
+                            control.LabelCloudName.Text = c.name;
+                            control.PictureBoxCloudImage.Image = mainWindowinstance.ImageListClouds.Images[0];
+                            control.LabelId.Text = c.id.ToString();
+                            break;
+                        case "box":
+                            CloudUserInfo cloudUserInfoBox = boxController.GetAccountInfo(c.token);
+                            control.LabelTotalSpace.Text = MyUtils.GetFormatedSpaceInGB(cloudUserInfoBox.total_space) + " GB";
+                            control.LabelFreeSpace.Text = MyUtils.GetFormatedSpaceInGB(cloudUserInfoBox.free_space) + " GB";
+                            control.LabelCloudName.Text = c.name;
+                            control.PictureBoxCloudImage.Image = mainWindowinstance.ImageListClouds.Images[1];
+                            control.LabelId.Text = c.id.ToString();
+                            break;
+                    }
+                    control.OnUserControlDeleteCloudButtonClicked += (s, eve) => DeleteCloudButtonClicked(s, eve);
+                    backgroundWorkerLoadClouds.ReportProgress(1, control);
                 }
-                control.OnUserControlDeleteCloudButtonClicked += (s, eve) => DeleteCloudButtonClicked(s, eve);
-                backgroundWorkerLoadClouds.ReportProgress(1, control);
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
 
@@ -117,6 +125,66 @@ namespace CloudBackupL.TabsControllers
             addBackupPlanWindow.ShowDialog();
             mainWindowinstance.backupPlansTabController.LoadPlans();
             mainWindowinstance.myBackupsTabController.LoadBackupPlansList();
+            LoadQueueList();
+        }
+
+        Timer executeBackupTimer = new Timer();
+        public void LoadQueueList()
+        {
+            listViewPlansQueue.Items.Clear();
+            List<BackupPlan> plans = databaseService.GetAllPlans();
+            plans.Sort(new Comparison<BackupPlan>((x, y) => DateTime.Compare(x.nextExecution, y.nextExecution)));
+            foreach(var plan in plans)
+            {
+                if (!plan.scheduleType.Equals("Manual"))
+                {
+                    listViewPlansQueue.Items.Add(new ListViewItem(new string[]
+                    {
+                        plan.name,
+                        plan.nextExecution.ToString()
+                    }));    
+                }
+            }
+
+            if (plans.Count > 0)
+            {
+                if(DateTime.Compare(plans[0].nextExecution, DateTime.Now) < 0)
+                {
+                    //execute now
+                    ExecuteBackup(plans[0].id);
+                } else
+                {      
+                    //set timer
+                    int timerTime = (int)(plans[0].nextExecution - DateTime.Now).TotalMilliseconds;
+                    if (timerTime < 0) timerTime = 2000;
+                    executeBackupTimer.Stop();
+                    executeBackupTimer.Interval = timerTime;
+                    executeBackupTimer.Tick += (sender, e) => ExecuteBackupTimer_Tick(sender, e, plans[0].id);
+                    executeBackupTimer.Enabled = true;
+                }
+            } 
+        }
+
+        private void ExecuteBackupTimer_Tick(object sender, EventArgs e, int planId)
+        {
+            ExecuteBackup(planId);
+        }
+
+        private void ExecuteBackup(int planId)
+        {
+            bool isExecuted = false;
+            foreach(var p in mainWindowinstance.FlowLayoutPanelPlans.Controls)
+            {
+                PlanControl planControl = (PlanControl)p;
+                if(Int32.Parse(planControl.LabelPlanId.Text) == planId)
+                {
+                    Console.WriteLine("start backup from schedule");
+                    mainWindowinstance.backupPlansTabController.PerformBackup(planControl);
+                    isExecuted = true;
+                }
+            }
+            //in case a plan was deleted
+            if (!isExecuted) LoadQueueList();
         }
     }
 }

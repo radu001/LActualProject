@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace CloudBackupL.Utils
 {
-    class ArchiveUtils
+    class MyUtils
     {
         public static void ZipFiles(string filesSource, string saveDirectory, EventHandler<SaveProgressEventArgs> Zip_SaveProgress, string password)
         {
@@ -56,7 +56,7 @@ namespace CloudBackupL.Utils
                     Directory.Move(tempPath + new DirectoryInfo(extractPath).Name, extractPath);
                     DeleteDirectory(tempPath);
                 }
-            } catch(Ionic.Zip.BadPasswordException e)
+            } catch(Ionic.Zip.BadPasswordException)
             {
                 MessageBox.Show("Wrong password, please try with another password!");
             }
@@ -100,5 +100,39 @@ namespace CloudBackupL.Utils
         {
             return Math.Round(ByteSize.FromBytes(space).GigaBytes, 3);
         }
+
+        public static DateTime GetNextExecution(BackupPlan plan)
+        {
+            DateTime nextUpdate = DateTime.Now;
+            nextUpdate = nextUpdate.AddHours(-nextUpdate.Hour + plan.scheduleTime.Hour);
+            nextUpdate = nextUpdate.AddMinutes(-nextUpdate.Minute + plan.scheduleTime.Minute);
+            switch (plan.scheduleType)
+            {
+                case "Monthly":
+                    if (nextUpdate.Day == plan.scheduleDay && DateTime.Compare(DateTime.Now, nextUpdate) < 0) return nextUpdate;
+
+                    nextUpdate = nextUpdate.AddDays(1);
+                    while (nextUpdate.Day != plan.scheduleDay)
+                    {
+                        nextUpdate = nextUpdate.AddDays(1);
+                    }
+                    return nextUpdate;
+
+                case "Weekly":
+                    int dayOfWeek = (plan.scheduleDay == 7 ? 0 : plan.scheduleDay);
+                    if ((int)nextUpdate.DayOfWeek == dayOfWeek && DateTime.Compare(DateTime.Now, nextUpdate) < 0) return nextUpdate;
+                    nextUpdate = nextUpdate.AddDays(1);
+                    while ((int)nextUpdate.DayOfWeek != dayOfWeek)
+                    {
+                        nextUpdate = nextUpdate.AddDays(1);
+                    }
+                    return nextUpdate;
+
+                case "Daily":
+                    return DateTime.Compare(DateTime.Now, nextUpdate) < 0 ? nextUpdate : nextUpdate.AddDays(1);
+            }
+            return DateTime.Now;
+        }
+
     }
 }

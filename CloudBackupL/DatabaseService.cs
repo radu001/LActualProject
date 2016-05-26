@@ -74,7 +74,7 @@ namespace CloudBackupL
             }
 
             BackupPlan backupPlan = GetBackupPlan(backup.backupPlanId);
-            backupPlan.lastRun = backup.date;
+            backupPlan.lastExecution = backup.date;
             backupPlan.currentStatus = "Updated";
             backupPlan.lastResult = true;
             backupPlan.lastBackupDuration = backup.runTime;

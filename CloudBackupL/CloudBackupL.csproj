@@ -167,7 +167,7 @@
     <Compile Include="SQLiteAsync.cs" />
     <Compile Include="TabsControllers\ManualWorkTabController.cs" />
     <Compile Include="TabsControllers\SettingsTabController.cs" />
-    <Compile Include="Utils\ArchiveUtils.cs" />
+    <Compile Include="Utils\MyUtils.cs" />
     <None Include="Resources\upload-512.png" />
     <Content Include="sqlite3.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

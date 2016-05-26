@@ -27,9 +27,12 @@ namespace CloudBackupL
         [MaxLength(50), NotNull]
         public string cloudId { get; set; }
 
-        public DateTime lastRun { get; set; }
+        public DateTime lastExecution { get; set; }
 
         public Boolean lastResult { get; set; }
+
+        [NotNull]
+        public DateTime nextExecution { get; set; }
 
         [MaxLength(50), NotNull]
         public String currentStatus { get; set; }
@@ -40,5 +43,10 @@ namespace CloudBackupL
         public String scheduleType { get; set; }
 
         public DateTime scheduleTime { get; set; }
+
+        public int scheduleDay { get; set; }
+
+        public Boolean overrideBackup { get; set; }
+
     }
 }

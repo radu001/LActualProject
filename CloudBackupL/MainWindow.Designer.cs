@@ -37,7 +37,6 @@
             this.labelMainStatus = new System.Windows.Forms.Label();
             this.progressBarMain = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
-            this.buttonRunAllplans = new System.Windows.Forms.Button();
             this.buttonAddBackupPlan = new System.Windows.Forms.Button();
             this.buttonAddCloud = new System.Windows.Forms.Button();
             this.textBoxLogs = new System.Windows.Forms.TextBox();
@@ -113,6 +112,12 @@
             this.buttonMinimize = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
+            this.listViewBackupQueue = new System.Windows.Forms.ListView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.labelMainPlanName = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -158,12 +163,15 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.labelMainPlanName);
+            this.tabPage1.Controls.Add(this.label2);
+            this.tabPage1.Controls.Add(this.listViewBackupQueue);
             this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.flowLayoutPanelClouds);
             this.tabPage1.Controls.Add(this.labelMainStatus);
             this.tabPage1.Controls.Add(this.progressBarMain);
             this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.buttonRunAllplans);
             this.tabPage1.Controls.Add(this.buttonAddBackupPlan);
             this.tabPage1.Controls.Add(this.buttonAddCloud);
             this.tabPage1.Controls.Add(this.textBoxLogs);
@@ -177,7 +185,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(535, 3);
+            this.label6.Location = new System.Drawing.Point(453, 3);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(96, 13);
             this.label6.TabIndex = 11;
@@ -193,14 +201,14 @@
             this.flowLayoutPanelClouds.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelClouds.Location = new System.Drawing.Point(456, 19);
             this.flowLayoutPanelClouds.Name = "flowLayoutPanelClouds";
-            this.flowLayoutPanelClouds.Size = new System.Drawing.Size(278, 269);
+            this.flowLayoutPanelClouds.Size = new System.Drawing.Size(278, 417);
             this.flowLayoutPanelClouds.TabIndex = 10;
             this.flowLayoutPanelClouds.WrapContents = false;
             // 
             // labelMainStatus
             // 
             this.labelMainStatus.AutoSize = true;
-            this.labelMainStatus.Location = new System.Drawing.Point(127, 17);
+            this.labelMainStatus.Location = new System.Drawing.Point(248, 28);
             this.labelMainStatus.Name = "labelMainStatus";
             this.labelMainStatus.Size = new System.Drawing.Size(40, 13);
             this.labelMainStatus.TabIndex = 9;
@@ -208,9 +216,9 @@
             // 
             // progressBarMain
             // 
-            this.progressBarMain.Location = new System.Drawing.Point(130, 35);
+            this.progressBarMain.Location = new System.Drawing.Point(251, 44);
             this.progressBarMain.Name = "progressBarMain";
-            this.progressBarMain.Size = new System.Drawing.Size(154, 23);
+            this.progressBarMain.Size = new System.Drawing.Size(199, 23);
             this.progressBarMain.TabIndex = 7;
             this.progressBarMain.Value = 100;
             // 
@@ -224,18 +232,9 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Logs:";
             // 
-            // buttonRunAllplans
-            // 
-            this.buttonRunAllplans.Location = new System.Drawing.Point(8, 135);
-            this.buttonRunAllplans.Name = "buttonRunAllplans";
-            this.buttonRunAllplans.Size = new System.Drawing.Size(100, 23);
-            this.buttonRunAllplans.TabIndex = 4;
-            this.buttonRunAllplans.Text = "Run All Plans Now";
-            this.buttonRunAllplans.UseVisualStyleBackColor = true;
-            // 
             // buttonAddBackupPlan
             // 
-            this.buttonAddBackupPlan.Location = new System.Drawing.Point(8, 85);
+            this.buttonAddBackupPlan.Location = new System.Drawing.Point(12, 124);
             this.buttonAddBackupPlan.Name = "buttonAddBackupPlan";
             this.buttonAddBackupPlan.Size = new System.Drawing.Size(100, 23);
             this.buttonAddBackupPlan.TabIndex = 3;
@@ -244,7 +243,7 @@
             // 
             // buttonAddCloud
             // 
-            this.buttonAddCloud.Location = new System.Drawing.Point(8, 35);
+            this.buttonAddCloud.Location = new System.Drawing.Point(12, 85);
             this.buttonAddCloud.Name = "buttonAddCloud";
             this.buttonAddCloud.Size = new System.Drawing.Size(100, 23);
             this.buttonAddCloud.TabIndex = 2;
@@ -258,7 +257,7 @@
             this.textBoxLogs.Location = new System.Drawing.Point(0, 291);
             this.textBoxLogs.Multiline = true;
             this.textBoxLogs.Name = "textBoxLogs";
-            this.textBoxLogs.Size = new System.Drawing.Size(734, 146);
+            this.textBoxLogs.Size = new System.Drawing.Size(452, 146);
             this.textBoxLogs.TabIndex = 1;
             // 
             // tabPage2
@@ -1048,6 +1047,59 @@
             this.label17.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseMove);
             this.label17.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseUp);
             // 
+            // listViewBackupQueue
+            // 
+            this.listViewBackupQueue.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader3,
+            this.columnHeader4});
+            this.listViewBackupQueue.Location = new System.Drawing.Point(130, 85);
+            this.listViewBackupQueue.Name = "listViewBackupQueue";
+            this.listViewBackupQueue.Size = new System.Drawing.Size(322, 200);
+            this.listViewBackupQueue.TabIndex = 12;
+            this.listViewBackupQueue.UseCompatibleStateImageBehavior = false;
+            this.listViewBackupQueue.View = System.Windows.Forms.View.Details;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(130, 65);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(82, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Backup Queue:";
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Plan Name";
+            this.columnHeader3.Width = 150;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Backup Time";
+            this.columnHeader4.Width = 150;
+            // 
+            // labelMainPlanName
+            // 
+            this.labelMainPlanName.BackColor = System.Drawing.Color.White;
+            this.labelMainPlanName.Font = new System.Drawing.Font("Palatino Linotype", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelMainPlanName.Location = new System.Drawing.Point(12, 30);
+            this.labelMainPlanName.Name = "labelMainPlanName";
+            this.labelMainPlanName.Size = new System.Drawing.Size(178, 23);
+            this.labelMainPlanName.TabIndex = 14;
+            this.labelMainPlanName.Text = "-";
+            this.labelMainPlanName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.White;
+            this.label3.Font = new System.Drawing.Font("Palatino Linotype", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(64, 10);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(79, 20);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Executing:";
+            // 
             // MainWindow
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1115,7 +1167,6 @@
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.TextBox textBoxLogs;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button buttonRunAllplans;
         private System.Windows.Forms.Button buttonAddBackupPlan;
         private System.Windows.Forms.Button buttonAddCloud;
         private System.Windows.Forms.Label labelMainStatus;
@@ -1189,6 +1240,12 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Button buttonMinimize;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ListView listViewBackupQueue;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.Label labelMainPlanName;
+        private System.Windows.Forms.Label label3;
     }
 }
 
