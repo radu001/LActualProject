@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clouds\OneDriveController.cs" />
+    <Compile Include="DatabaseConnection.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ManageBackupPlanWindow.cs">
       <SubType>Form</SubType>
