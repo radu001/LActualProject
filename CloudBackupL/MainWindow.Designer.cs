@@ -88,10 +88,7 @@
             this.textBoxChunkSize = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
+            this.checkBoxShowNotifications = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBoxRepeatPassword = new System.Windows.Forms.TextBox();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
@@ -119,6 +116,13 @@
             this.buttonExit = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.notifyIconApp = new System.Windows.Forms.NotifyIcon(this.components);
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBoxPostpone = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -138,6 +142,7 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage6.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -274,7 +279,6 @@
             this.progressBarMain.Name = "progressBarMain";
             this.progressBarMain.Size = new System.Drawing.Size(199, 23);
             this.progressBarMain.TabIndex = 7;
-            this.progressBarMain.Value = 100;
             // 
             // label1
             // 
@@ -311,6 +315,7 @@
             this.textBoxLogs.Location = new System.Drawing.Point(0, 291);
             this.textBoxLogs.Multiline = true;
             this.textBoxLogs.Name = "textBoxLogs";
+            this.textBoxLogs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxLogs.Size = new System.Drawing.Size(452, 146);
             this.textBoxLogs.TabIndex = 1;
             // 
@@ -370,18 +375,18 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.listViewBackupsInfo);
             this.splitContainer1.Size = new System.Drawing.Size(728, 431);
-            this.splitContainer1.SplitterDistance = 178;
+            this.splitContainer1.SplitterDistance = 149;
             this.splitContainer1.TabIndex = 0;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(36, 0);
+            this.label4.Location = new System.Drawing.Point(38, 4);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(130, 20);
+            this.label4.Size = new System.Drawing.Size(72, 20);
             this.label4.TabIndex = 2;
-            this.label4.Text = "My Backup Plans";
+            this.label4.Text = "My Plans";
             // 
             // listBoxBackupPlans
             // 
@@ -390,7 +395,7 @@
             this.listBoxBackupPlans.IntegralHeight = false;
             this.listBoxBackupPlans.Location = new System.Drawing.Point(0, 27);
             this.listBoxBackupPlans.Name = "listBoxBackupPlans";
-            this.listBoxBackupPlans.Size = new System.Drawing.Size(178, 404);
+            this.listBoxBackupPlans.Size = new System.Drawing.Size(149, 404);
             this.listBoxBackupPlans.TabIndex = 1;
             // 
             // listViewBackupsInfo
@@ -405,7 +410,7 @@
             this.listViewBackupsInfo.FullRowSelect = true;
             this.listViewBackupsInfo.Location = new System.Drawing.Point(0, 0);
             this.listViewBackupsInfo.Name = "listViewBackupsInfo";
-            this.listViewBackupsInfo.Size = new System.Drawing.Size(546, 431);
+            this.listViewBackupsInfo.Size = new System.Drawing.Size(575, 431);
             this.listViewBackupsInfo.TabIndex = 0;
             this.listViewBackupsInfo.UseCompatibleStateImageBehavior = false;
             this.listViewBackupsInfo.View = System.Windows.Forms.View.Details;
@@ -614,11 +619,11 @@
             this.groupBox4.Size = new System.Drawing.Size(339, 190);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Other";
+            this.groupBox4.Text = "Database and logs";
             // 
             // buttonSelectDatabase
             // 
-            this.buttonSelectDatabase.Location = new System.Drawing.Point(286, 56);
+            this.buttonSelectDatabase.Location = new System.Drawing.Point(286, 77);
             this.buttonSelectDatabase.Name = "buttonSelectDatabase";
             this.buttonSelectDatabase.Size = new System.Drawing.Size(28, 20);
             this.buttonSelectDatabase.TabIndex = 16;
@@ -627,7 +632,7 @@
             // 
             // buttonSelectLogFile
             // 
-            this.buttonSelectLogFile.Location = new System.Drawing.Point(286, 16);
+            this.buttonSelectLogFile.Location = new System.Drawing.Point(286, 37);
             this.buttonSelectLogFile.Name = "buttonSelectLogFile";
             this.buttonSelectLogFile.Size = new System.Drawing.Size(28, 20);
             this.buttonSelectLogFile.TabIndex = 15;
@@ -636,7 +641,7 @@
             // 
             // textBoxDatabaseLocation
             // 
-            this.textBoxDatabaseLocation.Location = new System.Drawing.Point(105, 57);
+            this.textBoxDatabaseLocation.Location = new System.Drawing.Point(105, 78);
             this.textBoxDatabaseLocation.Name = "textBoxDatabaseLocation";
             this.textBoxDatabaseLocation.Size = new System.Drawing.Size(175, 20);
             this.textBoxDatabaseLocation.TabIndex = 14;
@@ -644,7 +649,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(6, 60);
+            this.label8.Location = new System.Drawing.Point(6, 81);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(96, 13);
             this.label8.TabIndex = 13;
@@ -652,7 +657,7 @@
             // 
             // textBoxLogToFile
             // 
-            this.textBoxLogToFile.Location = new System.Drawing.Point(105, 17);
+            this.textBoxLogToFile.Location = new System.Drawing.Point(105, 38);
             this.textBoxLogToFile.Name = "textBoxLogToFile";
             this.textBoxLogToFile.Size = new System.Drawing.Size(175, 20);
             this.textBoxLogToFile.TabIndex = 12;
@@ -660,7 +665,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(6, 20);
+            this.label9.Location = new System.Drawing.Point(6, 41);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(56, 13);
             this.label9.TabIndex = 11;
@@ -682,7 +687,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(175, 20);
+            this.label7.Location = new System.Drawing.Point(175, 37);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(23, 13);
             this.label7.TabIndex = 7;
@@ -691,7 +696,7 @@
             // checkBoxPreventSleep
             // 
             this.checkBoxPreventSleep.AutoSize = true;
-            this.checkBoxPreventSleep.Location = new System.Drawing.Point(10, 52);
+            this.checkBoxPreventSleep.Location = new System.Drawing.Point(10, 69);
             this.checkBoxPreventSleep.Name = "checkBoxPreventSleep";
             this.checkBoxPreventSleep.Size = new System.Drawing.Size(273, 17);
             this.checkBoxPreventSleep.TabIndex = 6;
@@ -700,7 +705,7 @@
             // 
             // textBoxChunkSize
             // 
-            this.textBoxChunkSize.Location = new System.Drawing.Point(77, 17);
+            this.textBoxChunkSize.Location = new System.Drawing.Point(77, 34);
             this.textBoxChunkSize.Name = "textBoxChunkSize";
             this.textBoxChunkSize.Size = new System.Drawing.Size(92, 20);
             this.textBoxChunkSize.TabIndex = 2;
@@ -708,7 +713,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(7, 20);
+            this.label10.Location = new System.Drawing.Point(7, 37);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(62, 13);
             this.label10.TabIndex = 1;
@@ -716,48 +721,26 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.textBox5);
             this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Controls.Add(this.textBox4);
+            this.groupBox2.Controls.Add(this.textBoxPostpone);
             this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Controls.Add(this.checkBoxShowNotifications);
             this.groupBox2.Location = new System.Drawing.Point(377, 4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(340, 190);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Connection";
+            this.groupBox2.Text = "Other";
             // 
-            // textBox5
+            // checkBoxShowNotifications
             // 
-            this.textBox5.Location = new System.Drawing.Point(151, 57);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(119, 20);
-            this.textBox5.TabIndex = 10;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 60);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(142, 13);
-            this.label11.TabIndex = 9;
-            this.label11.Text = "Time between attempts (ms):";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(151, 17);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(119, 20);
-            this.textBox4.TabIndex = 8;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(6, 20);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(102, 13);
-            this.label12.TabIndex = 1;
-            this.label12.Text = "Number of attempts:";
+            this.checkBoxShowNotifications.AutoSize = true;
+            this.checkBoxShowNotifications.Location = new System.Drawing.Point(10, 73);
+            this.checkBoxShowNotifications.Name = "checkBoxShowNotifications";
+            this.checkBoxShowNotifications.Size = new System.Drawing.Size(114, 17);
+            this.checkBoxShowNotifications.TabIndex = 11;
+            this.checkBoxShowNotifications.Text = "Show Notifications";
+            this.checkBoxShowNotifications.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -867,6 +850,9 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.label20);
+            this.tabPage6.Controls.Add(this.label19);
+            this.tabPage6.Controls.Add(this.label18);
             this.tabPage6.Location = new System.Drawing.Point(4, 26);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
@@ -1043,7 +1029,7 @@
             this.panelTopBar.Controls.Add(this.label17);
             this.panelTopBar.Location = new System.Drawing.Point(155, 0);
             this.panelTopBar.Name = "panelTopBar";
-            this.panelTopBar.Size = new System.Drawing.Size(742, 23);
+            this.panelTopBar.Size = new System.Drawing.Size(742, 56);
             this.panelTopBar.TabIndex = 3;
             this.panelTopBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseDown);
             this.panelTopBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseMove);
@@ -1110,6 +1096,62 @@
             this.notifyIconApp.Text = "notifyIcon1";
             this.notifyIconApp.Visible = true;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(297, 35);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(24, 13);
+            this.label11.TabIndex = 14;
+            this.label11.Text = "Min";
+            // 
+            // textBoxPostpone
+            // 
+            this.textBoxPostpone.Location = new System.Drawing.Point(199, 32);
+            this.textBoxPostpone.Name = "textBoxPostpone";
+            this.textBoxPostpone.Size = new System.Drawing.Size(92, 20);
+            this.textBoxPostpone.TabIndex = 13;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(7, 35);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(195, 13);
+            this.label12.TabIndex = 12;
+            this.label12.Text = "Postpone schedule when unsuccessful:";
+            this.toolTip1.SetToolTip(this.label12, "Postpone the scheduled backup in case of some errors.");
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Maiandra GD", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(480, 412);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(248, 19);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "@2016 Developed by Zmeu Radu";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(12, 17);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(107, 16);
+            this.label19.TabIndex = 1;
+            this.label19.Text = "Version: beta 1.0";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(12, 46);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(226, 16);
+            this.label20.TabIndex = 2;
+            this.label20.Text = "Support: SecureBackup@gmail.com";
+            // 
             // MainWindow
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1157,6 +1199,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage6.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -1218,10 +1262,6 @@
         private System.Windows.Forms.TextBox textBoxChunkSize;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Label label12;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox textBoxRepeatPassword;
         private System.Windows.Forms.TextBox textBoxPassword;
@@ -1258,6 +1298,14 @@
         private System.Windows.Forms.Label labelMainPlanName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NotifyIcon notifyIconApp;
+        private System.Windows.Forms.CheckBox checkBoxShowNotifications;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox textBoxPostpone;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
     }
 }
 

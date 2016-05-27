@@ -56,9 +56,10 @@ namespace CloudBackupL.Utils
                     Directory.Move(tempPath + new DirectoryInfo(extractPath).Name, extractPath);
                     DeleteDirectory(tempPath);
                 }
-            } catch(Ionic.Zip.BadPasswordException)
+            } catch(Ionic.Zip.BadPasswordException e)
             {
                 MessageBox.Show("Wrong password, please try with another password!");
+                throw e;
             }
         }
 

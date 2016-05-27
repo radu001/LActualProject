@@ -163,7 +163,7 @@ namespace CloudBackupL
                     databaseService.UpdateBackupPlan(backupPlanToEdit);
                     dialogMessage = "Plan updated succesfully";
                 }
-
+                this.DialogResult = DialogResult.OK;
                 DialogResult dialog = MessageBox.Show(dialogMessage);
                 if (dialog == DialogResult.OK)
                 {
@@ -179,6 +179,7 @@ namespace CloudBackupL
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
+            this.DialogResult = DialogResult.None;
             this.Close();
         }
     }

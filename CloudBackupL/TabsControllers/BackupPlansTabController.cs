@@ -66,7 +66,6 @@ namespace CloudBackupL.TabsControllers
                 control.OnUserControlEditButtonClicked += (s, e) => EditButtonClicked(s, e);
                 control.OnUserControlViewHystoryButtonClicked += (s, e) => ViewHistoryButtonClicked(s, e);
                 control.OnUserControlRestoreButtonClicked += (s, e) => RestoreButtonClicked(s, e);
-                //control.ProgressBarArchiving
                 flowLayoutPanelPlans.Controls.Add(control);
             }
         }
@@ -112,7 +111,8 @@ namespace CloudBackupL.TabsControllers
         {
             int planId = Int32.Parse(((PlanControl)sender).LabelPlanId.Text);
             ManageBackupPlanWindow manageBackupPlanWindow = new ManageBackupPlanWindow(planId);
-            manageBackupPlanWindow.ShowDialog();
+            if(manageBackupPlanWindow.ShowDialog() == DialogResult.OK)
+                Logger.Log("The plan " + ((PlanControl)sender).LabelBackupName.Text + " was edited!");
         }
 
         private void DownloadButtonClicked(object sender, EventArgs e)
@@ -169,6 +169,7 @@ namespace CloudBackupL.TabsControllers
                     }
 
                 }
+                Logger.Log("The plan " + ((PlanControl)sender).LabelBackupName.Text + " was deleted!");
                 databaseService.DeletePlan(Int32.Parse(id));
                 MainWindow.instance.LoadAllControlls(); 
                 MessageBox.Show("Plan deleted!");
@@ -186,10 +187,10 @@ namespace CloudBackupL.TabsControllers
         {
             PlanControl planControl = (PlanControl)sender;
             MainWindow.instance.LabelMainPlanName.Text = "Plan: " + planControl.LabelBackupName.Text;
-            PerformBackup(planControl);
+            PerformBackup(planControl, false);
         }
 
-        public void PerformBackup(PlanControl planControl)
+        public void PerformBackup(PlanControl planControl, bool isFromSchedule)
         {
             if (!MainWindow.isActiveUploadOperation)
             {
@@ -197,7 +198,7 @@ namespace CloudBackupL.TabsControllers
                 DisableActions();
                 string password = new DatabaseService().GetSettings().getPassword();
                 BackupPlan backupPlan = databaseService.GetBackupPlan(Int32.Parse(planControl.LabelPlanId.Text));
-                UploadBackupAction uploadBackupAction = new UploadBackupAction(backupPlan, planControl.LabelStatus, planControl.ProgressBarArchiving, BackupCompleteEvent, password);
+                UploadBackupAction uploadBackupAction = new UploadBackupAction(backupPlan, planControl.LabelStatus, planControl.ProgressBarArchiving, BackupCompleteEvent, password, isFromSchedule);
                 uploadBackupAction.StartBackupAction();
             }
         }

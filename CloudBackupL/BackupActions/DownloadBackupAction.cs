@@ -58,6 +58,10 @@ namespace CloudBackupL.BackupActions
         {
             if (backgroundWorker.IsBusy == false)
             {
+                if(isRestoreAction)
+                    Logger.Log("Restoring backup, please don't interrupt!", ToolTipIcon.Info);
+                else
+                    Logger.Log("Downloading backup, please don't interrupt!", ToolTipIcon.Info);
                 backgroundWorker.RunWorkerAsync();
             }
         }
@@ -137,13 +141,23 @@ namespace CloudBackupL.BackupActions
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if(e.Error == null)
+            if (e.Error == null)
             {
+                if (isRestoreAction)
+                    Logger.Log("Restore successul!", ToolTipIcon.Info);
+                else
+                    Logger.Log("Download successful!", ToolTipIcon.Info);
                 downloadCompleteEvent(this, true);
-            } else
+            }
+            else
             {
+                if (isRestoreAction)
+                    Logger.Log("Something went wrong on restore backup!", ToolTipIcon.Error);
+                else
+                    Logger.Log("Something went wrong on download backup!", ToolTipIcon.Error);
+
                 downloadCompleteEvent(this, false);
-            }    
+            }
         }
 
     }

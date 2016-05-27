@@ -1,5 +1,6 @@
 ﻿using CloudBackupL.Clouds;
 using CloudBackupL.Models;
+using CloudBackupL.Utils;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Windows.Forms;
@@ -72,6 +73,7 @@ namespace CloudBackupL
                     cloud.date = DateTime.Now;
                     dbService.InsertCloud(cloud);
                     DialogResult dialogResult = MessageBox.Show("Cloud inserted successfuly.", "Succes", MessageBoxButtons.OK);
+                    Logger.Log("The cloud " + cloud.name + " was inserted successfuly!");
                     this.Close();
                 }
 

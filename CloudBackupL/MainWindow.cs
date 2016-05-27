@@ -1,4 +1,5 @@
 ﻿using CloudBackupL.TabsControllers;
+using CloudBackupL.Utils;
 using System;
 using System.ComponentModel;
 using System.Configuration;
@@ -54,8 +55,7 @@ namespace CloudBackupL
             notifyIconApp.Text = "Secure Backup";
             notifyIconApp.DoubleClick += NotifyIconApp_DoubleClick;
             LoadTrayType();
-            this.FormClosing += MainWindow_FormClosing;      
-
+            this.FormClosing += MainWindow_FormClosing;
 
         }
 
@@ -116,6 +116,8 @@ namespace CloudBackupL
             manualWorkTabController.LoadCloudList();
             homeTabController.LoadQueueList();
             LabelMainPlanName.Text = "-";
+            progressBarMain.Value = 0;
+            Logger.Log("Application started!");
         }
 
         public void RestrictDownloadAction()
@@ -311,6 +313,48 @@ namespace CloudBackupL
         {
             get { return textBoxRepeatPassword; }
             set { textBoxRepeatPassword = value; }
+        }
+
+        public TextBox TextBoxLogs
+        {
+            get { return textBoxLogs; }
+            set { textBoxLogs = value; }
+        }
+
+        public CheckBox CheckBoxShowNotifications
+        {
+            get { return checkBoxShowNotifications; }
+            set { checkBoxShowNotifications = value; }
+        }
+
+        public TextBox TextBoxPostpone
+        {
+            get { return textBoxPostpone; }
+            set { textBoxPostpone = value; }
+        }
+
+        public TextBox TextBoxDatabaseLocation
+        {
+            get { return textBoxDatabaseLocation; }
+            set { textBoxDatabaseLocation = value; }
+        }
+
+        public TextBox TextBoxLogToFile
+        {
+            get { return textBoxLogToFile; }
+            set { textBoxLogToFile = value; }
+        }
+
+        public Button ButtonSelectDatabase
+        {
+            get { return buttonSelectDatabase; }
+            set { buttonSelectDatabase = value; }
+        }
+
+        public Button ButtonSelectLogFile
+        {
+            get { return buttonSelectLogFile; }
+            set { buttonSelectLogFile = value; }
         }
 
         private bool dragging = false;

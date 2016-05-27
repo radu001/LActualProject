@@ -15,6 +15,10 @@ namespace CloudBackupL
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
+            if(new DatabaseService().GetSettings().preventShutDown) {
+                NativeMethods.SetThreadExecutionState(NativeMethods.ES_CONTINUOUS);
+            }
+
             if (new DatabaseService().GetSettings().askPassword)
             {
                 LoginForm fLogin = new LoginForm();

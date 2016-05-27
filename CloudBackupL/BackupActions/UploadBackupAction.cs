@@ -26,10 +26,12 @@ namespace CloudBackupL.BackupActions
         Cloud cloud;
         EventHandler<Boolean> backupCompleteEvent;
         string password;
+        bool isFromSchedule;
 
 
-        public UploadBackupAction(BackupPlan backupPlan, Label labelStatus, ProgressBar progressBar, EventHandler<Boolean> backupCompleteEvent, string password)
+        public UploadBackupAction(BackupPlan backupPlan, Label labelStatus, ProgressBar progressBar, EventHandler<Boolean> backupCompleteEvent, string password, bool isFromSchedule)
         {
+            this.isFromSchedule = isFromSchedule;
             this.backupPlan = backupPlan;
             this.labelStatus = labelStatus;
             this.progressBar = progressBar;
@@ -53,6 +55,7 @@ namespace CloudBackupL.BackupActions
         {
             if (backgroundWorker.IsBusy == false)
             {
+                Logger.Log("Starting backup " + backupPlan.name + ", please don't interrupt!", ToolTipIcon.Info);
                 backgroundWorker.RunWorkerAsync();
             }
         }
@@ -147,9 +150,20 @@ namespace CloudBackupL.BackupActions
         {
             if(e.Error == null)
             {
+                Logger.Log("Backup " + backupPlan.name + " successful!", ToolTipIcon.Info);
                 backupCompleteEvent(this, true);
             } else
             {
+                if(isFromSchedule)
+                {
+                    Logger.Log("Something went wrong on backup " + backupPlan.name+ "! Backup from schedule postponed to 5 minutes.", ToolTipIcon.Error);
+                    backupPlan.nextExecution = backupPlan.nextExecution.AddMinutes(new DatabaseService().GetSettings().postpone);
+                    databaseService.UpdateBackupPlan(backupPlan);
+                }
+                else
+                {
+                    Logger.Log("Something went wrong on backup " + backupPlan.name + "!", ToolTipIcon.Error);
+                }      
                 backupCompleteEvent(this, false);
             }
         }

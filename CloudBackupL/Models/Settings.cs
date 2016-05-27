@@ -20,12 +20,9 @@ namespace CloudBackupL.Models
 
         public int chunkSize { get; set; }
 
-        public int nrAttempts { get; set; }
+        public bool showNotifications { get; set; }
 
-        public int delay { get; set; }
-
-        [NotNull MaxLength(250)]
-        public string logFileLocation { get; set; }
+        public int postpone { get; set; }
 
         public string getPassword()
         {

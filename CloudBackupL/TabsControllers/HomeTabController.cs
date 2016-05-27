@@ -86,9 +86,9 @@ namespace CloudBackupL.TabsControllers
                     control.OnUserControlDeleteCloudButtonClicked += (s, eve) => DeleteCloudButtonClicked(s, eve);
                     backgroundWorkerLoadClouds.ReportProgress(1, control);
                 }
-            }catch(Exception ex)
+            }catch(Exception)
             {
-                Console.WriteLine(ex.Message);
+                Logger.Log("Error loading clouds, please check internet connection!");
             }
         }
 
@@ -108,6 +108,7 @@ namespace CloudBackupL.TabsControllers
                 if (databaseService.CanDeleteCloud(id))
                 {
                     databaseService.DeleteCloud(id);
+                    Logger.Log("The cloud " + ((CloudControl)sender).LabelCloudName.Text + " was deleted!");
                     LoadClouds();
                 }
                 else
@@ -182,7 +183,7 @@ namespace CloudBackupL.TabsControllers
                 if(Int32.Parse(planControl.LabelPlanId.Text) == planId)
                 {
                     Console.WriteLine("start backup from schedule");
-                    mainWindowinstance.backupPlansTabController.PerformBackup(planControl);
+                    mainWindowinstance.backupPlansTabController.PerformBackup(planControl,true);
                     isExecuted = true;
                 }
             }

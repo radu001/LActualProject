@@ -18,13 +18,12 @@ namespace CloudBackupL
                 checkDBExists = false;
 
                 Settings s = new Settings();
-                s.nrAttempts = 3;
-                s.delay = 500;
                 s.preventShutDown = true;
                 s.trayType = "never";
                 s.chunkSize = 99;
                 s.askPassword = true;
-                s.logFileLocation = AppDomain.CurrentDomain.BaseDirectory + "\\log.txt";
+                s.showNotifications = true;
+                s.postpone = 5;
 
                 lock (DatabaseConnection.connection)
                 {
