@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace CloudBackupL
@@ -16,7 +14,22 @@ namespace CloudBackupL
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainWindow());     
+
+            if (new DatabaseService().GetSettings().askPassword)
+            {
+                LoginForm fLogin = new LoginForm();
+                if (fLogin.ShowDialog() == DialogResult.OK)
+                {
+                    Application.Run(new MainWindow());
+                }
+                else
+                {
+                    Application.Exit();
+                }
+            } else
+            {
+                Application.Run(new MainWindow());
+            }
         }
     }
 }

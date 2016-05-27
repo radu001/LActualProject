@@ -4,6 +4,7 @@ using CloudBackupL.CustomControllers;
 using CloudBackupL.Utils;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace CloudBackupL.TabsControllers
@@ -89,8 +90,7 @@ namespace CloudBackupL.TabsControllers
                 {
                     MainWindow.isActiveDownloadOperation = true;
                     DisableActions();
-                    //to do
-                    string password = MyUtils.Encript("mypassword");
+                    string password = new DatabaseService().GetSettings().getPassword();
                     PlanControl planControl = (PlanControl)sender;
                     Cloud cloud = databaseService.GetCloudByName(planControl.LabelCloudName.Text);    
                     Backup lastBackup = databaseService.GetLastBackup(Int32.Parse(planControl.LabelPlanId.Text));
@@ -122,7 +122,7 @@ namespace CloudBackupL.TabsControllers
                 MainWindow.isActiveDownloadOperation = true;
                 //to do
                 DisableActions();
-                string password = MyUtils.Encript("mypassword");
+                string password = new DatabaseService().GetSettings().getPassword();
                 PlanControl planControl = (PlanControl)sender;
                 Backup lastBackup = databaseService.GetLastBackup(Int32.Parse(planControl.LabelPlanId.Text));
                 Cloud cloud = databaseService.GetCloudByName(planControl.LabelCloudName.Text);
@@ -195,7 +195,7 @@ namespace CloudBackupL.TabsControllers
             {
                 MainWindow.isActiveUploadOperation = true;
                 DisableActions();
-                string password = MyUtils.Encript("mypassword");
+                string password = new DatabaseService().GetSettings().getPassword();
                 BackupPlan backupPlan = databaseService.GetBackupPlan(Int32.Parse(planControl.LabelPlanId.Text));
                 UploadBackupAction uploadBackupAction = new UploadBackupAction(backupPlan, planControl.LabelStatus, planControl.ProgressBarArchiving, BackupCompleteEvent, password);
                 uploadBackupAction.StartBackupAction();

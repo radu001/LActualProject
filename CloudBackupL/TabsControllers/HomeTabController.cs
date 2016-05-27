@@ -134,10 +134,13 @@ namespace CloudBackupL.TabsControllers
             listViewPlansQueue.Items.Clear();
             List<BackupPlan> plans = databaseService.GetAllPlans();
             plans.Sort(new Comparison<BackupPlan>((x, y) => DateTime.Compare(x.nextExecution, y.nextExecution)));
+            BackupPlan planToQueue = null;
             foreach(var plan in plans)
             {
                 if (!plan.scheduleType.Equals("Manual"))
                 {
+                    if (planToQueue == null)
+                        planToQueue = plan;
                     listViewPlansQueue.Items.Add(new ListViewItem(new string[]
                     {
                         plan.name,
@@ -146,20 +149,20 @@ namespace CloudBackupL.TabsControllers
                 }
             }
 
-            if (plans.Count > 0)
+            if (planToQueue != null)
             {
-                if(DateTime.Compare(plans[0].nextExecution, DateTime.Now) < 0)
+                if(DateTime.Compare(planToQueue.nextExecution, DateTime.Now) < 0)
                 {
                     //execute now
-                    ExecuteBackup(plans[0].id);
+                    ExecuteBackup(planToQueue.id);
                 } else
                 {      
                     //set timer
-                    int timerTime = (int)(plans[0].nextExecution - DateTime.Now).TotalMilliseconds;
+                    int timerTime = (int)(planToQueue.nextExecution - DateTime.Now).TotalMilliseconds;
                     if (timerTime < 0) timerTime = 2000;
                     executeBackupTimer.Stop();
                     executeBackupTimer.Interval = timerTime;
-                    executeBackupTimer.Tick += (sender, e) => ExecuteBackupTimer_Tick(sender, e, plans[0].id);
+                    executeBackupTimer.Tick += (sender, e) => ExecuteBackupTimer_Tick(sender, e, planToQueue.id);
                     executeBackupTimer.Enabled = true;
                 }
             } 

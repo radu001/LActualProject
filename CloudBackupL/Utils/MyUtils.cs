@@ -14,7 +14,7 @@ namespace CloudBackupL.Utils
     {
         public static void ZipFiles(string filesSource, string saveDirectory, EventHandler<SaveProgressEventArgs> Zip_SaveProgress, string password)
         {
-            int size = (int) ByteSize.FromMegaBytes(Double.Parse(ConfigurationManager.AppSettings["chunkSize"])).Bytes;
+            int size = (int) ByteSize.FromMegaBytes(new DatabaseService().GetSettings().chunkSize).Bytes;
 
             using (ZipFile zip = new ZipFile())
             {
@@ -92,7 +92,7 @@ namespace CloudBackupL.Utils
             }
 
             string encodedPassword = Encoding.UTF8.GetString(hash);
-            return encodedPassword + encodedPassword;
+            return encodedPassword;
         }
 
 
@@ -131,7 +131,16 @@ namespace CloudBackupL.Utils
                 case "Daily":
                     return DateTime.Compare(DateTime.Now, nextUpdate) < 0 ? nextUpdate : nextUpdate.AddDays(1);
             }
-            return DateTime.Now;
+            return new DateTime(2500, 1, 1);
+        }
+
+        public static void UpdateSetting(string key, string value)
+        {
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            configuration.AppSettings.Settings[key].Value = value;
+            configuration.Save();
+
+            ConfigurationManager.RefreshSection("appSettings");
         }
 
     }

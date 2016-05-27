@@ -6,6 +6,7 @@ using System.IO;
 using CloudBackupL.Clouds;
 using CloudBackupL.BackupActions;
 using CloudBackupL.Utils;
+using System.Configuration;
 
 namespace CloudBackupL.TabsControllers
 {
@@ -43,7 +44,7 @@ namespace CloudBackupL.TabsControllers
             {
                 if (selectedItem != null && !MainWindow.isActiveDownloadOperation)
                 {
-                    string password = MyUtils.Encript("mypassword");
+                    string password = new DatabaseService().GetSettings().getPassword();
                     Backup backup = databaseService.GetBackup((int)selectedItem.Tag);
                     BackupPlan backupPlan = databaseService.GetBackupPlan(backup.backupPlanId);
                     Cloud cloud = databaseService.GetCloud(backup.cloudId);
@@ -58,7 +59,8 @@ namespace CloudBackupL.TabsControllers
         {
             if (selectedItem != null && !MainWindow.isActiveDownloadOperation)
             {
-                string password = MyUtils.Encript("mypassword");
+                string password = new DatabaseService().GetSettings().getPassword();
+
                 Backup backup = databaseService.GetBackup((int)selectedItem.Tag);
                 Cloud cloud = databaseService.GetCloud(backup.cloudId);
                 FolderBrowserDialog folderBrowser = new FolderBrowserDialog();
@@ -80,11 +82,6 @@ namespace CloudBackupL.TabsControllers
             mainInstance.ResetDownloadAction();
             Console.WriteLine("Download complete");
         }
-
-
-
-
-
 
 
         public void EventDelete(object sender, EventArgs e)

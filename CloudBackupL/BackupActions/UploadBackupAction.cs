@@ -108,7 +108,8 @@ namespace CloudBackupL.BackupActions
                     databaseService.DeleteBackup(lastBackup.id);
                 }
             }
-            backupPlan.nextExecution = MyUtils.GetNextExecution(backupPlan);
+            if (!backupPlan.scheduleType.Equals("Manual"))
+                backupPlan.nextExecution = MyUtils.GetNextExecution(backupPlan);
             databaseService.UpdateBackupPlan(backupPlan);
             currentBackup.runTime = watch.ElapsedMilliseconds;
             databaseService.InsertBackup(currentBackup);

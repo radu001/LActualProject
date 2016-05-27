@@ -321,7 +321,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 26);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(722, 437);
+            this.tabPage2.Size = new System.Drawing.Size(734, 437);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Backup Plans";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -350,7 +350,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 26);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(722, 437);
+            this.tabPage3.Size = new System.Drawing.Size(734, 437);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "My backups";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -369,8 +369,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.listViewBackupsInfo);
-            this.splitContainer1.Size = new System.Drawing.Size(716, 431);
-            this.splitContainer1.SplitterDistance = 176;
+            this.splitContainer1.Size = new System.Drawing.Size(728, 431);
+            this.splitContainer1.SplitterDistance = 178;
             this.splitContainer1.TabIndex = 0;
             // 
             // label4
@@ -390,7 +390,7 @@
             this.listBoxBackupPlans.IntegralHeight = false;
             this.listBoxBackupPlans.Location = new System.Drawing.Point(0, 27);
             this.listBoxBackupPlans.Name = "listBoxBackupPlans";
-            this.listBoxBackupPlans.Size = new System.Drawing.Size(176, 404);
+            this.listBoxBackupPlans.Size = new System.Drawing.Size(178, 404);
             this.listBoxBackupPlans.TabIndex = 1;
             // 
             // listViewBackupsInfo
@@ -405,7 +405,7 @@
             this.listViewBackupsInfo.FullRowSelect = true;
             this.listViewBackupsInfo.Location = new System.Drawing.Point(0, 0);
             this.listViewBackupsInfo.Name = "listViewBackupsInfo";
-            this.listViewBackupsInfo.Size = new System.Drawing.Size(536, 431);
+            this.listViewBackupsInfo.Size = new System.Drawing.Size(546, 431);
             this.listViewBackupsInfo.TabIndex = 0;
             this.listViewBackupsInfo.UseCompatibleStateImageBehavior = false;
             this.listViewBackupsInfo.View = System.Windows.Forms.View.Details;
@@ -441,7 +441,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 26);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(722, 437);
+            this.tabPage4.Size = new System.Drawing.Size(734, 437);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Manual Work";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -465,8 +465,8 @@
             this.splitContainer2.Panel2.Controls.Add(this.buttonManualDownload);
             this.splitContainer2.Panel2.Controls.Add(this.progressBarManual);
             this.splitContainer2.Panel2.Controls.Add(this.listViewCloudFiles);
-            this.splitContainer2.Size = new System.Drawing.Size(716, 431);
-            this.splitContainer2.SplitterDistance = 147;
+            this.splitContainer2.Size = new System.Drawing.Size(728, 431);
+            this.splitContainer2.SplitterDistance = 149;
             this.splitContainer2.TabIndex = 1;
             // 
             // label5
@@ -486,7 +486,7 @@
             this.listBoxCloudsManual.IntegralHeight = false;
             this.listBoxCloudsManual.Location = new System.Drawing.Point(0, 27);
             this.listBoxCloudsManual.Name = "listBoxCloudsManual";
-            this.listBoxCloudsManual.Size = new System.Drawing.Size(147, 404);
+            this.listBoxCloudsManual.Size = new System.Drawing.Size(149, 404);
             this.listBoxCloudsManual.TabIndex = 1;
             // 
             // label16
@@ -565,7 +565,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 26);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(722, 437);
+            this.tabPage5.Size = new System.Drawing.Size(734, 437);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Settings";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -783,6 +783,8 @@
             this.textBoxRepeatPassword.Name = "textBoxRepeatPassword";
             this.textBoxRepeatPassword.Size = new System.Drawing.Size(143, 20);
             this.textBoxRepeatPassword.TabIndex = 9;
+            this.textBoxRepeatPassword.Text = "tempPass-852";
+            this.textBoxRepeatPassword.UseSystemPasswordChar = true;
             // 
             // textBoxPassword
             // 
@@ -790,6 +792,8 @@
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(143, 20);
             this.textBoxPassword.TabIndex = 8;
+            this.textBoxPassword.Text = "tempPass-852";
+            this.textBoxPassword.UseSystemPasswordChar = true;
             // 
             // label13
             // 
@@ -866,7 +870,7 @@
             this.tabPage6.Location = new System.Drawing.Point(4, 26);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(722, 437);
+            this.tabPage6.Size = new System.Drawing.Size(734, 437);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "About";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1039,7 +1043,7 @@
             this.panelTopBar.Controls.Add(this.label17);
             this.panelTopBar.Location = new System.Drawing.Point(155, 0);
             this.panelTopBar.Name = "panelTopBar";
-            this.panelTopBar.Size = new System.Drawing.Size(742, 56);
+            this.panelTopBar.Size = new System.Drawing.Size(742, 23);
             this.panelTopBar.TabIndex = 3;
             this.panelTopBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseDown);
             this.panelTopBar.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelTopBar_MouseMove);

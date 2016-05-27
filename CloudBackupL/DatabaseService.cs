@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CloudBackupL.Models;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -15,11 +16,23 @@ namespace CloudBackupL
             if (checkDBExists && !File.Exists(connString))
             {
                 checkDBExists = false;
+
+                Settings s = new Settings();
+                s.nrAttempts = 3;
+                s.delay = 500;
+                s.preventShutDown = true;
+                s.trayType = "never";
+                s.chunkSize = 99;
+                s.askPassword = true;
+                s.logFileLocation = AppDomain.CurrentDomain.BaseDirectory + "\\log.txt";
+
                 lock (DatabaseConnection.connection)
                 {
                     DatabaseConnection.connection.CreateTable<Cloud>();
                     DatabaseConnection.connection.CreateTable<BackupPlan>();
                     DatabaseConnection.connection.CreateTable<Backup>();
+                    DatabaseConnection.connection.CreateTable<Settings>();
+                    DatabaseConnection.connection.Insert(s);
                 }
             }
         }
@@ -131,7 +144,7 @@ namespace CloudBackupL
         {
             lock (DatabaseConnection.connection)
             {
-                return DatabaseConnection.connection.Query<Cloud>("select * from BackupPlan where cloudId = ?", id).Count > 0 ? false : true;
+                return DatabaseConnection.connection.Query<BackupPlan>("select * from BackupPlan where cloudId = ?", id).Count > 0 ? false : true;
             }
         }
 
@@ -200,6 +213,24 @@ namespace CloudBackupL
                 List<Cloud> clouds;
                 clouds = DatabaseConnection.connection.Query<Cloud>("select * from Cloud where token = ?", accessToken);
                 return clouds.Count == 1 ? clouds[0] : null;
+            }
+        }
+
+        public Settings GetSettings()
+        {
+            List<Settings> settings;
+            lock (DatabaseConnection.connection)
+            {
+                settings = DatabaseConnection.connection.Query<Settings>("select * from Settings");
+                return settings.Count > 0 ? settings[0] : null;
+            }
+        }
+
+        public void SetSettings(Settings settings)
+        {
+            lock (DatabaseConnection.connection)
+            {
+                DatabaseConnection.connection.Update(settings);
             }
         }
     }

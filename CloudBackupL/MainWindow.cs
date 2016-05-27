@@ -1,5 +1,6 @@
 ﻿using CloudBackupL.TabsControllers;
 using System;
+using System.ComponentModel;
 using System.Configuration;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -20,6 +21,7 @@ namespace CloudBackupL
         private Button precedentButton;
         Color selectedColor;
         Color normalColor;
+        DatabaseService databaseService;
         
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
@@ -46,16 +48,29 @@ namespace CloudBackupL
             selectedColor = buttonTabHome.BackColor;
             normalColor = buttonTabBackupPlans.BackColor;
             precedentButton = buttonTabHome;
+            databaseService = new DatabaseService();
 
             notifyIconApp.Icon = SystemIcons.Information;
             notifyIconApp.Text = "Secure Backup";
             notifyIconApp.DoubleClick += NotifyIconApp_DoubleClick;
             LoadTrayType();
+            this.FormClosing += MainWindow_FormClosing;      
+
+
+        }
+
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {  
+            if(new DatabaseService().GetSettings().preventShutDown && (isActiveDownloadOperation || isActiveUploadOperation))
+            {
+                MessageBox.Show("Please wait until current opperation is finished");
+                e.Cancel = true;
+            }        
         }
 
         private void NotifyIconApp_DoubleClick(object sender, EventArgs e)
         {
-            string traySetting = ConfigurationManager.AppSettings["trayType"];
+            string traySetting = databaseService.GetSettings().trayType;
             if (traySetting.Equals("minimized"))
             {
                 notifyIconApp.Visible = false;
@@ -70,7 +85,7 @@ namespace CloudBackupL
 
         public void LoadTrayType()
         {
-            switch (ConfigurationManager.AppSettings["trayType"])
+            switch (databaseService.GetSettings().trayType)
             {
                 case "minimized":
                     notifyIconApp.Visible = true;
@@ -280,6 +295,24 @@ namespace CloudBackupL
             set { buttonCancel = value; }
         }
 
+        public CheckBox CheckBoxPassword
+        {
+            get { return checkBoxPassword; }
+            set { checkBoxPassword = value; }
+        }
+
+        public TextBox TextBoxPassword
+        {
+            get { return textBoxPassword; }
+            set { textBoxPassword = value; }
+        }
+
+        public TextBox TextBoxRepeatPassword
+        {
+            get { return textBoxRepeatPassword; }
+            set { textBoxRepeatPassword = value; }
+        }
+
         private bool dragging = false;
         private Point dragCursorPoint;
         private Point dragFormPoint;
@@ -334,7 +367,8 @@ namespace CloudBackupL
 
         private void buttonMinimize_Click(object sender, EventArgs e)
         {
-            if (ConfigurationManager.AppSettings["trayType"].Equals("minimized") || ConfigurationManager.AppSettings["trayType"].Equals("always"))
+            string traySetting = databaseService.GetSettings().trayType;
+            if (traySetting.Equals("minimized") || traySetting.Equals("always"))
             {
                 notifyIconApp.Visible = true;
                 this.Hide();
