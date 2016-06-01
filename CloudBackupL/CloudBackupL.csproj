@@ -147,8 +147,6 @@
     <None Include="Resources\upload-512.png" />
     <Content Include="app_icon.ico" />
     <Content Include="Cloud-icon.ico" />
-    <None Include="Resources\Cloud-icon.ico" />
-    <None Include="Resources\App-icon.ico" />
     <None Include="Resources\app_icon.ico" />
     <Content Include="sqlite3.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
