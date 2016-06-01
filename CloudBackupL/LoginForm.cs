@@ -91,7 +91,7 @@ namespace CloudBackupL
                     }
                 } else
                 {
-                    MessageBox.Show("Password not equals!");
+                    MessageBox.Show("Passwords not equals!");
                 }
             } else
             {

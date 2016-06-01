@@ -142,7 +142,8 @@ namespace CloudBackupL
                     if(!plan.scheduleType.Equals("Manual"))
                         plan.nextExecution = MyUtils.GetNextExecution(plan);
                     databaseService.InsertBackupPlan(plan);
-                    dialogMessage = "Plan created succesfully";
+                    dialogMessage = "Plan created succesfully!";
+                    Logger.Log(string.Format("Plan {0} created succesfully!", plan.name));
                 }
                 else
                 {

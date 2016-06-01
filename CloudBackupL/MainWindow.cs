@@ -61,11 +61,13 @@ namespace CloudBackupL
         }
 
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
-        {  
-            if(new DatabaseService().GetSettings().preventShutDown && (isActiveDownloadOperation || isActiveUploadOperation))
+        { 
+            if(isActiveDownloadOperation || isActiveUploadOperation)
             {
-                MessageBox.Show("Please wait until current opperation is finished");
-                e.Cancel = true;
+                if (MessageBox.Show("Please wait until current opperation is finished. Click Yes to force close.", "Close application?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    return;
+                else
+                    e.Cancel = true;
             }        
         }
 
@@ -108,6 +110,7 @@ namespace CloudBackupL
         {
             LoadAllControlls();
         }
+        static bool startAppLog = false;
 
         public void LoadAllControlls()
         {
@@ -118,7 +121,12 @@ namespace CloudBackupL
             homeTabController.LoadQueueList();
             LabelMainPlanName.Text = "-";
             progressBarMain.Value = 0;
-            Logger.Log("Application started!");
+            if (startAppLog == false)
+            {
+                Logger.Log("Application started!");
+                startAppLog = true;
+            }
+            
         }
 
         public void RestrictDownloadAction()

@@ -41,7 +41,7 @@ namespace CloudBackupL.TabsControllers
         {
             AddCloudWindow addCloudWindow = new AddCloudWindow();
             addCloudWindow.ShowDialog();
-            LoadClouds();
+            MainWindow.instance.LoadAllControlls();
         }
 
         //Load Clouds, need internet
@@ -57,38 +57,46 @@ namespace CloudBackupL.TabsControllers
         //Load Clouds in another thread
         private void backgroundWorkerLoadClouds_DoWork(object sender, DoWorkEventArgs e)
         {
-            try
+            List<Cloud> clouds = databaseService.GetAllClouds();
+            foreach (var c in clouds)
             {
-                List<Cloud> clouds = databaseService.GetAllClouds();
-                foreach (var c in clouds)
-                {
 
-                    CloudControl control = new CloudControl();
-                    switch (c.cloudType)
-                    {
-                        case "dropbox":
+                CloudControl control = new CloudControl();
+                switch (c.cloudType)
+                {
+                    case "dropbox":
+                        try
+                        {
                             CloudUserInfo cloudUserInfoDropBox = dropBoxController.GetAccountInfo(c.token);
                             control.LabelTotalSpace.Text = MyUtils.GetFormatedSpaceInGB(cloudUserInfoDropBox.total_space) + " GB";
                             control.LabelFreeSpace.Text = MyUtils.GetFormatedSpaceInGB(cloudUserInfoDropBox.free_space) + " GB";
-                            control.LabelCloudName.Text = c.name;
-                            control.PictureBoxCloudImage.Image = mainWindowinstance.ImageListClouds.Images[0];
-                            control.LabelId.Text = c.id.ToString();
-                            break;
-                        case "box":
+                        }
+                        catch (Exception)
+                        {
+                            Logger.Log("Error loading clouds, please check internet connection!");
+                        }
+                        control.LabelCloudName.Text = c.name;
+                        control.PictureBoxCloudImage.Image = mainWindowinstance.ImageListClouds.Images[0];
+                        control.LabelId.Text = c.id.ToString();
+                        break;
+                    case "box":
+                        try
+                        {
                             CloudUserInfo cloudUserInfoBox = boxController.GetAccountInfo(c.token);
                             control.LabelTotalSpace.Text = MyUtils.GetFormatedSpaceInGB(cloudUserInfoBox.total_space) + " GB";
                             control.LabelFreeSpace.Text = MyUtils.GetFormatedSpaceInGB(cloudUserInfoBox.free_space) + " GB";
-                            control.LabelCloudName.Text = c.name;
-                            control.PictureBoxCloudImage.Image = mainWindowinstance.ImageListClouds.Images[1];
-                            control.LabelId.Text = c.id.ToString();
-                            break;
-                    }
-                    control.OnUserControlDeleteCloudButtonClicked += (s, eve) => DeleteCloudButtonClicked(s, eve);
-                    backgroundWorkerLoadClouds.ReportProgress(1, control);
+                        }
+                        catch (Exception)
+                        {
+                            Logger.Log("Error loading clouds, please check internet connection!");
+                        }
+                        control.LabelCloudName.Text = c.name;
+                        control.PictureBoxCloudImage.Image = mainWindowinstance.ImageListClouds.Images[1];
+                        control.LabelId.Text = c.id.ToString();
+                        break;
                 }
-            }catch(Exception)
-            {
-                Logger.Log("Error loading clouds, please check internet connection!");
+                control.OnUserControlDeleteCloudButtonClicked += (s, eve) => DeleteCloudButtonClicked(s, eve);
+                backgroundWorkerLoadClouds.ReportProgress(1, control);
             }
         }
 
@@ -115,6 +123,7 @@ namespace CloudBackupL.TabsControllers
                 {
                     MessageBox.Show("Can't delete this cloud, there are plans who use this cloud.", "Error", MessageBoxButtons.OK);
                 }
+                MainWindow.instance.LoadAllControlls();
             }
         }
 
@@ -126,7 +135,7 @@ namespace CloudBackupL.TabsControllers
             addBackupPlanWindow.ShowDialog();
             mainWindowinstance.backupPlansTabController.LoadPlans();
             mainWindowinstance.myBackupsTabController.LoadBackupPlansList();
-            LoadQueueList();
+            MainWindow.instance.LoadAllControlls();
         }
 
         Timer executeBackupTimer = new Timer();
