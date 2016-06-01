@@ -21,13 +21,13 @@ namespace CloudBackupL
         // String GetAccountInfo(String accessToken);
         CloudUserInfo GetAccountInfo(string accessToken);
 
-        void Upload(string cloudPath, string token, string clientPath, UploadProgressChangedEventHandler peh, TaskCompletionSource<bool> tcs);
+        void Upload(string cloudPath, string token, string localPath, UploadProgressChangedEventHandler peh, TaskCompletionSource<bool> tcs);
 
         void Download(string cloudPath, string token, string localPath, DownloadProgressChangedEventHandler eh, TaskCompletionSource<bool> tcs);
 
-        void GetFilesList(String accessToken, EventHandler<List<CloudEntry>> eventHandler, string currentPath);
+        void GetFilesList(String token, EventHandler<List<CloudEntry>> eventHandler, string cloudPath);
 
-        void DeleteFolder(String accessToken, DownloadStringCompletedEventHandler eventHandler, string currentPath);
+        void DeleteFolder(String token, DownloadStringCompletedEventHandler eventHandler, string cloudPath);
 
     }
 }
