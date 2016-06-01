@@ -52,6 +52,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app_icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ByteSizeLib, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ByteSize.1.1.2\lib\dotnet\ByteSizeLib.dll</HintPath>
@@ -142,6 +145,11 @@
     <Compile Include="Utils\MyUtils.cs" />
     <None Include="ClassDiagram1.cd" />
     <None Include="Resources\upload-512.png" />
+    <Content Include="app_icon.ico" />
+    <Content Include="Cloud-icon.ico" />
+    <None Include="Resources\Cloud-icon.ico" />
+    <None Include="Resources\App-icon.ico" />
+    <None Include="Resources\app_icon.ico" />
     <Content Include="sqlite3.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

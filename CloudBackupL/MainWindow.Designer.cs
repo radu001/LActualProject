@@ -88,6 +88,9 @@
             this.textBoxChunkSize = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBoxPostpone = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.checkBoxShowNotifications = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBoxRepeatPassword = new System.Windows.Forms.TextBox();
@@ -100,6 +103,9 @@
             this.radioButtonTrayAlways = new System.Windows.Forms.RadioButton();
             this.label15 = new System.Windows.Forms.Label();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.imageListClouds = new System.Windows.Forms.ImageList(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.buttonTabAbout = new System.Windows.Forms.Button();
@@ -116,13 +122,7 @@
             this.buttonExit = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.notifyIconApp = new System.Windows.Forms.NotifyIcon(this.components);
-            this.label11 = new System.Windows.Forms.Label();
-            this.textBoxPostpone = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -732,6 +732,32 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Other";
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(297, 35);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(24, 13);
+            this.label11.TabIndex = 14;
+            this.label11.Text = "Min";
+            // 
+            // textBoxPostpone
+            // 
+            this.textBoxPostpone.Location = new System.Drawing.Point(199, 32);
+            this.textBoxPostpone.Name = "textBoxPostpone";
+            this.textBoxPostpone.Size = new System.Drawing.Size(92, 20);
+            this.textBoxPostpone.TabIndex = 13;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(7, 35);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(195, 13);
+            this.label12.TabIndex = 12;
+            this.label12.Text = "Postpone schedule when unsuccessful:";
+            this.toolTip1.SetToolTip(this.label12, "Postpone the scheduled backup in case of some errors.");
+            // 
             // checkBoxShowNotifications
             // 
             this.checkBoxShowNotifications.AutoSize = true;
@@ -860,6 +886,36 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "About";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(12, 46);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(226, 16);
+            this.label20.TabIndex = 2;
+            this.label20.Text = "Support: SecureBackup@gmail.com";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(12, 17);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(107, 16);
+            this.label19.TabIndex = 1;
+            this.label19.Text = "Version: beta 1.0";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Maiandra GD", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(480, 412);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(248, 19);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "@2016 Developed by Zmeu Radu";
             // 
             // imageListClouds
             // 
@@ -1096,62 +1152,6 @@
             this.notifyIconApp.Text = "notifyIcon1";
             this.notifyIconApp.Visible = true;
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(297, 35);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(24, 13);
-            this.label11.TabIndex = 14;
-            this.label11.Text = "Min";
-            // 
-            // textBoxPostpone
-            // 
-            this.textBoxPostpone.Location = new System.Drawing.Point(199, 32);
-            this.textBoxPostpone.Name = "textBoxPostpone";
-            this.textBoxPostpone.Size = new System.Drawing.Size(92, 20);
-            this.textBoxPostpone.TabIndex = 13;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(7, 35);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(195, 13);
-            this.label12.TabIndex = 12;
-            this.label12.Text = "Postpone schedule when unsuccessful:";
-            this.toolTip1.SetToolTip(this.label12, "Postpone the scheduled backup in case of some errors.");
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Maiandra GD", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(480, 412);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(248, 19);
-            this.label18.TabIndex = 0;
-            this.label18.Text = "@2016 Developed by Zmeu Radu";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(12, 17);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(107, 16);
-            this.label19.TabIndex = 1;
-            this.label19.Text = "Version: beta 1.0";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(12, 46);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(226, 16);
-            this.label20.TabIndex = 2;
-            this.label20.Text = "Support: SecureBackup@gmail.com";
-            // 
             // MainWindow
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1166,6 +1166,7 @@
             this.Controls.Add(this.panel2);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainWindow";

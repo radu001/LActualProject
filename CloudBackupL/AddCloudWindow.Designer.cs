@@ -156,6 +156,7 @@
             this.ClientSize = new System.Drawing.Size(449, 316);
             this.Controls.Add(this.panelCloudSelect);
             this.Controls.Add(this.panelCloudLogin);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddCloudWindow";
             this.Text = "AddCloud";
             this.panelCloudSelect.ResumeLayout(false);

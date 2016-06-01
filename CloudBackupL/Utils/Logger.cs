@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CloudBackupL.Properties;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
@@ -46,7 +47,7 @@ namespace CloudBackupL.Utils
                     NotifyIcon notifyIcon = MainWindow.instance.NotifyIconApp;
                     var state = notifyIcon.Visible;
                     notifyIcon.Visible = true;
-                    notifyIcon.Icon = SystemIcons.Application;
+                    notifyIcon.Icon = Resources.app_icon;
                     notifyIcon.BalloonTipText = logMessage;
                     notifyIcon.BalloonTipTitle = "Secure Backup";
                     notifyIcon.BalloonTipIcon = toolTipIcon;

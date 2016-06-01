@@ -1,4 +1,5 @@
-﻿using CloudBackupL.TabsControllers;
+﻿using CloudBackupL.Properties;
+using CloudBackupL.TabsControllers;
 using CloudBackupL.Utils;
 using System;
 using System.ComponentModel;
@@ -51,7 +52,7 @@ namespace CloudBackupL
             precedentButton = buttonTabHome;
             databaseService = new DatabaseService();
 
-            notifyIconApp.Icon = SystemIcons.Information;
+            notifyIconApp.Icon = Resources.app_icon;
             notifyIconApp.Text = "Secure Backup";
             notifyIconApp.DoubleClick += NotifyIconApp_DoubleClick;
             LoadTrayType();
