@@ -18,6 +18,7 @@ namespace CloudBackupL.Utils
 
             using (ZipFile zip = new ZipFile())
             {
+                zip.ParallelDeflateThreshold = -1;
                 zip.MaxOutputSegmentSize = size;
                 zip.SaveProgress += Zip_SaveProgress;
                 zip.Encryption = EncryptionAlgorithm.WinZipAes256;
@@ -45,6 +46,7 @@ namespace CloudBackupL.Utils
                 }
                 using (ZipFile zip = ZipFile.Read(directoryName + "temp.zip"))
                 {
+                    zip.ParallelDeflateThreshold = -1;
                     zip.ExtractProgress += Zip_ExtractProgress;
                     zip.Encryption = EncryptionAlgorithm.WinZipAes256;
                     zip.Password = password;
