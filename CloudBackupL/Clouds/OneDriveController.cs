@@ -137,7 +137,7 @@ namespace CloudBackupL.Clouds
         string currentPath;
         public void GetFilesList(string accessToken, EventHandler<List<CloudEntry>> eventHandler, string currentPath)
         {
-            //accessToken = RefreshToken(accessToken);
+            accessToken = RefreshToken(accessToken);
             this.currentPath = currentPath;
             this.eventHandler = eventHandler;
             var client = new WebClient();
