@@ -22,6 +22,27 @@ namespace CloudBackupL.CustomControllers
             };
         }
 
+        public void SetAvaible(int percentage)
+        {
+            labelAvaible.Text = percentage + "%";
+            if (percentage > 95)
+            {
+                labelAvaible.BackColor = Color.Red;
+                return;
+            }
+            if (percentage > 75)
+            {
+                labelAvaible.BackColor = Color.Yellow;
+                return;
+            }
+            if (percentage > 50)
+            {
+                labelAvaible.BackColor = Color.YellowGreen;
+                return;
+            }
+            labelAvaible.BackColor = Color.Green;
+        }
+
         public Label LabelFreeSpace
         {
             get { return this.labelFreeSpace; }
@@ -48,6 +69,5 @@ namespace CloudBackupL.CustomControllers
             get { return this.labelId; }
             set { this.labelId = value; }
         }
-
     }
 }

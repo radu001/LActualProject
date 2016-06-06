@@ -70,6 +70,8 @@ namespace CloudBackupL.TabsControllers
                             CloudUserInfo cloudUserInfoDropBox = dropBoxController.GetAccountInfo(c.token);
                             control.LabelTotalSpace.Text = MyUtils.GetFormatedSpaceInGB(cloudUserInfoDropBox.total_space) + " GB";
                             control.LabelFreeSpace.Text = MyUtils.GetFormatedSpaceInGB(cloudUserInfoDropBox.free_space) + " GB";
+                            int progress = (int)((cloudUserInfoDropBox.used_space * 100) / cloudUserInfoDropBox.total_space);
+                            control.SetAvaible(progress);
                         }
                         catch (Exception)
                         {
@@ -85,6 +87,8 @@ namespace CloudBackupL.TabsControllers
                             CloudUserInfo cloudUserInfoBox = boxController.GetAccountInfo(c.token);
                             control.LabelTotalSpace.Text = MyUtils.GetFormatedSpaceInGB(cloudUserInfoBox.total_space) + " GB";
                             control.LabelFreeSpace.Text = MyUtils.GetFormatedSpaceInGB(cloudUserInfoBox.free_space) + " GB";
+                            int progress = (int)((cloudUserInfoBox.used_space * 100) / cloudUserInfoBox.total_space);
+                            control.SetAvaible(progress);
                         }
                         catch (Exception)
                         {

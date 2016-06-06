@@ -35,13 +35,17 @@ namespace CloudBackupL
         int nWidthEllipse, // height of ellipse
         int nHeightEllipse // width of ellipse
         );
-        
+
+
+        [System.Runtime.InteropServices.DllImport("gdi32.dll", EntryPoint = "DeleteObject")]
+        private static extern bool DeleteObject(System.IntPtr hObject);
+
         //Main Window Constructor
         public MainWindow()
         {
             instance = this;
             InitializeComponent();
-            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+            //Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
             backupPlansTabController = new BackupPlansTabController();
             myBackupsTabController = new MyBackupsTabController();
             manualWorkTabController = new ManualWorkTabController();
